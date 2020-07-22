@@ -1,40 +1,34 @@
-﻿using JetBrains.Annotations;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class MapGenerator : MonoBehaviour
 {
-    public int width; // x
-    public int height; // y
-    public int depth; // z
+    [SerializeField]
+    private int width; // x
+    [SerializeField]
+    private int height; // y
+    [SerializeField]
+    private int depth; // z
 
-    public string seed;
-    public bool useRandomSeed;
-
-    [Range(0, 100)]
-    public int randomFillPercent; // 블록 생성 비율
-    [Range(0, 100)]
-    public float weight; // 층이 쌓일수록 생성 비율을 조절하는 변수
-    [Range(0, 26)]
-    public int neighbourCount; // 이웃하는 블록수 제한
-    [Range(0, 100)]
-    public int smoothCount; // 스무딩 횟수
+    [SerializeField, Range(0, 100)]
+    private int randomFillPercent; // 블록 생성 비율
+    [SerializeField, Range(0, 10)]
+    private float weight; // 층이 쌓일수록 생성 비율을 조절하는 변수
+    [SerializeField, Range(0, 26)]
+    private int neighbourCount; // 이웃하는 블록수 제한
+    [SerializeField, Range(0, 100)]
+    private int smoothCount; // 스무딩 횟수
 
     public GameObject cubePrefab;
     public Material sandMaterial;
     public Material grassMaterial;
 
-    [SerializeField]
-    protected GameObject[,,] cubes;
+    private GameObject[,,] cubes;
 
     public Transform mapTrans;
 
-    int[,,] map;
+    private int[,,] map;
 
     // BSP 알고리즘을 수행하는 트리 클래스
     private class BSP
@@ -183,22 +177,14 @@ public class MapGenerator : MonoBehaviour
     // 랜덤으로 블록을 생성하는 메소드
     void RandomFillMap()
     {
-        if (useRandomSeed)
-        {
-            seed = Time.time.ToString();
-        }
-        
-        System.Random psuedoRandom = new System.Random(seed.GetHashCode());
-
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < depth; z++)
             {
-                float _x = Math.Abs(x - width / 2) / (float)(width / 2);
-                float _z = Math.Abs(z - depth / 2) / (float)(depth / 2);
-                float weight = Mathf.Clamp(1 - (_x + _z) / (float)(width + depth), 0f, 1f);
-                map[x, 0, z] = (psuedoRandom.Next(0, 100) < randomFillPercent * weight) ? 1 : 0;
-                Debug.Log(string.Format("{0} {1} {2}", _x, _z, weight));
+                float _x = Mathf.Abs(x - width / 2) / (float)(width / 2);
+                float _z = Mathf.Abs(z - depth / 2) / (float)(depth / 2);
+                float weight = Mathf.Pow(_x, 2) + Mathf.Pow(_z, 2) > 1 ? 0.1f : 1f;
+                map[x, 0, z] = (UnityEngine.Random.Range(0, 100) < randomFillPercent * weight) ? 1 : 0;
             }
         }
         for (int y = 1; y < height; y++)
@@ -207,16 +193,16 @@ public class MapGenerator : MonoBehaviour
             {
                 for (int z = 0; z < depth; z++)
                 {
-                    map[x, y, z] = (map[x, y-1, z] == 1 && psuedoRandom.Next(0, 100) < randomFillPercent - weight * y) ? 1 : 0;
+                    map[x, y, z] = (map[x, y-1, z] == 1 && UnityEngine.Random.Range(0, 100) < randomFillPercent - weight * y) ? 1 : 0;
                 }
             }
         }
     }
 
-    // 거친 표면을 부드럽게 다듬는 메소드
+    // 굴곡을 완만하게 다듬는 메소드
     void SmoothMap()
     {
-        for (int y = height-1; y > 0; y--)
+        for (int y = height-1; y >= 0; y--)
         {
             for (int x = 0; x < width; x++)
             {
@@ -224,7 +210,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     int neighbourWallTiles = GetSurroundingWallCount(x, y, z);
 
-                    if (neighbourWallTiles > neighbourCount && map[x, y-1, z] == 1)
+                    if (neighbourWallTiles > neighbourCount)
                         map[x, y, z] = 1;
                     else if (neighbourWallTiles < neighbourCount)
                         map[x, y, z] = 0;
