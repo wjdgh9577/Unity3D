@@ -6,11 +6,13 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerPhysics playerPhysics;
 
-    private Vector2 pos;
+    void Awake()
+    {
+        playerPhysics = GetComponent<PlayerPhysics>();
+    }
 
     void Start()
     {
-        playerPhysics = GetComponent<PlayerPhysics>();
         StartCoroutine(Drag());
     }
 
@@ -32,19 +34,50 @@ public class PlayerInput : MonoBehaviour
 
     IEnumerator Drag()
     {
+        Vector2 startPos = Vector2.zero;
+        Vector2 currentPos = Vector2.zero;
+        bool enableJump = true;
+        bool enableDive = true;
+        
         while (true)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                Vector2 nextPos = Input.mousePosition;
-                if (nextPos.y - pos.y > 10)
-                {
-                    playerPhysics.Jump();
-                }
-                pos = nextPos;
-                Debug.Log(pos);
+                startPos = Input.mousePosition;
+                currentPos = startPos;
             }
-            yield return new WaitForSecondsRealtime(0.1f);
+            else if (Input.GetMouseButton(0))
+            {
+                currentPos = Input.mousePosition;
+                if (currentPos.y - startPos.y > 100)
+                {
+                    if (enableJump)
+                    {
+                        playerPhysics.Jump();
+                        enableJump = false;
+                    }
+                }
+                else if (currentPos.y - startPos.y < -100)
+                {
+                    if (enableDive)
+                    {
+                        playerPhysics.Dive();
+                        enableDive = false;
+                    }
+                }
+                else
+                {
+                    playerPhysics.Fly();
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                startPos = Input.mousePosition;
+                currentPos = startPos;
+                enableJump = true;
+                enableDive = true;
+            }
+            yield return null;
         }
     }
 }
