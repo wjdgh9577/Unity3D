@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPhysics : MonoBehaviour
 {
     private Rigidbody rigidbody;
+    private BoxCollider boxCollider;
 
     [SerializeField]
     private float jumpPower;
@@ -15,6 +16,7 @@ public class PlayerPhysics : MonoBehaviour
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     public void Jump()
@@ -28,7 +30,19 @@ public class PlayerPhysics : MonoBehaviour
 
     public void Dive()
     {
-        rigidbody.velocity = Vector3.down * jumpPower * 10;
+        Vector3 extents = boxCollider.bounds.extents;
+        Vector3 center = boxCollider.bounds.center;
+        Vector3 frontBottom = new Vector3(center.x + extents.x, center.y - extents.y, center.z);
+        Vector3 backBottom = new Vector3(center.x - extents.x, center.y - extents.y, center.z);
+
+        if (Physics.Raycast(frontBottom, Vector3.down, out RaycastHit hit) || Physics.Raycast(backBottom, Vector3.down, out hit))
+        {
+            if (hit.transform.CompareTag("Field"))
+            {
+                rigidbody.position += Vector3.down * hit.distance;
+                rigidbody.velocity = Vector3.zero;
+            }
+        }
     }
 
     public void Fly()
@@ -41,7 +55,7 @@ public class PlayerPhysics : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Field" && collision.contacts[0].normal.y == 1)
+        if (collision.transform.CompareTag("Field") && collision.contacts[0].normal.y == 1)
         {
             canJump = true;
             canFly = false;
@@ -50,7 +64,7 @@ public class PlayerPhysics : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.transform.tag == "Field")
+        if (collision.transform.CompareTag("Field"))
         {
             canFly = true;
         }
