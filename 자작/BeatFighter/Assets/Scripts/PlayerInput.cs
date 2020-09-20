@@ -27,7 +27,11 @@ public class PlayerInput : MonoBehaviour
         {
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, maxDistance))
             {
-                if (layerMask.value == LayerMask.NameToLayer("Enemy")) player.Target = hit.transform.GetComponent<MobChar>();
+                if (layerMask.value == LayerMask.NameToLayer("Enemy"))
+                {
+                    BaseChar target = hit.transform.GetComponent<MobChar>();
+                    player.SetTarget(target);
+                }
             }
         }
     }

@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public struct DamageInfo
-{
-    BaseChar from;
-    BaseChar to;
-    int damage;
-}
-
 public class SkillIcon : MonoBehaviour, IPointerDownHandler
 {
     private PlayerChar player;
     private bool on = false;
 
-    private void Awake()
+    private void OnEnable()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerChar>();
     }

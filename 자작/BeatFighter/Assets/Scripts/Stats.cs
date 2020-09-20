@@ -14,7 +14,7 @@ public struct Stats
     {
         this.MaxHP = MaxHP;
         this.HP = MaxHP;
-        this.Atk = 1;
+        this.Atk = 5;
         this.def = 0;
     }
 }
