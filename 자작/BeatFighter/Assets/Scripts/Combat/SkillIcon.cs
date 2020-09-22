@@ -10,7 +10,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
 
     private void OnEnable()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerChar>();
+        player = Combat.Instance.player;
     }
 
     public void OnPointerDown(PointerEventData eventData)

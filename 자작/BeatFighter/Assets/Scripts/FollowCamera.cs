@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    private float distance = 5f;
-
-    void Start()
-    {
-        
-    }
-
-    void LateUpdate()
-    {
-        
-    }
+    
 }

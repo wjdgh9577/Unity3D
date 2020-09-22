@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 전투시 플레이어에게 적용되는 Input
+/// </summary>
 public class PlayerInput : MonoBehaviour
 {
     public LayerMask layerMask;

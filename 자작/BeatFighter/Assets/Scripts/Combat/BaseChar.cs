@@ -26,36 +26,51 @@ public class BaseChar : MonoBehaviour
     private BaseChar _target;
     public BaseChar Target { get => _target; set => _target = value; }
 
-    private Stats stats;
+    public Stats stats;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        stats = new Stats(100);
     }
 
+    /// <summary>
+    /// 공격 대상 설정
+    /// </summary>
+    /// <param name="target"></param>
     public virtual void SetTarget(BaseChar target)
     {
         Target = target;
     }
 
+    /// <summary>
+    /// 애니메이션 이벤트 함수
+    /// 현재 타겟에게 데미지
+    /// </summary>
     public void Hit()
     {
         if (Target == null) return;
         DoDamage(Target);
     }
 
+    /// <summary>
+    /// 상대에게 데미지
+    /// </summary>
+    /// <param name="target"></param>
     public void DoDamage(BaseChar target)
     {
         int damage = Formula.CalcDamage(stats, target.stats);
         target.GetDamage(damage);
     }
 
+    /// <summary>
+    /// 데미지 적용
+    /// </summary>
+    /// <param name="damage"></param>
     public void GetDamage(int damage)
     {
-        stats.HP = Mathf.Clamp(stats.HP - damage, 0, stats.MaxHP);
+        stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
         onTakeDamage();
-        Debug.Log(stats.HP + "/" + stats.MaxHP);
+        Debug.Log(stats.hp + "/" + stats.maxHp);
     }
 
     public void Attack()
@@ -63,8 +78,12 @@ public class BaseChar : MonoBehaviour
         animator.Play("Attack", -1, 0);
     }
 
+    /// <summary>
+    /// 현재 HP 비율 반환
+    /// </summary>
+    /// <returns></returns>
     public float GetHPAmount()
     {
-        return (float)stats.HP / stats.MaxHP;
+        return (float)stats.hp / stats.maxHp;
     }
 }

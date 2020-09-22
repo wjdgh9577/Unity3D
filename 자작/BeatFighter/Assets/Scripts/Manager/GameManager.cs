@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public Combat combat;
-    public SkillGroup skillGroup;
-    public VitalSign vitalSign;
+    public Cinemachine.CinemachineVirtualCamera followCam;
 
     [SerializeField]
     private float _noteSpeed;
@@ -15,15 +13,17 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        TableData.instance = new TableData();
+        TableData.instance.LoadTableDatas();
 
         noteSpeed = _noteSpeed;
     }
 
     public void test()
     {
-        combat.gameObject.SetActive(true);
-        skillGroup.gameObject.SetActive(true);
-        vitalSign.gameObject.SetActive(true);
-        HPGroup.Instance.SetHP();
+        Combat.Instance.gameObject.SetActive(true);
+        Combat.Instance.SetMap(30000);
+        followCam.Follow = Combat.Instance.cameraPoint;
+        followCam.LookAt = Combat.Instance.cameraPoint;
     }
 }

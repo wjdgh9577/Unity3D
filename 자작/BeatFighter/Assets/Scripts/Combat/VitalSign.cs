@@ -8,11 +8,31 @@ public class VitalSign : MonoBehaviour
     public RectTransform poolLineTM;
     public GameObject note;
 
+    private void Awake()
+    {
+        Combat.onStageSet += Show;
+        Combat.onStageEnd += Hide;
+        Hide();
+    }
+
     void Start()
     {
         PoolNote();
     }
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 노트 생성
+    /// </summary>
     public void PoolNote()
     {
         GameObject newNote = Instantiate(note, poolLineTM.position, Quaternion.identity, heartTM) as GameObject;
