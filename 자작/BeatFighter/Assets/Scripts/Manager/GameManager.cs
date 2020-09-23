@@ -6,17 +6,11 @@ public class GameManager : Singleton<GameManager>
 {
     public Cinemachine.CinemachineVirtualCamera followCam;
 
-    [SerializeField]
-    private float _noteSpeed;
-    public float noteSpeed { get { return _noteSpeed; } set { _noteSpeed = value; } }
-
     protected override void Awake()
     {
         base.Awake();
         TableData.instance = new TableData();
         TableData.instance.LoadTableDatas();
-
-        noteSpeed = _noteSpeed;
     }
 
     public void test()

@@ -1,13 +1,19 @@
 ﻿{
-	"md5": "ac7d23370acc7c56321ea517666a5593",
+	"md5": "7547a6bc9ab8ed864f5c653dc3efeb65",
 	"array": 
 		[
 			{
 				"typeID": 20000,
 				"model": "Ninja",
+				"level": 1,
 				"atk": 1,
 				"def": 0,
-				"vit": 100
+				"vit": 100,
+				"atkPerLevel": 1,
+				"defPerLevel": 1,
+				"vitPerLevel": 10,
+				"signPeriod": 0.5,
+				"signSpeed": 1
 			}
 		]
 }

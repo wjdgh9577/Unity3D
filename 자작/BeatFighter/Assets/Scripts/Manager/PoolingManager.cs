@@ -2,21 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Folder
+{
+    UI,
+    Model,
+    Particle,
+    Field
+}
+
 public class PoolingManager : Singleton<PoolingManager>
 {
-    public PlayerChar SpawnPlayer(string model, Transform parent)
+    public T Spawn<T>(string name, Folder folder, Transform parent = null)
     {
-        Object obj = Resources.Load("PlayerChar/" + model);
-        GameObject player = Instantiate(obj, parent) as GameObject;
-        
-        return player.GetComponent<PlayerChar>();
+        string folderName;
+
+        switch(folder)
+        {
+            case Folder.Model:
+                folderName = "Model/";
+                break;
+            case Folder.UI:
+                folderName = "UI/";
+                break;
+            case Folder.Particle:
+                folderName = "Particle/";
+                break;
+            case Folder.Field:
+                folderName = "Field/";
+                break;
+            default:
+                folderName = "";
+                break;
+        }
+
+        Object obj = Resources.Load(folderName + name);
+        GameObject noteGObj = Instantiate(obj, parent) as GameObject;
+
+        return noteGObj.GetComponent<T>();
     }
 
-    public MobChar SpawnMob(string model, Transform parent)
+    public void Despawn(GameObject obj)
     {
-        Object obj = Resources.Load("MobChar/" + model);
-        GameObject mob = Instantiate(obj, parent) as GameObject;
-        
-        return mob.GetComponent<MobChar>();
+        Destroy(obj);
     }
 }

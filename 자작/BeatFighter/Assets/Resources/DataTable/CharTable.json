@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "a0a6f7c0439d964df7f2932d348a48aa",
+	"md5": "eb2f280102540f4e8307812540bef281",
 	"array": 
 		[
 			{
@@ -10,7 +10,9 @@
 				"vit": 100,
 				"atkPerLevel": 1,
 				"defPerLevel": 1,
-				"vitPerLevel": 10
+				"vitPerLevel": 10,
+				"signPeriod": 2,
+				"signSpeed": 1
 			}
 		]
 }

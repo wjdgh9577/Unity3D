@@ -5,15 +5,17 @@ using UnityEngine;
 
 public struct DamageInfo
 {
-    BaseChar from;
-    BaseChar to;
-    int damage;
+    public BaseChar from;
+    public BaseChar to;
+    public int damage;
+    public float criticalBonus;
 
-    public DamageInfo(BaseChar from, BaseChar to, int damage)
+    public DamageInfo(BaseChar from, BaseChar to, int damage, float criticalBonus)
     {
         this.from = from;
         this.to = to;
         this.damage = damage;
+        this.criticalBonus = criticalBonus;
     }
 }
 
@@ -33,6 +35,13 @@ public class BaseChar : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    public void CreateDmgParticle(DamageInfo info)
+    {
+        HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>("HPParticle", Folder.Particle);
+        particle.transform.position = transform.position;
+        particle.SetMesh(info);
+    }
+
     /// <summary>
     /// 공격 대상 설정
     /// </summary>
@@ -43,12 +52,22 @@ public class BaseChar : MonoBehaviour
     }
 
     /// <summary>
+    /// 콜라이더의 높이를 반환
+    /// </summary>
+    /// <returns></returns>
+    public float GetHeight()
+    {
+        return GetComponent<Collider>().bounds.center.y * 2;
+    }
+
+    /// <summary>
     /// 애니메이션 이벤트 함수
     /// 현재 타겟에게 데미지
     /// </summary>
     public void Hit()
     {
         if (Target == null) return;
+        stats.hp -= 10;
         DoDamage(Target);
     }
 
@@ -59,16 +78,18 @@ public class BaseChar : MonoBehaviour
     public void DoDamage(BaseChar target)
     {
         int damage = Formula.CalcDamage(stats, target.stats);
-        target.GetDamage(damage);
+        DamageInfo info = new DamageInfo(this, target, damage, 0);
+        target.GetDamage(info);
     }
 
     /// <summary>
     /// 데미지 적용
     /// </summary>
     /// <param name="damage"></param>
-    public void GetDamage(int damage)
+    public void GetDamage(DamageInfo info)
     {
-        stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
+        stats.hp = Mathf.Clamp(stats.hp - info.damage, 0, stats.maxHp);
+        CreateDmgParticle(info);
         onTakeDamage();
         Debug.Log(stats.hp + "/" + stats.maxHp);
     }

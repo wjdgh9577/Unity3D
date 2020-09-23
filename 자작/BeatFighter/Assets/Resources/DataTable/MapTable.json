@@ -1,10 +1,10 @@
 ﻿{
-	"md5": "cbea8e20faf6471794f868170577613a",
+	"md5": "0eb15fe9492665409196502552b32d75",
 	"array": 
 		[
 			{
 				"typeID": 30000,
-				"mapName": "GrassLand",
+				"fieldName": "GrassLand",
 				"stage1": 40000,
 				"stage2": 40001
 			}

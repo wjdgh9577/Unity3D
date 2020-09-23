@@ -8,9 +8,14 @@ public class Combat : Singleton<Combat>
     public static Action onStageSet;
     public static Action onStageEnd;
 
+    [Header("References")]
+    public Transform field;
     public Transform cameraPoint;
     public GameObject targeting;
+    public VitalSign vitalSign;
+    public HPGroup hpGroup;
 
+    [Header("Character Setting")]
     public CharSetting playerSetting;
     public List<CharSetting> mobSettings;
 
@@ -19,6 +24,7 @@ public class Combat : Singleton<Combat>
     
     public PlayerChar player { get; private set; }
     public MobChar[] mobs { get; private set; } = new MobChar[5];
+    [NonSerialized]
     public int mobCount;
 
     protected override void Awake()
@@ -54,7 +60,9 @@ public class Combat : Singleton<Combat>
             return;
         }
 
-        player = playerSetting.SetPlayer(10000);//
+        PoolingManager.Instance.Spawn<GameObject>("GrassLand", Folder.Field, field);
+        player = playerSetting.SetPlayer(PlayerData.currentChar);
+        vitalSign.SetPlayer(player);
         SetStage(currentStage);
     }
 
