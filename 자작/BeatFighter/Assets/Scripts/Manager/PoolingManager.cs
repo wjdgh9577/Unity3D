@@ -7,11 +7,21 @@ public enum Folder
     UI,
     Model,
     Particle,
-    Field
+    Field,
+    Skill
 }
 
 public class PoolingManager : Singleton<PoolingManager>
 {
+    /// <summary>
+    /// 해당 타입의 프리팹을 스폰
+    /// 풀링 리스트에 없는 경우 생성하여 반환
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="name"></param>
+    /// <param name="folder"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
     public T Spawn<T>(string name, Folder folder, Transform parent = null)
     {
         string folderName;
@@ -30,17 +40,24 @@ public class PoolingManager : Singleton<PoolingManager>
             case Folder.Field:
                 folderName = "Field/";
                 break;
+            case Folder.Skill:
+                folderName = "Skill/";
+                break;
             default:
                 folderName = "";
                 break;
         }
 
         Object obj = Resources.Load(folderName + name);
-        GameObject noteGObj = Instantiate(obj, parent) as GameObject;
+        GameObject spawnObj = Instantiate(obj, parent) as GameObject;
 
-        return noteGObj.GetComponent<T>();
+        return spawnObj.GetComponent<T>();
     }
 
+    /// <summary>
+    /// 해당 오브젝트를 풀링하고 비활성화
+    /// </summary>
+    /// <param name="obj"></param>
     public void Despawn(GameObject obj)
     {
         Destroy(obj);

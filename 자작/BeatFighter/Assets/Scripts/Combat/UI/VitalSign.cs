@@ -28,7 +28,7 @@ public class VitalSign : MonoBehaviour
     private void FixedUpdate()
     {
         time += Time.fixedDeltaTime;
-        if (time >= period) PoolNote();
+        if (!player.isDead && time >= period) PoolNote();
         if (notes.Count > 0 && notes[0].anchoredPosition.y < 0)
         {
             notes[0].GetComponent<Note>().Despawn();

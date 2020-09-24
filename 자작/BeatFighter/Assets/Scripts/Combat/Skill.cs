@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    public int typeID;
 
-    void Update()
-    {
-        
-    }
+    public float cooldown;
 }

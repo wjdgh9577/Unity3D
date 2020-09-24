@@ -30,6 +30,8 @@ public class BaseChar : MonoBehaviour
 
     public Stats stats;
 
+    public bool isDead = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();

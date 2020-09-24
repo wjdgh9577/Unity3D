@@ -60,7 +60,7 @@ public class Combat : Singleton<Combat>
             return;
         }
 
-        PoolingManager.Instance.Spawn<GameObject>("GrassLand", Folder.Field, field);
+        PoolingManager.Instance.Spawn<GameObject>(mapInfo.fieldName, Folder.Field, field);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
         SetStage(currentStage);
