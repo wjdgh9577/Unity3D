@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
-    private float _speed = 100f;
+    private float _speed;
+    private float _defaultSpeed = 100f;
 
     private RectTransform rectTransform;
     public float speed { get { return _speed; }}
-
+    public float judgeTime { get; set; }
+    
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -26,7 +28,7 @@ public class Note : MonoBehaviour
     /// <param name="speed"></param>
     public void SetSpeed(float speed)
     {
-        _speed *= speed;
+        _speed = _defaultSpeed * speed;
     }
 
     public void Despawn()

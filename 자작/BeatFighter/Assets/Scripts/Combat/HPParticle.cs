@@ -5,8 +5,8 @@ using UnityEngine;
 public class HPParticle : MonoBehaviour
 {
     public GameObject Target;
-    public float Speed;
-    public float upSpeed;
+    public float Speed = 100f;
+    public float upSpeed = 1f;
 
     public bool JustOnStart = false;
 
@@ -28,6 +28,12 @@ public class HPParticle : MonoBehaviour
         gameObject.transform.rotation = Rotation;
 
         HPLabel = transform.GetChild(0).GetComponent<TextMesh>();
+    }
+
+    private void OnEnable()
+    {
+        upSpeed = 1f;
+        Alpha = 1f;
     }
 
     private void Update()

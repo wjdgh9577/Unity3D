@@ -23,6 +23,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
         if (on)
         {
             player.Attack();
+            Combat.Instance.vitalSign.Judge();
             on = false;
         }
     }

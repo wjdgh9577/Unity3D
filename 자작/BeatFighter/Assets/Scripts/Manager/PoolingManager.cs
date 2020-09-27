@@ -13,6 +13,14 @@ public enum Folder
 
 public class PoolingManager : Singleton<PoolingManager>
 {
+    private Dictionary<string, List<GameObject>> poolingObjs;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        poolingObjs = new Dictionary<string, List<GameObject>>();
+    }
+
     /// <summary>
     /// 해당 타입의 프리팹을 스폰
     /// 풀링 리스트에 없는 경우 생성하여 반환
@@ -25,6 +33,17 @@ public class PoolingManager : Singleton<PoolingManager>
     public T Spawn<T>(string name, Folder folder, Transform parent = null)
     {
         string folderName;
+        string cloneName = name + "(Clone)";
+
+        if (poolingObjs.ContainsKey(cloneName) && poolingObjs[cloneName].Count > 0)
+        {
+            GameObject pooledObj = poolingObjs[cloneName][0];
+            poolingObjs[cloneName].RemoveAt(0);
+            pooledObj.SetActive(true);
+            pooledObj.transform.SetParent(parent);
+
+            return pooledObj.GetComponent<T>();
+        }
 
         switch(folder)
         {
@@ -60,6 +79,10 @@ public class PoolingManager : Singleton<PoolingManager>
     /// <param name="obj"></param>
     public void Despawn(GameObject obj)
     {
-        Destroy(obj);
+        obj.SetActive(false);
+        obj.transform.SetParent(this.transform);
+        if (poolingObjs.ContainsKey(obj.name)) poolingObjs[obj.name].Add(obj);
+        else poolingObjs[obj.name] = new List<GameObject>() { obj };
+        //Destroy(obj);
     }
 }

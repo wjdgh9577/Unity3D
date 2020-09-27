@@ -68,6 +68,21 @@ public class VitalSign : MonoBehaviour
         List<float> sign = player.stats.GetSign();
         period = sign[0];
         newNote.SetSpeed(sign[1]);
+        newNote.judgeTime = Time.time + period;
         newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
+    }
+
+    public void Judge()
+    {
+        if (notes.Count > 0)
+        {
+            Note note = notes[0].GetComponent<Note>();
+            float gap = Mathf.Abs(Time.time - note.judgeTime);
+            if (gap < 0.1f)
+            {
+                note.Despawn();
+                notes.RemoveAt(0);
+            }
+        }
     }
 }

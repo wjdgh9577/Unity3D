@@ -6,6 +6,7 @@ using UnityEngine;
 public class Combat : Singleton<Combat>
 {
     public static Action onStageSet;
+    public static Action onStageStart;
     public static Action onStageEnd;
 
     [Header("References")]
