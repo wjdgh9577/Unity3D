@@ -73,7 +73,7 @@ public class BaseChar : PoolObj
     /// 애니메이션 이벤트 함수
     /// 현재 타겟에게 데미지
     /// </summary>
-    public void Hit()
+    public virtual void Hit()
     {
         if (Target == null) return;
         currentSkill.Initialize();
@@ -106,7 +106,7 @@ public class BaseChar : PoolObj
     /// 스킬 사용
     /// </summary>
     /// <param name="typeID"></param>
-    public void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)
+    public virtual void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)
     {
         CastInfo castInfo = new CastInfo() { from = this, to = Target };
         SkillInfo skillInfo = TableData.instance.skillDataDic[typeID];

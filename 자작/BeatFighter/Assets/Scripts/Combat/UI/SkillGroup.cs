@@ -13,6 +13,8 @@ public class SkillGroup : MonoBehaviour
         Combat.onMapSet += SetBaseData;
         Combat.onStageSet += Show;
         Combat.onStageEnd += Hide;
+        PlayerChar.onSkillPrepared += LockSkillIcons;
+        PlayerChar.onSkillInitialized += UnlockSkillIcons;
         Hide();
     }
 
@@ -36,6 +38,22 @@ public class SkillGroup : MonoBehaviour
         {
             SkillInfo info = TableData.instance.skillDataDic[PlayerData.currentSkills[i]];
             skillIcons[i].SetBaseData(player, info);
+        }
+    }
+
+    public void LockSkillIcons()
+    {
+        for (int i = 0; i < skillIcons.Length; i++)
+        {
+            skillIcons[i].Lock();
+        }
+    }
+
+    public void UnlockSkillIcons()
+    {
+        for (int i = 0; i < skillIcons.Length; i++)
+        {
+            skillIcons[i].Unlock();
         }
     }
 }

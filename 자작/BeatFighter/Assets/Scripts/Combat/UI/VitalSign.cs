@@ -85,7 +85,7 @@ public class VitalSign : MonoBehaviour
         {
             Note note = notes[0].GetComponent<Note>();
             float gap = Mathf.Abs(Time.time - note.judgeTime);
-            if (gap < 0.05f)
+            if (gap < 0.03f)
             {
                 note.Despawn();
                 notes.RemoveAt(0);
