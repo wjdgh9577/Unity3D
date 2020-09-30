@@ -6,8 +6,8 @@ public static class PlayerData
 {
     public static int level = 5; // for test
 
-    public static int currentChar = 10000;
-    public static List<int> currentSkills = new List<int>() { 50000, 50000, 50000, 50000 };
+    public static int currentChar = 10001;
+    public static List<int> currentSkills = new List<int>() { 50100, 50100, 50100, 50100 };
 
     public static int targetingParticle = 2000;
     public static int HPParticle = 2100;

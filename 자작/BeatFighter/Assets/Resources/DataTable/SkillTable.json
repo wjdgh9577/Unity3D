@@ -1,9 +1,15 @@
 ﻿{
-	"md5": "1a482653179eb3ea79caa7f7e9ae2a3f",
+	"md5": "6f924f162d9ee56a3a438528da79af3d",
 	"array": 
 		[
 			{
 				"typeID": 50000,
+				"stateName": "Attack",
+				"atkMul": 2
+			},
+			{
+				"typeID": 50100,
+				"stateName": "Attack",
 				"atkMul": 2
 			}
 		]

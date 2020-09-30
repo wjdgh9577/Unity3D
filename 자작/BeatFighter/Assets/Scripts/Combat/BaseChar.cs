@@ -37,6 +37,7 @@ public class BaseChar : PoolObj
     public Stats stats;
 
     public bool isDead = false;
+    private Skill currentSkill;
 
     private void Awake()
     {
@@ -75,8 +76,7 @@ public class BaseChar : PoolObj
     public void Hit()
     {
         if (Target == null) return;
-        stats.hp -= 10;
-        DoDamage(Target);
+        currentSkill.Initialize();
     }
 
     /// <summary>
@@ -106,16 +106,21 @@ public class BaseChar : PoolObj
     /// 스킬 사용
     /// </summary>
     /// <param name="typeID"></param>
-    public void DoSkill(int typeID)
+    public void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)
     {
         CastInfo castInfo = new CastInfo() { from = this, to = Target };
         SkillInfo skillInfo = TableData.instance.skillDataDic[typeID];
-        Skill skill = PoolingManager.Instance.Spawn<Skill>(typeID);
+        currentSkill = PoolingManager.Instance.Spawn<Skill>(typeID);
+        currentSkill.Prepare(castInfo, skillInfo, judge);
     }
 
-    public void Attack()
+    /// <summary>
+    /// 스킬 시전시 특정 캐스팅 동작 실행
+    /// </summary>
+    /// <param name="stateName"></param>
+    public void Play(string stateName)
     {
-        animator.Play("Attack", -1, 0);
+        animator.Play(stateName, -1, 0);
     }
 
     /// <summary>

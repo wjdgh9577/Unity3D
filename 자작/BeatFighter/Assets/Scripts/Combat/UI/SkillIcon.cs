@@ -23,9 +23,8 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
             if (Time.time - lastSkillTime > metaData.cooldown)
             {
                 lastSkillTime = Time.time;
-                player.Attack();
-                //player.DoSkill(metaData.typeID);
-                Combat.Instance.vitalSign.Judge();
+                JudgeRank judge = Combat.Instance.vitalSign.Judge();
+                player.DoSkill(metaData.typeID, judge);
             }
             on = false;
         }

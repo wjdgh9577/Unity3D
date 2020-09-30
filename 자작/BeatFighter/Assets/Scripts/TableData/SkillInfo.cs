@@ -8,6 +8,8 @@ public class SkillInfo : TableData.IData<int>
     public string stateName;
 
     public float cooldown = 0;
+    public float duration = 0;
+    public float tickTime = 0;
     public float atkMul = 1;
     public float atkAdd = 0;
     public float defMul = 1;

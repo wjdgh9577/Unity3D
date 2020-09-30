@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum JudgeRank
+{
+    critical,
+    Normal,
+    Fail
+}
+
 public class VitalSign : MonoBehaviour
 {
     public RectTransform heartTM;
@@ -72,17 +79,25 @@ public class VitalSign : MonoBehaviour
         newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
     }
 
-    public void Judge()
+    public JudgeRank Judge()
     {
         if (notes.Count > 0)
         {
             Note note = notes[0].GetComponent<Note>();
             float gap = Mathf.Abs(Time.time - note.judgeTime);
-            if (gap < 0.1f)
+            if (gap < 0.05f)
             {
                 note.Despawn();
                 notes.RemoveAt(0);
+                return JudgeRank.critical;
+            }
+            else if (gap < 0.1f)
+            {
+                note.Despawn();
+                notes.RemoveAt(0);
+                return JudgeRank.Normal;
             }
         }
+        return JudgeRank.Fail;
     }
 }
