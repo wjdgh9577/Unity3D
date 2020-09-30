@@ -1,10 +1,10 @@
 ﻿{
-	"md5": "eb2f280102540f4e8307812540bef281",
+	"md5": "c3c2ee6a6a0f9ad36f6a839223dba9ae",
 	"array": 
 		[
 			{
 				"typeID": 10000,
-				"model": "Warrior",
+				"modelID": 0,
 				"atk": 5,
 				"def": 0,
 				"vit": 100,

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Targeting : MonoBehaviour
+public class Targeting : PoolObj
 {
     [SerializeField]
     private float rotationSpeed;

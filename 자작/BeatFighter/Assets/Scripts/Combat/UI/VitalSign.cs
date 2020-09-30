@@ -62,7 +62,7 @@ public class VitalSign : MonoBehaviour
     public void PoolNote()
     {
         time = 0;
-        Note newNote = PoolingManager.Instance.Spawn<Note>("Note", Folder.UI, heartTM);
+        Note newNote = PoolingManager.Instance.Spawn<Note>(PlayerData.NoteUI, heartTM);
         RectTransform newNoteTM = newNote.GetComponent<RectTransform>();
         notes.Add(newNoteTM);
         List<float> sign = player.stats.GetSign();

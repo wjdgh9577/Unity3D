@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         TableData.instance = new TableData();
         TableData.instance.LoadTableDatas();
+        PreloadManager.Instance.PreloadResources();
     }
 
     public void test()

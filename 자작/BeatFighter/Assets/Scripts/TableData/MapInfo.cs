@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapInfo : TableData.IData<int>
 {
     public int typeID;
-    public string fieldName;
+    public int fieldID;
     public int stage1;
     public int stage2;
     public int stage3;

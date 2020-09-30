@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPParticle : MonoBehaviour
+public class HPParticle : PoolObj
 {
     public GameObject Target;
     public float Speed = 100f;
@@ -56,7 +56,7 @@ public class HPParticle : MonoBehaviour
 
         if (Alpha < 0.005f)
         {
-            PoolingManager.Instance.Despawn(gameObject);
+            Despawn();
         }
     }
 

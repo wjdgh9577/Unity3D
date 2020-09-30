@@ -22,11 +22,13 @@ public class TableData
     private Dictionary<int, MobInfo> _mobDataDic;
     private Dictionary<int, MapInfo> _mapDataDic;
     private Dictionary<int, StageInfo> _stageDataDic;
+    private Dictionary<int, SkillInfo> _skillDataDic;
     
     public Dictionary<int, CharInfo> charDataDic => _charDataDic;
     public Dictionary<int, MobInfo> mobDataDic => _mobDataDic;
     public Dictionary<int, MapInfo> mapDataDic => _mapDataDic;
     public Dictionary<int, StageInfo> stageDataDic => _stageDataDic;
+    public Dictionary<int, SkillInfo> skillDataDic => _skillDataDic;
 
     public void LoadTableDatas()
     {
@@ -36,6 +38,7 @@ public class TableData
         foreach (var pair in mapDataDic) pair.Value.Setup();
         LoadTable<int, StageInfo>("StageTable", out _stageDataDic);
         foreach (var pair in stageDataDic) pair.Value.Setup();
+        LoadTable<int, SkillInfo>("SkillTable", out _skillDataDic);
     }
 
     private void LoadTable<Key, Value>(string jsonFilename, out Dictionary<Key, Value> dataDic) where Value : IData<Key>

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Combat : Singleton<Combat>
 {
+    public static Action onMapSet;
+    public static Action onMapEnd;
     public static Action onStageSet;
     public static Action onStageStart;
     public static Action onStageEnd;
@@ -12,7 +14,7 @@ public class Combat : Singleton<Combat>
     [Header("References")]
     public Transform field;
     public Transform cameraPoint;
-    public GameObject targeting;
+    public Targeting targeting;
     public VitalSign vitalSign;
     public HPGroup hpGroup;
 
@@ -31,6 +33,7 @@ public class Combat : Singleton<Combat>
     protected override void Awake()
     {
         base.Awake();
+        onMapSet += CreateTargetParticle;
     }
 
     /// <summary>
@@ -61,9 +64,10 @@ public class Combat : Singleton<Combat>
             return;
         }
 
-        PoolingManager.Instance.Spawn<GameObject>(mapInfo.fieldName, Folder.Field, field);
+        PoolingManager.Instance.Spawn<GameObject>(mapInfo.fieldID, field);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
+        onMapSet();
         SetStage(currentStage);
     }
 
@@ -87,9 +91,9 @@ public class Combat : Singleton<Combat>
             mobCount += 1;
         }
 
-        onStageSet();
         player.SetTarget(mobs[0]);
         HPGroup.Instance.Refresh();
+        onStageSet();
     }
 
     /// <summary>
@@ -117,12 +121,19 @@ public class Combat : Singleton<Combat>
     }
 
     /// <summary>
+    /// 타겟팅 표시 생성
+    /// </summary>
+    private void CreateTargetParticle()
+    {
+        targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, this.transform);
+    }
+
+    /// <summary>
     /// 타겟팅 표시 설정
     /// </summary>
     /// <param name="target"></param>
     public void SetTarget(BaseChar target)
     {
-        targeting.SetActive(true);
         targeting.transform.position = target.transform.position + Vector3.up * 0.1f;
     }
 }

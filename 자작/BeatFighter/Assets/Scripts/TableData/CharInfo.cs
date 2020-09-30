@@ -6,7 +6,7 @@ public class CharInfo : TableData.IData<int>
 {
     // Model info
     public int typeID;
-    public string model;
+    public int modelID;
 
     // Status info
     public int atk;

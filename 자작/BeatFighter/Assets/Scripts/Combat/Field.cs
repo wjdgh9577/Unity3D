@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Field : MonoBehaviour
+public class Field : PoolObj
 {
-    public void Despawn()
+    public override void Despawn()
     {
-        PoolingManager.Instance.Despawn(gameObject);
+        base.Despawn();
     }
 }

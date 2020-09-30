@@ -19,7 +19,13 @@ public struct DamageInfo
     }
 }
 
-public class BaseChar : MonoBehaviour
+public struct CastInfo
+{
+    public BaseChar from;
+    public BaseChar to;
+}
+
+public class BaseChar : PoolObj
 {
     public static Action onTakeDamage;
 
@@ -39,7 +45,7 @@ public class BaseChar : MonoBehaviour
 
     public void CreateDmgParticle(DamageInfo info)
     {
-        HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>("HPParticle", Folder.Particle);
+        HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>(PlayerData.HPParticle);
         particle.transform.position = transform.position;
         particle.SetMesh(info);
     }
@@ -94,6 +100,17 @@ public class BaseChar : MonoBehaviour
         CreateDmgParticle(info);
         onTakeDamage();
         Debug.Log(stats.hp + "/" + stats.maxHp);
+    }
+
+    /// <summary>
+    /// 스킬 사용
+    /// </summary>
+    /// <param name="typeID"></param>
+    public void DoSkill(int typeID)
+    {
+        CastInfo castInfo = new CastInfo() { from = this, to = Target };
+        SkillInfo skillInfo = TableData.instance.skillDataDic[typeID];
+        Skill skill = PoolingManager.Instance.Spawn<Skill>(typeID);
     }
 
     public void Attack()

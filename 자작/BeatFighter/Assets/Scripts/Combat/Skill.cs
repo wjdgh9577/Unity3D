@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill : MonoBehaviour
+public class Skill : PoolObj
 {
-    public int typeID;
-
-    public float cooldown;
+    public void Initialize()
+    {
+        
+    }
 }

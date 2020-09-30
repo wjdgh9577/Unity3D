@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 각 개체의 HP바 관리
 /// </summary>
-public class HPBar : MonoBehaviour
+public class HPBar : PoolObj
 {
     public Image currentHP;
     private BaseChar owner;

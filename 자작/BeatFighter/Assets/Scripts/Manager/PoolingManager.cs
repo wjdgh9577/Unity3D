@@ -2,73 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Folder
-{
-    UI,
-    Model,
-    Particle,
-    Field,
-    Skill
-}
-
 public class PoolingManager : Singleton<PoolingManager>
 {
-    private Dictionary<string, List<GameObject>> poolingObjs;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        poolingObjs = new Dictionary<string, List<GameObject>>();
-    }
+    private Dictionary<int, List<GameObject>> poolingObjs;
 
     /// <summary>
     /// 해당 타입의 프리팹을 스폰
     /// 풀링 리스트에 없는 경우 생성하여 반환
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="name"></param>
-    /// <param name="folder"></param>
+    /// <param name="typeID"></param>
     /// <param name="parent"></param>
     /// <returns></returns>
-    public T Spawn<T>(string name, Folder folder, Transform parent = null)
+    public T Spawn<T>(int typeID, Transform parent = null)
     {
-        string folderName;
-        string cloneName = name + "(Clone)";
 
-        if (poolingObjs.ContainsKey(cloneName) && poolingObjs[cloneName].Count > 0)
+        if (poolingObjs == null) poolingObjs = new Dictionary<int, List<GameObject>>();
+
+        if (poolingObjs.ContainsKey(typeID) && poolingObjs[typeID].Count > 0)
         {
-            GameObject pooledObj = poolingObjs[cloneName][0];
-            poolingObjs[cloneName].RemoveAt(0);
+            GameObject pooledObj = poolingObjs[typeID][0];
+            poolingObjs[typeID].RemoveAt(0);
             pooledObj.SetActive(true);
             pooledObj.transform.SetParent(parent);
 
             return pooledObj.GetComponent<T>();
         }
 
-        switch(folder)
-        {
-            case Folder.Model:
-                folderName = "Model/";
-                break;
-            case Folder.UI:
-                folderName = "UI/";
-                break;
-            case Folder.Particle:
-                folderName = "Particle/";
-                break;
-            case Folder.Field:
-                folderName = "Field/";
-                break;
-            case Folder.Skill:
-                folderName = "Skill/";
-                break;
-            default:
-                folderName = "";
-                break;
-        }
-
-        Object obj = Resources.Load(folderName + name);
-        GameObject spawnObj = Instantiate(obj, parent) as GameObject;
+        GameObject spawnObj = Instantiate(PreloadManager.Instance.preloadObjs[typeID], parent);
 
         return spawnObj.GetComponent<T>();
     }
@@ -81,8 +42,10 @@ public class PoolingManager : Singleton<PoolingManager>
     {
         obj.SetActive(false);
         obj.transform.SetParent(this.transform);
-        if (poolingObjs.ContainsKey(obj.name)) poolingObjs[obj.name].Add(obj);
-        else poolingObjs[obj.name] = new List<GameObject>() { obj };
-        //Destroy(obj);
+
+        int typeID = int.Parse(obj.name.Split('_')[0]);
+
+        if (poolingObjs.ContainsKey(typeID)) poolingObjs[typeID].Add(obj);
+        else poolingObjs[typeID] = new List<GameObject>() { obj };
     }
 }

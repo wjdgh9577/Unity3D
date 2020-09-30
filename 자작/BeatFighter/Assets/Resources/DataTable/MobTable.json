@@ -1,10 +1,10 @@
 ﻿{
-	"md5": "7547a6bc9ab8ed864f5c653dc3efeb65",
+	"md5": "95c9219574150e5ce1ee8a509c39a01b",
 	"array": 
 		[
 			{
 				"typeID": 20000,
-				"model": "Ninja",
+				"modelID": 100,
 				"level": 1,
 				"atk": 1,
 				"def": 0,

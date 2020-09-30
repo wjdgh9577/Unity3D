@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note : MonoBehaviour
+public class Note : PoolObj
 {
     private float _speed;
     private float _defaultSpeed = 100f;
@@ -31,8 +31,8 @@ public class Note : MonoBehaviour
         _speed = _defaultSpeed * speed;
     }
 
-    public void Despawn()
+    public override void Despawn()
     {
-        PoolingManager.Instance.Despawn(gameObject);
+        base.Despawn();
     }
 }

@@ -6,12 +6,10 @@ using UnityEngine.EventSystems;
 public class SkillIcon : MonoBehaviour, IPointerDownHandler
 {
     private PlayerChar player;
-    private bool on = false;
+    private SkillInfo metaData;
+    private float lastSkillTime = 0;
 
-    private void OnEnable()
-    {
-        player = Combat.Instance.player;
-    }
+    private bool on = false;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -22,9 +20,20 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
     {
         if (on)
         {
-            player.Attack();
-            Combat.Instance.vitalSign.Judge();
+            if (Time.time - lastSkillTime > metaData.cooldown)
+            {
+                lastSkillTime = Time.time;
+                player.Attack();
+                //player.DoSkill(metaData.typeID);
+                Combat.Instance.vitalSign.Judge();
+            }
             on = false;
         }
+    }
+
+    public void SetBaseData(PlayerChar player, SkillInfo meta)
+    {
+        this.player = player;
+        this.metaData = meta;
     }
 }
