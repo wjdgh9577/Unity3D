@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class SkillIcon : MonoBehaviour, IPointerDownHandler
 {
     public GameObject _lock;
-    public Text _text;
+    public Image _cooldownImage;
+    public Text _cooldownText;
 
     private PlayerChar player;
     private SkillInfo metaData;
@@ -28,17 +29,20 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
         if (on && !isLock && !isCooldown)
         {
             lastSkillTime = Time.time;
-            _text.gameObject.SetActive(true);
+            _cooldownText.gameObject.SetActive(true);
+            _cooldownImage.gameObject.SetActive(true);
             JudgeRank judge = Combat.Instance.vitalSign.Judge();Debug.Log(judge);
             player.DoSkill(metaData.typeID, judge);
         }
         if (isCooldown)
         {
-            _text.text = ((int)remainTime).ToString();
+            _cooldownText.text = ((int)remainTime).ToString();
+            _cooldownImage.fillAmount = remainTime / metaData.cooldown;
         }
         else
         {
-            _text.gameObject.SetActive(false);
+            _cooldownText.gameObject.SetActive(false);
+            _cooldownImage.gameObject.SetActive(false);
             _lock.SetActive(false);
         }
         if (isLock) _lock.SetActive(true);

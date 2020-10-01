@@ -8,14 +8,14 @@ public struct DamageInfo
     public BaseChar from;
     public BaseChar to;
     public int damage;
-    public float criticalBonus;
+    public JudgeRank judge;
 
-    public DamageInfo(BaseChar from, BaseChar to, int damage, float criticalBonus)
+    public DamageInfo(BaseChar from, BaseChar to, int damage, JudgeRank judge)
     {
         this.from = from;
         this.to = to;
         this.damage = damage;
-        this.criticalBonus = criticalBonus;
+        this.judge = judge;
     }
 }
 
@@ -42,13 +42,6 @@ public class BaseChar : PoolObj
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    public void CreateDmgParticle(DamageInfo info)
-    {
-        HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>(PlayerData.HPParticle);
-        particle.transform.position = transform.position;
-        particle.SetMesh(info);
     }
 
     /// <summary>
@@ -83,10 +76,10 @@ public class BaseChar : PoolObj
     /// 상대에게 데미지
     /// </summary>
     /// <param name="target"></param>
-    public void DoDamage(BaseChar target)
+    public void DoDamage(BaseChar target, Stats stats, JudgeRank judge)
     {
-        int damage = Formula.CalcDamage(stats, target.stats);
-        DamageInfo info = new DamageInfo(this, target, damage, 0);
+        int damage = Formula.CalcDamage(stats, target.stats, judge);
+        DamageInfo info = new DamageInfo(this, target, damage, judge);
         target.GetDamage(info);
     }
 
@@ -97,7 +90,7 @@ public class BaseChar : PoolObj
     public void GetDamage(DamageInfo info)
     {
         stats.hp = Mathf.Clamp(stats.hp - info.damage, 0, stats.maxHp);
-        CreateDmgParticle(info);
+        Combat.Instance.CreateDmgParticle(info);
         onTakeDamage();
         Debug.Log(stats.hp + "/" + stats.maxHp);
     }

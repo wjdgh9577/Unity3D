@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "6f924f162d9ee56a3a438528da79af3d",
+	"md5": "6cda057b05c8909558f702762bbe720c",
 	"array": 
 		[
 			{
@@ -10,6 +10,7 @@
 			{
 				"typeID": 50100,
 				"stateName": "Attack",
+				"cooldown": 5,
 				"atkMul": 2
 			}
 		]

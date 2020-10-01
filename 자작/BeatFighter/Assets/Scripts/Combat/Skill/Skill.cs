@@ -110,9 +110,11 @@ public abstract class Skill : PoolObj
         return true;
     }
 
-    protected void DoSkillDamage()
+    protected void DoSkillDamage(BaseChar target)
     {
-
+        Stats stats = castInfo.from.stats;
+        stats.AddSkillParameter(metaData);
+        castInfo.from.DoDamage(target, stats, judge);
     }
 
     /// <summary>

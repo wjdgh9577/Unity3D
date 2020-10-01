@@ -128,6 +128,13 @@ public class Combat : Singleton<Combat>
         targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, this.transform);
     }
 
+    public void CreateDmgParticle(DamageInfo info)
+    {
+        HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>(PlayerData.HPParticle);
+        particle.transform.position = info.to.transform.position;
+        particle.SetMesh(info);
+    }
+
     /// <summary>
     /// 타겟팅 표시 설정
     /// </summary>

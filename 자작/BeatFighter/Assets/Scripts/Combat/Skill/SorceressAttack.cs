@@ -7,7 +7,7 @@ public class SorceressAttack : Skill
     protected override void OnInitialized()
     {
         Play("Explosion", castInfo.to.transform.position);
-        DoSkillDamage();
+        DoSkillDamage(castInfo.to);
         Despawn();
     }
 }

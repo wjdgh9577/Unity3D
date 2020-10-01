@@ -10,10 +10,11 @@ public class SkillInfo : TableData.IData<int>
     public float cooldown = 0;
     public float duration = 0;
     public float tickTime = 0;
+
     public float atkMul = 1;
-    public float atkAdd = 0;
+    public int atkAdd = 0;
     public float defMul = 1;
-    public float defAdd = 0;
+    public int defAdd = 0;
     public float periodMul = 1;
     public float speedMul = 1;
 

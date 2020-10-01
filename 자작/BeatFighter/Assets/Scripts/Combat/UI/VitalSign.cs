@@ -79,6 +79,10 @@ public class VitalSign : MonoBehaviour
         newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
     }
 
+    /// <summary>
+    /// 노트가 처리된 판정을 반환
+    /// </summary>
+    /// <returns></returns>
     public JudgeRank Judge()
     {
         if (notes.Count > 0)

@@ -62,7 +62,7 @@ public class HPParticle : PoolObj
 
     public void SetMesh(DamageInfo info)
     {
-        HPLabel.text = info.damage.ToString();
-        HPLabel.color = info.criticalBonus > 1 ? Color.yellow : Color.red;
+        HPLabel.text = info.judge != JudgeRank.Fail ? info.damage.ToString() : "Miss";
+        HPLabel.color = info.judge == JudgeRank.critical ? Color.yellow : Color.red;
     }
 }

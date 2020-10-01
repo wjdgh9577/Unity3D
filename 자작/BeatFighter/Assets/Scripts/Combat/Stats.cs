@@ -34,6 +34,14 @@ public struct Stats
         this.signSpeed = stats.ContainsKey("signS") ? stats["signS"] : 0;
     }
 
+    public void AddSkillParameter(SkillInfo info)
+    {
+        atk = (int)(atk * info.atkMul) + info.atkAdd;
+        def = (int)(def * info.defMul) + info.defAdd;
+        signPeriod *= info.periodMul;
+        signSpeed *= info.speedMul;
+    }
+
     public List<float> GetSign()
     {
         List<float> sign = new List<float>() { signPeriod * Mathf.Clamp((float)hp / maxHp, 0.5f, 1f), signSpeed * Mathf.Clamp((float)maxHp / hp, 1f, 2f) };
