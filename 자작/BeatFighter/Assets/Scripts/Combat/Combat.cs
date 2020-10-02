@@ -59,18 +59,19 @@ public class Combat : Singleton<Combat>
             stageIDs.Add(mapInfo.stageList[i]);
         }
 
-        int currentStage = GetAndRemoveCurrentStage();
-        if (currentStage == -1)
-        {
-            Debug.LogError("현재 맵에 스테이지가 존재하지 않음");
-            return;
-        }
-
+        //int currentStage = GetAndRemoveCurrentStage();
+        //if (currentStage == -1)
+        //{
+        //    Debug.LogError("현재 맵에 스테이지가 존재하지 않음");
+        //    return;
+        //}
+        
         PoolingManager.Instance.Spawn<GameObject>(mapInfo.fieldID, field);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
         onMapSet();
-        SetStage(currentStage);
+        //SetStage(currentStage);
+        GotoNextStage(0);
     }
 
     /// <summary>
@@ -115,16 +116,16 @@ public class Combat : Singleton<Combat>
     /// <summary>
     /// 다음 스테이지로 이동
     /// </summary>
-    public void GotoNextStage()
+    public void GotoNextStage(float time)
     {
         if (mobCount != 0) return;
 
-        StartCoroutine(NextStageRoutine());
+        StartCoroutine(NextStageRoutine(time));
     }
 
-    private IEnumerator NextStageRoutine()
+    private IEnumerator NextStageRoutine(float time)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(time);
         int currentStage = GetAndRemoveCurrentStage();
         if (currentStage != -1)
         {
@@ -215,7 +216,7 @@ public class Combat : Singleton<Combat>
         else if (mobCount == 0)
         {
             onStageEnd();
-            GotoNextStage();
+            GotoNextStage(2);
         }
     }
 

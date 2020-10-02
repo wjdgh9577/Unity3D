@@ -16,9 +16,10 @@ public class GameManager : Singleton<GameManager>
 
     public void test()
     {
-        Combat.Instance.gameObject.SetActive(true);
+        FadeManager.Instance.FadeOut();
         Combat.Instance.SetMap(30000);
         followCam.Follow = Combat.Instance.cameraPoint;
         followCam.LookAt = Combat.Instance.cameraPoint;
+
     }
 }

@@ -31,11 +31,6 @@ public class VitalSign : MonoBehaviour
         Hide();
     }
 
-    private void OnEnable()
-    {
-        time = float.PositiveInfinity;
-    }
-
     private void FixedUpdate()
     {
         if (!poolLock)
@@ -85,6 +80,7 @@ public class VitalSign : MonoBehaviour
     public void UnlockPoolNote()
     {
         poolLock = false;
+        time = float.PositiveInfinity;
     }
 
     /// <summary>

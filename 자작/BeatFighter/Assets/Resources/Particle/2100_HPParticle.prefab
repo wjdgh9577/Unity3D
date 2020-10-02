@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 1331499650934338477}
   - component: {fileID: 5333186292134611303}
   m_Layer: 5
-  m_Name: HPParticle
+  m_Name: 2100_HPParticle
   m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,6 +139,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   Speed: 100
   upSpeed: 1
-  JustOnStart: 1
+  JustOnStart: 0
   Alpha: 1
   FadeSpeed: 2.5
