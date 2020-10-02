@@ -15,13 +15,13 @@ public class PlayerChar : BaseChar
     public override void SetTarget(BaseChar target)
     {
         base.SetTarget(target);
-        Combat.Instance.SetTarget(target);
+        if (target != null) Combat.Instance.SetTarget(target);
     }
 
     public override void Hit()
     {
-        base.Hit();
         onSkillInitialized();
+        base.Hit();
     }
 
     public override void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)

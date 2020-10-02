@@ -112,6 +112,7 @@ public abstract class Skill : PoolObj
 
     protected void DoSkillDamage(BaseChar target)
     {
+        if (!Combat.Targetable(target)) return;
         int combo = 1;
         if (castInfo.from is PlayerChar) combo = Combat.Instance.vitalSign.combo;
         Stats stats = castInfo.from.stats;

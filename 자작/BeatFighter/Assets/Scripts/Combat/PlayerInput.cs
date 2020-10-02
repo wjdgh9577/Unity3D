@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
                 if (layerMask.value == LayerMask.NameToLayer("Enemy"))
                 {
                     BaseChar target = hit.transform.GetComponent<MobChar>();
-                    player.SetTarget(target);
+                    if (!target.isDead) player.SetTarget(target);
                 }
             }
         }

@@ -11,8 +11,11 @@ public class SkillGroup : MonoBehaviour
     private void Awake()
     {
         Combat.onMapSet += SetBaseData;
+        Combat.onMapSet += LockSkillIcons;
+        Combat.onMapEnd += Hide;
         Combat.onStageSet += Show;
-        Combat.onStageEnd += Hide;
+        Combat.onStageStart += UnlockSkillIcons;
+        Combat.onStageEnd += LockSkillIcons;
         PlayerChar.onSkillPrepared += LockSkillIcons;
         PlayerChar.onSkillInitialized += UnlockSkillIcons;
         Hide();

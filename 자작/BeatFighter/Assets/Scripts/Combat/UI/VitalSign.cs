@@ -19,11 +19,14 @@ public class VitalSign : MonoBehaviour
     public int combo { get; private set; } = 0;
     private float time;
     private float period;
+    private bool poolLock = true;
 
     private void Awake()
     {
+        Combat.onMapEnd += Hide;
         Combat.onStageSet += Show;
-        Combat.onStageEnd += Hide;
+        Combat.onStageStart += UnlockPoolNote;
+        Combat.onStageEnd += DespawnAll;
         notes = new List<RectTransform>();
         Hide();
     }
@@ -35,13 +38,16 @@ public class VitalSign : MonoBehaviour
 
     private void FixedUpdate()
     {
-        time += Time.fixedDeltaTime;
-        if (!player.isDead && time >= period) PoolNote();
-        if (notes.Count > 0 && notes[0].anchoredPosition.y < 0)
+        if (!poolLock)
         {
-            combo = 0;
-            notes[0].GetComponent<Note>().Despawn();
-            notes.RemoveAt(0);
+            time += Time.fixedDeltaTime;
+            if (!player.isDead && time >= period) PoolNote();
+            if (notes.Count > 0 && notes[0].anchoredPosition.y < 0)
+            {
+                combo = 0;
+                notes[0].GetComponent<Note>().Despawn();
+                notes.RemoveAt(0);
+            }
         }
     }
 
@@ -52,11 +58,6 @@ public class VitalSign : MonoBehaviour
 
     public void Hide()
     {
-        for (int i = 0; i < notes.Count; i++)
-        {
-            notes[0].GetComponent<Note>().Despawn();
-        }
-        notes.Clear();
         gameObject.SetActive(false);
     }
 
@@ -79,6 +80,11 @@ public class VitalSign : MonoBehaviour
         newNote.SetSpeed(sign[1]);
         newNote.judgeTime = Time.time + period;
         newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
+    }
+
+    public void UnlockPoolNote()
+    {
+        poolLock = false;
     }
 
     /// <summary>
@@ -108,5 +114,15 @@ public class VitalSign : MonoBehaviour
         }
         combo = 0;
         return JudgeRank.Fail;
+    }
+
+    public void DespawnAll()
+    {
+        for (int i = 0; i < notes.Count; i++)
+        {
+            notes[0].GetComponent<Note>().Despawn();
+        }
+        notes.Clear();
+        poolLock = true;
     }
 }

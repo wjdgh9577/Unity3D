@@ -28,6 +28,8 @@ public struct CastInfo
 public class BaseChar : PoolObj
 {
     public static Action onTakeDamage;
+    public static Action onPlayerDeath;
+    public static Action onMobDeath;
 
     private Animator animator;
 
@@ -92,6 +94,19 @@ public class BaseChar : PoolObj
         stats.hp = Mathf.Clamp(stats.hp - info.damage, 0, stats.maxHp);
         Combat.Instance.CreateDmgParticle(info);
         onTakeDamage();
+        if (stats.hp <= 0)
+        {
+            isDead = true;
+            if (this is MobChar)
+            {
+                onMobDeath();
+            }
+            else
+            {
+                onPlayerDeath();
+            }
+            Play("Dead");
+        }
         Debug.Log(stats.hp + "/" + stats.maxHp);
     }
 
@@ -105,6 +120,11 @@ public class BaseChar : PoolObj
         SkillInfo skillInfo = TableData.instance.skillDataDic[typeID];
         currentSkill = PoolingManager.Instance.Spawn<Skill>(typeID);
         currentSkill.Prepare(castInfo, skillInfo, judge);
+    }
+
+    public virtual void Dead()
+    {
+        PoolingManager.Instance.Despawn(gameObject);
     }
 
     /// <summary>

@@ -34,6 +34,7 @@ public class Combat : Singleton<Combat>
     {
         base.Awake();
         onMapSet += CreateTargetParticle;
+        BaseChar.onMobDeath += MobDeath;
     }
 
     /// <summary>
@@ -88,20 +89,23 @@ public class Combat : Singleton<Combat>
         foreach (var pair in stageInfo.mobList)
         {
             mobs[pair.Key] = mobSettings[pair.Key].SetMob(pair.Value);
+            mobs[pair.Key].SetTarget(player);
             mobCount += 1;
         }
 
-        player.SetTarget(mobs[0]);
-        HPGroup.Instance.Refresh();
+        player.SetTarget(GetRandomMob());
+        //HPGroup.Instance.Refresh();
         onStageSet();
+        StartCoroutine(StartCurrentStage());
     }
 
     /// <summary>
     /// 현재 스테이지 시작
     /// </summary>
-    public void StartCurrentStage()
+    private IEnumerator StartCurrentStage()
     {
-
+        yield return new WaitForSeconds(3);
+        onStageStart();
     }
 
     /// <summary>
@@ -128,6 +132,10 @@ public class Combat : Singleton<Combat>
         targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, this.transform);
     }
 
+    /// <summary>
+    /// 데미지 파티클 생성
+    /// </summary>
+    /// <param name="info"></param>
     public void CreateDmgParticle(DamageInfo info)
     {
         HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>(PlayerData.HPParticle);
@@ -142,5 +150,41 @@ public class Combat : Singleton<Combat>
     public void SetTarget(BaseChar target)
     {
         targeting.transform.position = target.transform.position + Vector3.up * 0.1f;
+    }
+
+    /// <summary>
+    /// 현재 살아있는 몬스터 중 랜덤으로 반환
+    /// </summary>
+    /// <returns></returns>
+    public MobChar GetRandomMob()
+    {
+        List<int> mobIndexes = new List<int>();
+        for (int i = 0; i < mobs.Length; i++)
+        {
+            if (Targetable(mobs[i])) mobIndexes.Add(i);
+        }
+        if (mobIndexes.Count == 0) return null;
+        int index = UnityEngine.Random.Range(0, mobIndexes.Count);
+        return mobs[mobIndexes[index]];
+    }
+
+    /// <summary>
+    /// 대상을 타겟으로 삼을 수 있는지 판단
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static bool Targetable(BaseChar target)
+    {
+        return target != null && target.isActiveAndEnabled && !target.isDead;
+    }
+
+    public void MobDeath()
+    {
+        mobCount -= 1;
+        if (mobCount != 0 && player.Target.isDead) player.SetTarget(GetRandomMob());
+        else if (mobCount == 0)
+        {
+            onStageEnd();
+        }
     }
 }

@@ -29,16 +29,17 @@ public class HPBar : PoolObj
     }
 
     /// <summary>
-    /// HP바 Fill Amount 설정
+    /// HP바 Fill Amount 설정하고 체력이 0일 경우 제거
     /// </summary>
     /// <param name="amount"></param>
-    public void Refresh()
+    public bool Refresh()
     {
         currentHP.fillAmount = owner.GetHPAmount();
-    }
-
-    public void Despawn()
-    {
-        PoolingManager.Instance.Despawn(gameObject);
+        if (currentHP.fillAmount == 0)
+        {
+            Despawn();
+            return true;
+        }
+        return false;
     }
 }

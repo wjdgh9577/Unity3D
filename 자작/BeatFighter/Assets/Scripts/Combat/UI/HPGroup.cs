@@ -44,9 +44,11 @@ public class HPGroup : Singleton<HPGroup>
     /// </summary>
     public void Refresh()
     {
-        for (int i = 0; i < bars.Count; i++)
+        bool isDespawned;
+        for (int i = bars.Count - 1; i >= 0; i--)
         {
-            bars[i].Refresh();
+            isDespawned = bars[i].Refresh();
+            if (isDespawned) bars.RemoveAt(i);
         }
     }
 
