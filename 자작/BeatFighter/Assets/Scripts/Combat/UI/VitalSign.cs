@@ -16,6 +16,7 @@ public class VitalSign : MonoBehaviour
 
     private List<RectTransform> notes;
     private PlayerChar player;
+    public int combo { get; private set; } = 0;
     private float time;
     private float period;
 
@@ -38,6 +39,7 @@ public class VitalSign : MonoBehaviour
         if (!player.isDead && time >= period) PoolNote();
         if (notes.Count > 0 && notes[0].anchoredPosition.y < 0)
         {
+            combo = 0;
             notes[0].GetComponent<Note>().Despawn();
             notes.RemoveAt(0);
         }
@@ -91,17 +93,20 @@ public class VitalSign : MonoBehaviour
             float gap = Mathf.Abs(Time.time - note.judgeTime);
             if (gap < 0.03f)
             {
+                combo += 1;
                 note.Despawn();
                 notes.RemoveAt(0);
                 return JudgeRank.critical;
             }
             else if (gap < 0.1f)
             {
+                combo += 1;
                 note.Despawn();
                 notes.RemoveAt(0);
                 return JudgeRank.Normal;
             }
         }
+        combo = 0;
         return JudgeRank.Fail;
     }
 }

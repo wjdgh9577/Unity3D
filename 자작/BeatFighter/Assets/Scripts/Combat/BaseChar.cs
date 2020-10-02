@@ -76,9 +76,9 @@ public class BaseChar : PoolObj
     /// 상대에게 데미지
     /// </summary>
     /// <param name="target"></param>
-    public void DoDamage(BaseChar target, Stats stats, JudgeRank judge)
+    public void DoDamage(BaseChar target, Stats stats, JudgeRank judge, int combo)
     {
-        int damage = Formula.CalcDamage(stats, target.stats, judge);
+        int damage = Formula.CalcDamage(stats, target.stats, judge, combo);
         DamageInfo info = new DamageInfo(this, target, damage, judge);
         target.GetDamage(info);
     }
