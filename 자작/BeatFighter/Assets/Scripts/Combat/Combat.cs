@@ -34,6 +34,7 @@ public class Combat : Singleton<Combat>
     {
         base.Awake();
         onMapSet += CreateTargetParticle;
+        onStageSet += StartCurrentStage;
         BaseChar.onMobDeath += MobDeath;
     }
 
@@ -76,7 +77,7 @@ public class Combat : Singleton<Combat>
     /// 스테이지 세팅
     /// </summary>
     /// <param name="stageID"></param>
-    public void SetStage(int stageID)
+    private void SetStage(int stageID)
     {
         mobCount = 0;
         StageInfo stageInfo = TableData.instance.stageDataDic[stageID];
@@ -94,24 +95,60 @@ public class Combat : Singleton<Combat>
         }
 
         player.SetTarget(GetRandomMob());
-        //HPGroup.Instance.Refresh();
         onStageSet();
-        StartCoroutine(StartCurrentStage());
     }
 
     /// <summary>
     /// 현재 스테이지 시작
     /// </summary>
-    private IEnumerator StartCurrentStage()
+    public void StartCurrentStage()
     {
-        yield return new WaitForSeconds(3);
+        StartCoroutine(StartCurrentStageRoutine());
+    }
+
+    private IEnumerator StartCurrentStageRoutine()
+    {
+        yield return new WaitForSeconds(1);
         onStageStart();
+    }
+
+    /// <summary>
+    /// 다음 스테이지로 이동
+    /// </summary>
+    public void GotoNextStage()
+    {
+        if (mobCount != 0) return;
+
+        StartCoroutine(NextStageRoutine());
+    }
+
+    private IEnumerator NextStageRoutine()
+    {
+        yield return new WaitForSeconds(2);
+        int currentStage = GetAndRemoveCurrentStage();
+        if (currentStage != -1)
+        {
+            player.Play("Run");
+            Vector3 startPos = transform.position;
+            Vector3 endPos = transform.position + Vector3.right * 20;
+            float progress = 0;
+            while (true)
+            {
+                if (transform.position == endPos) break;
+                progress += Time.deltaTime * 0.5f;
+                transform.position = Vector3.Lerp(startPos, endPos, progress);
+                yield return null;
+            }
+            player.Play("Idle");
+            SetStage(currentStage);
+        }
+        else onMapEnd();
     }
 
     /// <summary>
     /// 현재 스테이지를 반환하고 리스트에서 삭제
     /// </summary>
-    public int GetAndRemoveCurrentStage()
+    private int GetAndRemoveCurrentStage()
     {
         int currentStage = -1;
         
@@ -156,7 +193,7 @@ public class Combat : Singleton<Combat>
     /// 현재 살아있는 몬스터 중 랜덤으로 반환
     /// </summary>
     /// <returns></returns>
-    public MobChar GetRandomMob()
+    private MobChar GetRandomMob()
     {
         List<int> mobIndexes = new List<int>();
         for (int i = 0; i < mobs.Length; i++)
@@ -169,15 +206,8 @@ public class Combat : Singleton<Combat>
     }
 
     /// <summary>
-    /// 대상을 타겟으로 삼을 수 있는지 판단
+    /// 몬스터가 죽는 순간 실행되는 함수
     /// </summary>
-    /// <param name="target"></param>
-    /// <returns></returns>
-    public static bool Targetable(BaseChar target)
-    {
-        return target != null && target.isActiveAndEnabled && !target.isDead;
-    }
-
     public void MobDeath()
     {
         mobCount -= 1;
@@ -185,6 +215,17 @@ public class Combat : Singleton<Combat>
         else if (mobCount == 0)
         {
             onStageEnd();
+            GotoNextStage();
         }
+    }
+
+    /// <summary>
+    /// 대상을 타겟으로 삼을 수 있는지 판단
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static bool Targetable(BaseChar target)
+    {
+        return target != null && target.isActiveAndEnabled && !target.isDead;
     }
 }

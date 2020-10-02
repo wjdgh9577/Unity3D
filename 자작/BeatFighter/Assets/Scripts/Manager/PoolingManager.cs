@@ -25,6 +25,7 @@ public class PoolingManager : Singleton<PoolingManager>
             poolingObjs[typeID].RemoveAt(0);
             pooledObj.SetActive(true);
             pooledObj.transform.SetParent(parent);
+            pooledObj.transform.localPosition = Vector3.zero;
 
             return pooledObj.GetComponent<T>();
         }

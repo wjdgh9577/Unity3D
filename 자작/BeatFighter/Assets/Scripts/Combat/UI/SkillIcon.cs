@@ -31,7 +31,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
             lastSkillTime = Time.time;
             _cooldownText.gameObject.SetActive(true);
             _cooldownImage.gameObject.SetActive(true);
-            JudgeRank judge = Combat.Instance.vitalSign.Judge();Debug.Log(judge);
+            JudgeRank judge = Combat.Instance.vitalSign.Judge();
             player.DoSkill(metaData.typeID, judge);
         }
         if (isCooldown)

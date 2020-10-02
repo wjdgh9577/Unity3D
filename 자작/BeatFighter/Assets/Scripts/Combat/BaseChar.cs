@@ -46,6 +46,11 @@ public class BaseChar : PoolObj
         animator = GetComponent<Animator>();
     }
 
+    public void Initialized()
+    {
+        isDead = false;
+    }
+
     /// <summary>
     /// 공격 대상 설정
     /// </summary>
@@ -107,7 +112,6 @@ public class BaseChar : PoolObj
             }
             Play("Dead");
         }
-        Debug.Log(stats.hp + "/" + stats.maxHp);
     }
 
     /// <summary>
