@@ -73,10 +73,12 @@ public class BaseChar : PoolObj
     /// 애니메이션 이벤트 함수
     /// 현재 타겟에게 데미지
     /// </summary>
-    public virtual void Hit()
+    public virtual void Hit(int skillHash = 0)
     {
         if (Target == null) return;
-        currentSkill.Initialize();
+        SkillHash hash = (SkillHash)skillHash;
+        if (hash == SkillHash.Start || hash == SkillHash.JustOneShot) currentSkill.Initialize();
+        currentSkill.OnInitialized(hash);
     }
 
     /// <summary>
@@ -110,7 +112,7 @@ public class BaseChar : PoolObj
             {
                 onPlayerDeath();
             }
-            Play("Dead");
+            CrossFade("Dead");
         }
     }
 
@@ -118,17 +120,17 @@ public class BaseChar : PoolObj
     /// 스킬 사용
     /// </summary>
     /// <param name="typeID"></param>
-    public virtual void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)
+    public virtual void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal, int combo = 1)
     {
         CastInfo castInfo = new CastInfo() { from = this, to = Target };
         SkillInfo skillInfo = TableData.instance.skillDataDic[typeID];
         currentSkill = PoolingManager.Instance.Spawn<Skill>(typeID);
-        currentSkill.Prepare(castInfo, skillInfo, judge);
+        currentSkill.Prepare(castInfo, skillInfo, judge, combo);
     }
 
     public virtual void Dead()
     {
-        PoolingManager.Instance.Despawn(gameObject);
+        Despawn();
     }
 
     /// <summary>
@@ -138,6 +140,11 @@ public class BaseChar : PoolObj
     public void Play(string stateName)
     {
         animator.Play(stateName, -1, 0);
+    }
+
+    public void CrossFade(string stateName)
+    {
+        animator.CrossFade(stateName, 0.3f);
     }
 
     /// <summary>

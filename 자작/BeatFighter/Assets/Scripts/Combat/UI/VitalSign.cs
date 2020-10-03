@@ -16,6 +16,7 @@ public class VitalSign : MonoBehaviour
 
     private List<RectTransform> notes;
     private PlayerChar player;
+
     public int combo { get; private set; } = 0;
     private float time;
     private float period;
@@ -77,6 +78,9 @@ public class VitalSign : MonoBehaviour
         newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
     }
 
+    /// <summary>
+    /// 노트 생성 잠금 해제
+    /// </summary>
     public void UnlockPoolNote()
     {
         poolLock = false;
@@ -112,6 +116,9 @@ public class VitalSign : MonoBehaviour
         return JudgeRank.Fail;
     }
 
+    /// <summary>
+    /// 모든 노트를 제거하고 노트 생성을 잠금
+    /// </summary>
     public void DespawnAll()
     {
         for (int i = 0; i < notes.Count; i++)

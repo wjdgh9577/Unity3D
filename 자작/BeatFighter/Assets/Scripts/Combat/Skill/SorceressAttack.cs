@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SorceressAttack : Skill
 {
-    protected override void OnInitialized()
+    protected override void OnOneShot()
     {
         Play("Explosion", castInfo.to.transform.position);
         DoSkillDamage(castInfo.to);

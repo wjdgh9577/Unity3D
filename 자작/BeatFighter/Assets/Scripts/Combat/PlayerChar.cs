@@ -18,15 +18,16 @@ public class PlayerChar : BaseChar
         if (target != null) Combat.Instance.SetTarget(target);
     }
 
-    public override void Hit()
+    public override void Hit(int skillHash = 0)
     {
-        onSkillInitialized();
-        base.Hit();
+        SkillHash hash = (SkillHash)skillHash;
+        if (hash == SkillHash.Finish || hash == SkillHash.JustOneShot) onSkillInitialized();
+        base.Hit(skillHash);
     }
 
-    public override void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal)
+    public override void DoSkill(int typeID, JudgeRank judge = JudgeRank.Normal, int combo = 1)
     {
-        base.DoSkill(typeID, judge);
+        base.DoSkill(typeID, judge, combo);
         onSkillPrepared();
     }
 }

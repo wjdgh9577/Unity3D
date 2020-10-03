@@ -26,6 +26,7 @@ public class FadeManager : Singleton<FadeManager>
             fade.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
+        fadeScreen.gameObject.SetActive(false);
     }
 
     public void FadeOut()
@@ -46,5 +47,6 @@ public class FadeManager : Singleton<FadeManager>
             fade.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
+        fadeScreen.gameObject.SetActive(false);
     }
 }

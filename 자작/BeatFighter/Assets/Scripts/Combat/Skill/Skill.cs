@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillHash
+{
+    JustOneShot,
+    Start,
+    Middle,
+    Finish
+}
+
 public abstract class Skill : PoolObj
 {
     protected CastInfo castInfo;
     private SkillInfo metaData;
     private JudgeRank judge;
+    private int combo;
 
     private bool prepared;
     private bool isAlive;
@@ -17,7 +26,10 @@ public abstract class Skill : PoolObj
     private ParticleSystem[] particleSystems;
     private AudioSource[] audioSources;
 
-    protected abstract void OnInitialized();
+    protected virtual void OnOneShot() { }
+    protected virtual void OnStart() { }
+    protected virtual void OnMiddle() { }
+    protected virtual void OnFinish() { }
     protected virtual void OnAlive() { }
     protected virtual void OnTick() { }
     protected virtual void OnExpired() { }
@@ -51,11 +63,12 @@ public abstract class Skill : PoolObj
     /// </summary>
     /// <param name="castInfo"></param>
     /// <param name="meta"></param>
-    public void Prepare(CastInfo castInfo, SkillInfo metaData, JudgeRank judge)
+    public void Prepare(CastInfo castInfo, SkillInfo metaData, JudgeRank judge, int combo)
     {
         this.castInfo = castInfo;
         this.metaData = metaData;
         this.judge = judge;
+        this.combo = combo;
         this.prepared = false;
         castInfo.from.Play(metaData.stateName);
     }
@@ -68,7 +81,25 @@ public abstract class Skill : PoolObj
         this.prepared = true;
         this.isAlive = true;
         this.hasDuration = false;
-        OnInitialized();
+    }
+
+    public void OnInitialized(SkillHash hash)
+    {
+        switch (hash)
+        {
+            case SkillHash.JustOneShot:
+                OnOneShot();
+                break;
+            case SkillHash.Start:
+                OnStart();
+                break;
+            case SkillHash.Middle:
+                OnMiddle();
+                break;
+            case SkillHash.Finish:
+                OnFinish();
+                break;
+        }
     }
 
     /// <summary>
@@ -113,11 +144,17 @@ public abstract class Skill : PoolObj
     protected void DoSkillDamage(BaseChar target)
     {
         if (!Combat.Targetable(target)) return;
-        int combo = 1;
-        if (castInfo.from is PlayerChar) combo = Combat.Instance.vitalSign.combo;
         Stats stats = castInfo.from.stats;
         stats.AddSkillParameter(metaData);
         castInfo.from.DoDamage(target, stats, judge, combo);
+    }
+
+    protected void DoSkillDamageAllEnemies()
+    {
+        foreach (BaseChar target in Combat.Instance.mobs)
+        {
+            DoSkillDamage(target);
+        }
     }
 
     /// <summary>

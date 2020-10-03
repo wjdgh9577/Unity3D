@@ -32,7 +32,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
             _cooldownText.gameObject.SetActive(true);
             _cooldownImage.gameObject.SetActive(true);
             JudgeRank judge = Combat.Instance.vitalSign.Judge();
-            player.DoSkill(metaData.typeID, judge);
+            player.DoSkill(metaData.typeID, judge, Combat.Instance.vitalSign.combo);
         }
         if (isCooldown)
         {

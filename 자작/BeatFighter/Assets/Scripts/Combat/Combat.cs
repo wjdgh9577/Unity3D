@@ -140,7 +140,7 @@ public class Combat : Singleton<Combat>
                 transform.position = Vector3.Lerp(startPos, endPos, progress);
                 yield return null;
             }
-            player.Play("Idle");
+            player.CrossFade("Idle");
             SetStage(currentStage);
         }
         else onMapEnd();
@@ -168,6 +168,7 @@ public class Combat : Singleton<Combat>
     private void CreateTargetParticle()
     {
         targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, this.transform);
+        targeting.gameObject.SetActive(false);
     }
 
     /// <summary>
