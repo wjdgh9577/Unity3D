@@ -27,6 +27,8 @@ public struct CastInfo
 
 public class BaseChar : PoolObj
 {
+    public int[] skillIDs;
+
     public static Action onTakeDamage;
     public static Action onPlayerDeath;
     public static Action onMobDeath;
@@ -38,6 +40,7 @@ public class BaseChar : PoolObj
 
     public Stats stats;
 
+    [System.NonSerialized]
     public bool isDead = false;
     private Skill currentSkill;
 
@@ -130,7 +133,7 @@ public class BaseChar : PoolObj
 
     public virtual void Dead()
     {
-        Despawn();
+        if (this is MobChar) Despawn();
     }
 
     /// <summary>

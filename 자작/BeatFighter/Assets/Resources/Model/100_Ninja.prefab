@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5435d24bfccdab4298aadbeb85a699f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
+  skillIDs: 18c40000
 --- !u!95 &7325720874015955406
 Animator:
   serializedVersion: 3

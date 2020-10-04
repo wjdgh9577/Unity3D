@@ -22,7 +22,7 @@ public struct Stats
 
     public void SetBaseStats(Dictionary<string, float> stats, int level = 0)
     {
-        this.level = stats.ContainsKey("level") ? (int)stats["level"] : level;
+        this.level = level;
         this.atkPerLevel = (int)stats["atkPL"];
         this.defPerLevel = (int)stats["defPL"];
         this.vitPerLevel = (int)stats["vitPL"];

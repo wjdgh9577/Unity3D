@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826098257d5250640b52f0784400a641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
+  skillIDs: 50c30000
 --- !u!114 &6830380720115173289
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,7 +90,7 @@ public class Combat : Singleton<Combat>
 
         foreach (var pair in stageInfo.mobList)
         {
-            mobs[pair.Key] = mobSettings[pair.Key].SetMob(pair.Value);
+            mobs[pair.Key] = mobSettings[pair.Key].SetMob(pair.Value[0], pair.Value[1]);
             mobs[pair.Key].SetTarget(player);
             mobCount += 1;
         }
@@ -111,6 +111,10 @@ public class Combat : Singleton<Combat>
     {
         yield return new WaitForSeconds(1);
         onStageStart();
+        for (int i = 0; i < mobs.Length; i++)
+        {
+            if (Targetable(mobs[i])) mobs[i].StartCombat();
+        }
     }
 
     /// <summary>

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillInfo : TableData.IData<int>
 {
     public int typeID;
+    public string skillType;
     public string stateName;
 
     public float cooldown = 0;

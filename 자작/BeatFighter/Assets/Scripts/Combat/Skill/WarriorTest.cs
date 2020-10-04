@@ -16,7 +16,12 @@ public class WarriorTest : Skill
 
     protected override void OnFinish()
     {
-        DoSkillDamage(castInfo.to);
+        DoSkillDamageAllEnemies();
         Despawn();
+    }
+
+    protected override void OnAlive()
+    {
+        if (!Combat.Targetable(castInfo.from)) Despawn();
     }
 }

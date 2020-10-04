@@ -9,7 +9,6 @@ public class MobInfo : TableData.IData<int>
     public int modelID;
 
     // Status info
-    public int level;
     public int atk;
     public int def;
     public int vit;
@@ -27,7 +26,6 @@ public class MobInfo : TableData.IData<int>
     public Dictionary<string, float> ReturnStats()
     {
         Dictionary<string, float> stats = new Dictionary<string, float>();
-        stats["level"] = level;
         stats["atk"] = atk;
         stats["def"] = def;
         stats["vit"] = vit;

@@ -14,12 +14,12 @@ public class CharSetting : MonoBehaviour
         return player;
     }
 
-    public MobChar SetMob(int typeID)
+    public MobChar SetMob(int typeID, int level)
     {
         MobInfo info = TableData.instance.mobDataDic[typeID];
         MobChar mob = PoolingManager.Instance.Spawn<MobChar>(info.modelID, transform);
         mob.Initialized();
-        mob.stats.SetBaseStats(info.ReturnStats());
+        mob.stats.SetBaseStats(info.ReturnStats(), level);
 
         return mob;
     }

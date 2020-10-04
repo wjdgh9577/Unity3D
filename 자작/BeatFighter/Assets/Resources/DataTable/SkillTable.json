@@ -1,25 +1,34 @@
 ﻿{
-	"md5": "a187b88961c8f3cd938ecff642773079",
+	"md5": "31dbdb485fef1d2318e92c453599762e",
 	"array": 
 		[
 			{
 				"typeID": 50000,
+				"skillType": "Active",
 				"stateName": "Attack",
 				"atkMul": 2
 			},
 			{
 				"typeID": 50100,
+				"skillType": "Active",
 				"stateName": "Attack",
 				"cooldown": 5,
 				"atkMul": 2
 			},
 			{
 				"typeID": 50101,
+				"skillType": "Active",
 				"stateName": "Attack",
 				"cooldown": 20,
 				"duration": 3,
 				"tickTime": 0.1,
 				"atkMul": 0.5
+			},
+			{
+				"typeID": 50200,
+				"skillType": "Active",
+				"stateName": "Attack",
+				"atkMul": 2
 			}
 		]
 }

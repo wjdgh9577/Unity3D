@@ -16,6 +16,7 @@ public class SkillGroup : MonoBehaviour
         Combat.onStageSet += Show;
         Combat.onStageStart += UnlockSkillIcons;
         Combat.onStageEnd += LockSkillIcons;
+        BaseChar.onPlayerDeath += LockSkillIcons;
         PlayerChar.onSkillPrepared += LockSkillIcons;
         PlayerChar.onSkillInitialized += UnlockSkillIcons;
         Hide();
