@@ -52,6 +52,8 @@ public class BaseChar : PoolObj
     public void Initialized()
     {
         isDead = false;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
     }
 
     /// <summary>

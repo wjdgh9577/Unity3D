@@ -1,11 +1,12 @@
 ﻿{
-	"md5": "31dbdb485fef1d2318e92c453599762e",
+	"md5": "ce7610b3bd04f66daa6c3b5e4ca9c361",
 	"array": 
 		[
 			{
 				"typeID": 50000,
 				"skillType": "Active",
 				"stateName": "Attack",
+				"cooldown": 10,
 				"atkMul": 2
 			},
 			{

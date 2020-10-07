@@ -20,11 +20,11 @@ public class Targeting : PoolObj
 
     public void Show()
     {
-        gameObject.SetActive(true);
+        SetActive(true);
     }
 
     public void Hide()
     {
-        gameObject.SetActive(false);
+        SetActive(false);
     }
 }

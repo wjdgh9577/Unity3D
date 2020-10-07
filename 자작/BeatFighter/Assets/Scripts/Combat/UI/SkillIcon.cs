@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SkillIcon : MonoBehaviour, IPointerDownHandler
 {
+    public Image _skillIcon;
     public GameObject _lock;
     public Image _cooldownImage;
     public Text _cooldownText;
@@ -55,6 +56,12 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
     {
         this.player = player;
         this.metaData = meta;
+        SetSkillIcon(meta.typeID);
+    }
+
+    private void SetSkillIcon(int typeID)
+    {
+        _skillIcon.sprite = PreloadManager.Instance.preloadSprites[typeID];
     }
 
     public void Lock()

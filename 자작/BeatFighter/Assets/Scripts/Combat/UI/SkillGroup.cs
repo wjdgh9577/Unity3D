@@ -55,6 +55,7 @@ public class SkillGroup : MonoBehaviour
 
     public void UnlockSkillIcons()
     {
+        if (Combat.Instance.mobCount == 0) return;
         for (int i = 0; i < skillIcons.Length; i++)
         {
             skillIcons[i].Unlock();

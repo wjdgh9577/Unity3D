@@ -30,6 +30,7 @@ public class PoolingManager : Singleton<PoolingManager>
             return pooledObj.GetComponent<T>();
         }
 
+        if (!PreloadManager.Instance.preloadObjs.ContainsKey(typeID)) return default(T);
         GameObject spawnObj = Instantiate(PreloadManager.Instance.preloadObjs[typeID], parent);
 
         return spawnObj.GetComponent<T>();
@@ -42,7 +43,7 @@ public class PoolingManager : Singleton<PoolingManager>
     public void Despawn(GameObject obj)
     {
         obj.SetActive(false);
-        obj.transform.SetParent(this.transform);
+        obj.transform.SetParent(transform);
 
         int typeID = int.Parse(obj.name.Split('_')[0]);
 

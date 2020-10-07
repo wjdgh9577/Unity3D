@@ -27,13 +27,13 @@ public class HPGroup : Singleton<HPGroup>
     public void SetHPGroup()
     {
         if (Combat.Instance.player == null) return;
-        HPBar hpBar = PoolingManager.Instance.Spawn<HPBar>(PlayerData.MaxHPUI, this.transform);
+        HPBar hpBar = PoolingManager.Instance.Spawn<HPBar>(PlayerData.MaxHPUI, transform);
         hpBar.Initialize(Combat.Instance.player);
         bars.Add(hpBar);
         for (int i = 0; i < Combat.Instance.mobCount; i++)
         {
             if (Combat.Instance.mobs[i] == null) continue;
-            hpBar = PoolingManager.Instance.Spawn<HPBar>(PlayerData.MaxHPUI, this.transform);
+            hpBar = PoolingManager.Instance.Spawn<HPBar>(PlayerData.MaxHPUI, transform);
             hpBar.Initialize(Combat.Instance.mobs[i]);
             bars.Add(hpBar);
         }

@@ -20,7 +20,7 @@ public class MobChar : BaseChar
                     if (Time.time - pair.Value >= pair.Key.cooldown)
                     {
                         DoSkill(pair.Key.Key());
-                        skills[pair.Key] = Time.time;Debug.LogFormat("{0} {1}",lastSignTime, Time.time);
+                        skills[pair.Key] = Time.time;
                         break;
                     }
                 }

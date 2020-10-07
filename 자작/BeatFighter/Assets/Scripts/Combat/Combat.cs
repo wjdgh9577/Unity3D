@@ -12,9 +12,8 @@ public class Combat : Singleton<Combat>
     public static Action onStageEnd;
 
     [Header("References")]
-    public Transform field;
+    public Transform combatFieldTM;
     public Transform cameraPoint;
-    public Targeting targeting;
     public VitalSign vitalSign;
     public HPGroup hpGroup;
 
@@ -24,7 +23,9 @@ public class Combat : Singleton<Combat>
 
     private int mapID;
     private List<int> stageIDs;
-    
+    private Field field;
+    private Targeting targeting;
+
     public PlayerChar player { get; private set; }
     public MobChar[] mobs { get; private set; } = new MobChar[5];
     [NonSerialized]
@@ -66,7 +67,7 @@ public class Combat : Singleton<Combat>
         //    return;
         //}
         
-        PoolingManager.Instance.Spawn<GameObject>(mapInfo.fieldID, field);
+        field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, combatFieldTM);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
         onMapSet();
@@ -171,8 +172,8 @@ public class Combat : Singleton<Combat>
     /// </summary>
     private void CreateTargetParticle()
     {
-        targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, this.transform);
-        targeting.gameObject.SetActive(false);
+        targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, transform);
+        targeting.SetActive(false);
     }
 
     /// <summary>
