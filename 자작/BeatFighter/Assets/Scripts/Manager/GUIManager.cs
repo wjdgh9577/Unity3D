@@ -8,6 +8,7 @@ public class GUIManager : Singleton<GUIManager>
 {
     public LoginPanel loginPanel;
     public MenuPanel menuPanel;
+    public CollectionPanel collectionPanel;
 
     [SerializeField]
     private Image fadeScreen;

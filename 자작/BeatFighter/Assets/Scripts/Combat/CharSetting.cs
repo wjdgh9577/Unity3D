@@ -9,7 +9,7 @@ public class CharSetting : MonoBehaviour
         CharInfo info = TableData.instance.charDataDic[typeID];
         PlayerChar player = PoolingManager.Instance.Spawn<PlayerChar>(info.modelID, transform);
         player.Initialized();
-        player.stats.SetBaseStats(info.ReturnStats(), PlayerData.level);
+        player.stats.SetBaseStats(info.ReturnStats(), PlayerData.charDataDic[typeID].level);
         
         return player;
     }

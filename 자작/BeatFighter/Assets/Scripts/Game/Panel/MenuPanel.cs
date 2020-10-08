@@ -19,4 +19,10 @@ public class MenuPanel : PanelBase
         GameManager.Instance.Logout();
         Hide();
     }
+
+    public void OnCollectionButton()
+    {
+        GUIManager.Instance.collectionPanel.Show();
+        Hide();
+    }
 }

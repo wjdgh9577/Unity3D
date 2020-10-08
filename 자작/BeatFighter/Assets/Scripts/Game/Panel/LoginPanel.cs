@@ -6,13 +6,17 @@ public class LoginPanel : PanelBase
 {
     public void OnNewGameButton()
     {
+        PlayerData.NewAccountSetup();
+        PlayerData.SaveData();
         GameManager.Instance.Login();
         Hide();
     }
 
     public void OnLoadButton()
     {
-        Debug.LogError("세이브/로드 구현 필요!");
+        if (PlayerData.LoadData()) return;
+        GameManager.Instance.Login();
+        Hide();
     }
 
     public void OnExitButton()
