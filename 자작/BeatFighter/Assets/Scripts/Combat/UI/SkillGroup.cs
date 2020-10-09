@@ -8,7 +8,7 @@ public class SkillGroup : MonoBehaviour
     private SkillIcon[] skillIcons;
     private PlayerChar player;
 
-    private void Awake()
+    public void Initialize()
     {
         Combat.onMapSet += SetBaseData;
         Combat.onMapSet += LockSkillIcons;

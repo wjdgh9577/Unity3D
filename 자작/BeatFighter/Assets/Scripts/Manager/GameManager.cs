@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         menuCam.gameObject.SetActive(true);
         PreloadManager.Instance.PreloadResources();
+        GUIManager.Instance.loginPanel.Show();
         Combat.onMapSet += ChangeCam;
     }
 
@@ -36,7 +37,7 @@ public class GameManager : Singleton<GameManager>
             if (cart.m_Position == track.PathLength) break;
             yield return null;
         }
-        // 플레이어 데이터 로드 구현
+        
         GUIManager.Instance.menuPanel.Show();
         BackGround.Instance.SetBackGroundCharacter();
     }

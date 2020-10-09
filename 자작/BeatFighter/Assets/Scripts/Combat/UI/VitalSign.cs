@@ -22,7 +22,7 @@ public class VitalSign : MonoBehaviour
     private float period;
     private bool poolLock = true;
 
-    private void Awake()
+    public void Initialize()
     {
         Combat.onMapEnd += Hide;
         Combat.onStageSet += Show;

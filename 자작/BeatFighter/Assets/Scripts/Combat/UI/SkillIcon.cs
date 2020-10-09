@@ -18,7 +18,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
     private bool isCooldown { get { return Time.time - lastSkillTime < metaData.cooldown; } }
 
     private bool on = false;
-    private bool isLock = false;
+    private bool isLock = true;
 
     public void OnPointerDown(PointerEventData eventData)
     {

@@ -1,0 +1,24 @@
+﻿{
+	"md5": "891997f2c32ec57f532325fd1f354556",
+	"array": 
+		[
+			{
+				"typeID": 10000,
+				"skillID0": 50000,
+				"skillID1": 50001,
+				"skillID2": 50002,
+				"skillID3": 50003
+			},
+			{
+				"typeID": 10001,
+				"skillID0": 50100,
+				"skillID1": 50101,
+				"skillID2": 50100,
+				"skillID3": 50101
+			},
+			{
+				"typeID": 20000,
+				"skillID0": 50200
+			}
+		]
+}

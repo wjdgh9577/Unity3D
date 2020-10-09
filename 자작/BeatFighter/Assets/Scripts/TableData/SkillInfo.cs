@@ -24,3 +24,34 @@ public class SkillInfo : TableData.IData<int>
         return typeID;
     }
 }
+
+public class SkillSetInfo : TableData.IData<int>
+{
+    public int typeID;
+    public int skillID0;
+    public int skillID1;
+    public int skillID2;
+    public int skillID3;
+
+    public List<int> skillIDs;
+
+    public int Key()
+    {
+        return typeID;
+    }
+
+    public void Setup()
+    {
+        skillIDs = new List<int>();
+
+        Add(skillID0);
+        Add(skillID1);
+        Add(skillID2);
+        Add(skillID3);
+    }
+
+    private void Add(int skillID)
+    {
+        if (skillID > 0) skillIDs.Add(skillID);
+    }
+}

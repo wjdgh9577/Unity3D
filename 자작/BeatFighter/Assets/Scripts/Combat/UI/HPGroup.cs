@@ -9,12 +9,7 @@ public class HPGroup : Singleton<HPGroup>
 {
     private List<HPBar> bars;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    private void Start()
+    public void Initialize()
     {
         bars = new List<HPBar>();
         BaseChar.onTakeDamage += Refresh;

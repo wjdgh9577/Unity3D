@@ -1,9 +1,29 @@
 ﻿{
-	"md5": "ce7610b3bd04f66daa6c3b5e4ca9c361",
+	"md5": "e7de77e8a8b947282a5183f35ee3c4c6",
 	"array": 
 		[
 			{
 				"typeID": 50000,
+				"skillType": "Active",
+				"stateName": "Attack0",
+				"atkMul": 1
+			},
+			{
+				"typeID": 50001,
+				"skillType": "Active",
+				"stateName": "Attack1",
+				"cooldown": 5,
+				"atkMul": 2
+			},
+			{
+				"typeID": 50002,
+				"skillType": "Active",
+				"stateName": "Attack2",
+				"cooldown": 5,
+				"atkAdd": 5
+			},
+			{
+				"typeID": 50003,
 				"skillType": "Active",
 				"stateName": "Attack",
 				"cooldown": 10,

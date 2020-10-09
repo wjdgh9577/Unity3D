@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using JsonFx.Json;
 
 public class TableData
 {
@@ -23,12 +21,14 @@ public class TableData
     private Dictionary<int, MapInfo> _mapDataDic;
     private Dictionary<int, StageInfo> _stageDataDic;
     private Dictionary<int, SkillInfo> _skillDataDic;
+    private Dictionary<int, SkillSetInfo> _skillSetDataDic;
     
     public Dictionary<int, CharInfo> charDataDic => _charDataDic;
     public Dictionary<int, MobInfo> mobDataDic => _mobDataDic;
     public Dictionary<int, MapInfo> mapDataDic => _mapDataDic;
     public Dictionary<int, StageInfo> stageDataDic => _stageDataDic;
     public Dictionary<int, SkillInfo> skillDataDic => _skillDataDic;
+    public Dictionary<int, SkillSetInfo> skillSetDataDic => _skillSetDataDic;
 
     public void LoadTableDatas()
     {
@@ -39,11 +39,13 @@ public class TableData
         LoadTable<int, StageInfo>("StageTable", out _stageDataDic);
         foreach (var pair in stageDataDic) pair.Value.Setup();
         LoadTable<int, SkillInfo>("SkillTable", out _skillDataDic);
+        LoadTable<int, SkillSetInfo>("SkillSetTable", out _skillSetDataDic);
+        foreach (var pair in skillSetDataDic) pair.Value.Setup();
     }
 
-    private void LoadTable<Key, Value>(string jsonFilename, out Dictionary<Key, Value> dataDic) where Value : IData<Key>
+    private void LoadTable<Key, Value>(string jsonFileName, out Dictionary<Key, Value> dataDic) where Value : IData<Key>
     {
-        TextAsset jsonText = Resources.Load<TextAsset>("DataTable/" + jsonFilename);
+        TextAsset jsonText = Resources.Load<TextAsset>("DataTable/" + jsonFileName);
         if (jsonText == null)
         {
             dataDic = null;

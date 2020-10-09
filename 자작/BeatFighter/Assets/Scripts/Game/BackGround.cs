@@ -54,14 +54,14 @@ public class BackGround : Singleton<BackGround>
 
     public void SetBackGroundCharacter()
     {
-        backGroundChar?.Despawn();
+        DeleteBackGroundCharacter();
         CharInfo info = TableData.instance.charDataDic[PlayerData.currentChar];
         backGroundChar = PoolingManager.Instance.Spawn<BaseChar>(info.modelID, transform);
     }
 
     public void DeleteBackGroundCharacter()
     {
-        backGroundChar.Despawn();
+        backGroundChar?.Despawn();
     }
 
     public void Show()

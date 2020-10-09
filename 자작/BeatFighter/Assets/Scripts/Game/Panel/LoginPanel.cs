@@ -14,7 +14,7 @@ public class LoginPanel : PanelBase
 
     public void OnLoadButton()
     {
-        if (PlayerData.LoadData()) return;
+        if (!PlayerData.LoadData()) return;
         GameManager.Instance.Login();
         Hide();
     }

@@ -27,7 +27,7 @@ public struct CastInfo
 
 public class BaseChar : PoolObj
 {
-    public int[] skillIDs;
+    protected List<int> skillIDs;
 
     public static Action onTakeDamage;
     public static Action onPlayerDeath;
@@ -49,11 +49,12 @@ public class BaseChar : PoolObj
         animator = GetComponent<Animator>();
     }
 
-    public void Initialized()
+    public void Initialized(int typeID)
     {
         isDead = false;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        skillIDs = TableData.instance.skillSetDataDic[typeID].skillIDs;
     }
 
     /// <summary>

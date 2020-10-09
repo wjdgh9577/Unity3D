@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "db2e79fa9f23168bd1b6da8c548f582b",
+	"md5": "b2e338d2177d30034ee45cd4de4e3d19",
 	"array": 
 		[
 			{
@@ -10,11 +10,11 @@
 			{
 				"typeID": 40001,
 				"mob1": 20000,
-				"mob1Level": 10,
+				"mob1Level": 2,
 				"mob2": 20000,
-				"mob2Level": 10,
+				"mob2Level": 2,
 				"mob3": 20000,
-				"mob3Level": 10
+				"mob3Level": 2
 			}
 		]
 }

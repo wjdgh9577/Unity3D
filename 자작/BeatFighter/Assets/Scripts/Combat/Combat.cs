@@ -16,6 +16,7 @@ public class Combat : Singleton<Combat>
     public Transform cameraPoint;
     public VitalSign vitalSign;
     public HPGroup hpGroup;
+    public SkillGroup skillGroup;
 
     [Header("Character Setting")]
     public CharSetting playerSetting;
@@ -37,6 +38,10 @@ public class Combat : Singleton<Combat>
         onMapSet += CreateTargetParticle;
         onStageSet += StartCurrentStage;
         BaseChar.onMobDeath += MobDeath;
+        
+        vitalSign.Initialize();
+        hpGroup.Initialize();
+        skillGroup.Initialize();
     }
 
     /// <summary>

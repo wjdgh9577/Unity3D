@@ -9,9 +9,12 @@ public abstract class PanelBase : MonoBehaviour
         gameObject.SetActive(active);
     }
 
+    protected virtual void Refresh() { }
+
     public virtual void Show()
     {
         SetActive(true);
+        Refresh();
     }
 
     public virtual void Hide()
