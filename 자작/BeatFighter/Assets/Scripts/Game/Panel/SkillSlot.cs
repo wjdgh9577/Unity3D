@@ -12,6 +12,11 @@ public class SkillSlot : MonoBehaviour
     [SerializeField]
     private int index;
 
+    /// <summary>
+    /// 스킬 선택창 활성화 또는 스킬 변경시 슬롯 초기화
+    /// </summary>
+    /// <param name="typeID"></param>
+    /// <param name="skillID"></param>
     public void Refresh(int typeID, int skillID)
     {
         this.typeID = typeID;

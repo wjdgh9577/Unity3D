@@ -1,0 +1,86 @@
+﻿{
+	"md5": "eb602c496647a97217b21abaef431e29",
+	"array": 
+		[
+			{
+				"level": 1,
+				"requireExp": 100
+			},
+			{
+				"level": 2,
+				"requireExp": 200
+			},
+			{
+				"level": 3,
+				"requireExp": 400
+			},
+			{
+				"level": 4,
+				"requireExp": 800
+			},
+			{
+				"level": 5,
+				"requireExp": 1600
+			},
+			{
+				"level": 6,
+				"requireExp": 3200
+			},
+			{
+				"level": 7,
+				"requireExp": 6400
+			},
+			{
+				"level": 8,
+				"requireExp": 12800
+			},
+			{
+				"level": 9,
+				"requireExp": 20000
+			},
+			{
+				"level": 10,
+				"requireExp": 30000
+			},
+			{
+				"level": 11,
+				"requireExp": 45000
+			},
+			{
+				"level": 12,
+				"requireExp": 63000
+			},
+			{
+				"level": 13,
+				"requireExp": 90000
+			},
+			{
+				"level": 14,
+				"requireExp": 100000
+			},
+			{
+				"level": 15,
+				"requireExp": 100000
+			},
+			{
+				"level": 16,
+				"requireExp": 100000
+			},
+			{
+				"level": 17,
+				"requireExp": 100000
+			},
+			{
+				"level": 18,
+				"requireExp": 100000
+			},
+			{
+				"level": 19,
+				"requireExp": 100000
+			},
+			{
+				"level": 20,
+				"requireExp": 0
+			}
+		]
+}

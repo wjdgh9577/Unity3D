@@ -10,6 +10,9 @@ public class CollectionPanel : PanelBase
     private List<int> charList;
     private int index;
 
+    /// <summary>
+    /// 판넬 활성화시 초기화
+    /// </summary>
     protected override void Refresh()
     {
         charDic = PlayerData.charDataDic;

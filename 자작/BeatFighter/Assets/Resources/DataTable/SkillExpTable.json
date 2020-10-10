@@ -1,0 +1,46 @@
+﻿{
+	"md5": "7e6fa730c89e34cc06f492173c8cd8af",
+	"array": 
+		[
+			{
+				"level": 1,
+				"requireExp": 500
+			},
+			{
+				"level": 2,
+				"requireExp": 1000
+			},
+			{
+				"level": 3,
+				"requireExp": 2000
+			},
+			{
+				"level": 4,
+				"requireExp": 4000
+			},
+			{
+				"level": 5,
+				"requireExp": 4000
+			},
+			{
+				"level": 6,
+				"requireExp": 4000
+			},
+			{
+				"level": 7,
+				"requireExp": 4000
+			},
+			{
+				"level": 8,
+				"requireExp": 4000
+			},
+			{
+				"level": 9,
+				"requireExp": 4000
+			},
+			{
+				"level": 10,
+				"requireExp": 0
+			}
+		]
+}

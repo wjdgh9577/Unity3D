@@ -22,6 +22,9 @@ public class TableData
     private Dictionary<int, StageInfo> _stageDataDic;
     private Dictionary<int, SkillInfo> _skillDataDic;
     private Dictionary<int, SkillSetInfo> _skillSetDataDic;
+    private Dictionary<int, RewardInfo> _rewardDataDic;
+    private Dictionary<int, CharExpInfo> _charExpDataDic;
+    private Dictionary<int, SkillExpInfo> _skillExpDataDic;
     
     public Dictionary<int, CharInfo> charDataDic => _charDataDic;
     public Dictionary<int, MobInfo> mobDataDic => _mobDataDic;
@@ -29,6 +32,9 @@ public class TableData
     public Dictionary<int, StageInfo> stageDataDic => _stageDataDic;
     public Dictionary<int, SkillInfo> skillDataDic => _skillDataDic;
     public Dictionary<int, SkillSetInfo> skillSetDataDic => _skillSetDataDic;
+    public Dictionary<int, RewardInfo> rewardDataDic => _rewardDataDic;
+    public Dictionary<int, CharExpInfo> charExpDataDic => _charExpDataDic;
+    public Dictionary<int, SkillExpInfo> skillExpDataDic => _skillExpDataDic;
 
     public void LoadTableDatas()
     {
@@ -41,6 +47,10 @@ public class TableData
         LoadTable<int, SkillInfo>("SkillTable", out _skillDataDic);
         LoadTable<int, SkillSetInfo>("SkillSetTable", out _skillSetDataDic);
         foreach (var pair in skillSetDataDic) pair.Value.Setup();
+        LoadTable<int, RewardInfo>("RewardTable", out _rewardDataDic);
+        foreach (var pair in rewardDataDic) pair.Value.Setup();
+        LoadTable<int, CharExpInfo>("CharExpTable", out _charExpDataDic);
+        LoadTable<int, SkillExpInfo>("SkillExpTable", out _skillExpDataDic);
     }
 
     private void LoadTable<Key, Value>(string jsonFileName, out Dictionary<Key, Value> dataDic) where Value : IData<Key>

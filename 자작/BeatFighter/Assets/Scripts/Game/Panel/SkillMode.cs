@@ -16,6 +16,10 @@ public class SkillMode : PanelBase
 
     public int skillID;
 
+    /// <summary>
+    /// 스킬 선택창 활성화시 초기화
+    /// </summary>
+    /// <param name="typeID"></param>
     public void Refresh(int typeID)
     {
         if (contents == null) contents = new List<SkillListContent>();
@@ -39,21 +43,28 @@ public class SkillMode : PanelBase
         skillID = 0;
     }
 
-    public void UnselectAll()
+    /// <summary>
+    /// 스킬 리스트의 모든 스킬의 선택상태를 취소
+    /// </summary>
+    public void DeselectAll()
     {
         foreach (var content in contents)
         {
-            content.Unselected();
+            content.Deselected();
         }
+    }
+
+    /// <summary>
+    /// 선택된 스킬의 설명 출력
+    /// </summary>
+    /// <param name="skillID"></param>
+    public void SetDescription(int skillID)
+    {
+        Debug.LogError("스킬 설명 출력 구현 필요");
     }
 
     public void OnBackButton()
     {
         Hide();
-    }
-
-    public void SetDescription(int skillID)
-    {
-        Debug.LogError("스킬 설명 출력 구현 필요");
     }
 }
