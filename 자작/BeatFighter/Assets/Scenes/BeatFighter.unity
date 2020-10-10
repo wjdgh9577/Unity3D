@@ -6569,6 +6569,7 @@ MonoBehaviour:
   loginPanel: {fileID: 158966158}
   menuPanel: {fileID: 611906760}
   collectionPanel: {fileID: 1630717964}
+  skillMode: {fileID: 1784437091}
   fadeScreen: {fileID: 1607330902}
   loadingScreen: {fileID: 1603614858}
   loadingText: {fileID: 1121948420}
@@ -6951,6 +6952,7 @@ MonoBehaviour:
   - {fileID: 1840485776}
   - {fileID: 612437056}
   - {fileID: 607564313}
+  skillID: 0
 --- !u!1 &1815194271
 GameObject:
   m_ObjectHideFlags: 0

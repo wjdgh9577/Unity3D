@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoolObj : MonoBehaviour
 {
     public Transform ParentTM { get { return transform.parent.transform; } }
+    [System.NonSerialized]
     public GameObject prefeb;
 
     public void SetActive(bool active)

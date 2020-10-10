@@ -21,12 +21,12 @@ public class CollectionPanel : PanelBase
         }
         charList.Sort();
         index = charList.IndexOf(PlayerData.currentChar);
-        skillMode.Refresh(charList[index]);
     }
 
     public void OnSkillButton()
     {
         skillMode.Show();
+        skillMode.Refresh(charList[index]);
     }
 
     public void OnItemButton()
@@ -50,6 +50,5 @@ public class CollectionPanel : PanelBase
         else if (index < 0) index = charList.Count - 1;
         PlayerData.currentChar = charList[index];
         BackGround.Instance.SetBackGroundCharacter();
-        skillMode.Refresh(charList[index]);
     }
 }

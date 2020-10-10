@@ -21,16 +21,16 @@ public class SkillSlot : MonoBehaviour
 
     public void OnSelected()
     {
-        if (SkillMode.skillID == 0)
+        if (GUIManager.Instance.skillMode.skillID == 0)
         {
-            Debug.LogError("스킬 설명 출력 구현 필요");
+            GUIManager.Instance.skillMode.SetDescription(skillID);
         }
         else
         {
-            PlayerData.currentSkills[index] = SkillMode.skillID;
-            PlayerData.charDataDic[typeID].skills[index] = SkillMode.skillID;
-            Refresh(typeID, SkillMode.skillID);
-            SkillMode.skillID = 0;
+            PlayerData.currentSkills[index] = GUIManager.Instance.skillMode.skillID;
+            PlayerData.charDataDic[typeID].skills[index] = GUIManager.Instance.skillMode.skillID;
+            Refresh(typeID, GUIManager.Instance.skillMode.skillID);
+            GUIManager.Instance.skillMode.skillID = 0;
         }
     }
 }

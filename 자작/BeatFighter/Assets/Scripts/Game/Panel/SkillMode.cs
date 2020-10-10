@@ -14,7 +14,7 @@ public class SkillMode : PanelBase
     [System.NonSerialized]
     public List<SkillListContent> contents;
 
-    public static int skillID;
+    public int skillID;
 
     public void Refresh(int typeID)
     {
@@ -35,6 +35,16 @@ public class SkillMode : PanelBase
             content.Refresh(typeID, skill);
             contents.Add(content);
         }
+
+        skillID = 0;
+    }
+
+    public void UnselectAll()
+    {
+        foreach (var content in contents)
+        {
+            content.Unselected();
+        }
     }
 
     public void OnBackButton()
@@ -42,9 +52,8 @@ public class SkillMode : PanelBase
         Hide();
     }
 
-    public static void SetSelectedSkill(int skillID)
+    public void SetDescription(int skillID)
     {
-        SkillMode.skillID = skillID;
         Debug.LogError("스킬 설명 출력 구현 필요");
     }
 }
