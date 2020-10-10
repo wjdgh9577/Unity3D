@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a4a1bd87dc0a04082c5985dd6e8bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefeb: {fileID: 0}
   icon: {fileID: 1865012107631160690}
   name: {fileID: 1865012107352563711}
 --- !u!222 &1865012106677133757
@@ -134,7 +135,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1865012106677133756}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1865012106677133759}
+        m_MethodName: OnSelected
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1865012106677133758
 MonoBehaviour:
   m_ObjectHideFlags: 0

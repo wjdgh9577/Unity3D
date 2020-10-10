@@ -36,6 +36,14 @@ public class PoolingManager : Singleton<PoolingManager>
         return spawnObj.GetComponent<T>();
     }
 
+    /// <summary>
+    /// 해당 프리팹을 스폰
+    /// 풀링 리스트에 없는 경우 생성하여 반환
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
     public T Spawn<T>(GameObject obj, Transform parent = null)
     {
         if (poolingObjs2 == null) poolingObjs2 = new Dictionary<GameObject, List<PoolObj>>();

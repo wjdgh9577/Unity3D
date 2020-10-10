@@ -8,9 +8,19 @@ public class SkillListContent : PoolObj
     public Image icon;
     public Text name;
 
-    public void Refresh(int skillID)
+    private int typeID;
+    private int skillID;
+
+    public void Refresh(int typeID, int skillID)
     {
-        icon.sprite = PreloadManager.Instance.preloadSprites[skillID];
-        name.text = skillID.ToString();
+        this.typeID = typeID;
+        this.skillID = skillID;
+        this.icon.sprite = PreloadManager.Instance.preloadSprites[skillID];
+        this.name.text = skillID.ToString();
+    }
+
+    public void OnSelected()
+    {
+        SkillMode.SetSelectedSkill(skillID);
     }
 }

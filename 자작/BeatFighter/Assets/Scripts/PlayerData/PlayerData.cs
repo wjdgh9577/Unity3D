@@ -113,10 +113,18 @@ public static class PlayerData
 
     public static void SaveData()
     {
-        string data = JsonFx.Json.JsonWriter.Serialize(DataFormat.GetCurrentData());
+        if (File.Exists(GetPath()))
+        {
+            File.Delete(GetPath());
+        }
+
         FileStream fs = new FileStream(GetPath(), FileMode.Create, FileAccess.Write);
+
+        string data = JsonFx.Json.JsonWriter.Serialize(DataFormat.GetCurrentData());
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(data);
         fs.Write(bytes, 0, bytes.Length);
+        
+        fs.Close();
     }
 
     public static bool LoadData()
@@ -127,12 +135,14 @@ public static class PlayerData
         }
 
         FileStream fs = new FileStream(GetPath(), FileMode.Open, FileAccess.Read);
+
         byte[] bytes = new byte[(int)fs.Length];
         fs.Read(bytes, 0, (int)fs.Length);
         string data = System.Text.Encoding.UTF8.GetString(bytes);
         DataFormat formattedData = JsonUtility.FromJson<DataFormat>(data);
-
         DataFormat.SetCurrentData(formattedData);
+        
+        fs.Close();
         
         return true;
     }
