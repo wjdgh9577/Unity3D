@@ -30,7 +30,6 @@ public class SkillMode : PanelBase
         for (int i = 0; i < PlayerData.charDataDic[typeID].skills.Count; i++)
         {
             int skill = PlayerData.charDataDic[typeID].skills[i];
-            PlayerData.currentSkills[i] = skill;
             slots[i].Refresh(typeID, skill);
         }
         foreach (int skill in TableData.instance.skillSetDataDic[typeID].skillIDs)

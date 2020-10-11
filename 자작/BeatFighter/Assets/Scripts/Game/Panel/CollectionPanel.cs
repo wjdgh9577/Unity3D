@@ -51,7 +51,7 @@ public class CollectionPanel : PanelBase
         index = isRightSide ? index + 1 : index - 1;
         if (index >= charList.Count) index = 0;
         else if (index < 0) index = charList.Count - 1;
-        PlayerData.currentChar = charList[index];
+        PlayerData.ChangeCurrentChar(charList[index]);
         BackGround.Instance.SetBackGroundCharacter();
     }
 }

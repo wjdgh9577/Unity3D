@@ -1,11 +1,11 @@
 ﻿{
-	"md5": "3c3a253fe24d8c0402f2840222899048",
+	"md5": "277de186010f6ccb12a7b8818567c5d6",
 	"array": 
 		[
 			{
-				"typeID": 60000,
+				"typeID": 70000,
 				"exp": 100,
-				"character": 10001,
+				"character": 20001,
 				"percent3": 100
 			}
 		]

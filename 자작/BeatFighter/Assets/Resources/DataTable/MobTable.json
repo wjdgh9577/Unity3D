@@ -1,10 +1,10 @@
 ﻿{
-	"md5": "9374c430bb38cb24e69e130e7f9caacb",
+	"md5": "eb6681e114b737c86d0e0e5724914bc3",
 	"array": 
 		[
 			{
-				"typeID": 20000,
-				"modelID": 100,
+				"typeID": 30000,
+				"modelID": 10100,
 				"atk": 1,
 				"def": 0,
 				"vit": 100,
@@ -12,6 +12,17 @@
 				"defPerLevel": 1,
 				"vitPerLevel": 10,
 				"signPeriod": 5
+			},
+			{
+				"typeID": 30001,
+				"modelID": 10101,
+				"atk": 5,
+				"def": 0,
+				"vit": 100,
+				"atkPerLevel": 1,
+				"defPerLevel": 1,
+				"vitPerLevel": 10,
+				"signPeriod": 10
 			}
 		]
 }

@@ -6,25 +6,49 @@ public class LoginPanel : PanelBase
 {
     public void OnNewGameButton()
     {
-        PlayerData.NewAccountSetup();
-        PlayerData.SaveData();
-        GameManager.Instance.Login();
-        Hide();
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox(
+            () => 
+            {
+                PlayerData.NewAccountSetup();
+                PlayerData.SaveData();
+                GameManager.Instance.Login();
+                Hide();
+            }, 
+            () => 
+            {
+
+            });
     }
 
     public void OnLoadButton()
     {
-        if (!PlayerData.LoadData()) return;
+        if (!PlayerData.LoadData())
+        {
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox(
+                () =>
+                {
+
+                });
+            return;
+        }
         GameManager.Instance.Login();
         Hide();
     }
 
     public void OnExitButton()
     {
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox(
+            () =>
+            {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+                UnityEditor.EditorApplication.isPlaying = false;
 #else
-        Application.Quit();
+                Application.Quit();
 #endif
+            },
+            () =>
+            {
+
+            });
     }
 }

@@ -13,15 +13,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Cinemachine.CinemachineDollyCart cart;
 
-    private bool isCombat = false;
-
     protected override void Awake()
     {
         base.Awake();
         menuCam.gameObject.SetActive(true);
         PreloadManager.Instance.PreloadResources();
         GUIManager.Instance.loginPanel.Show();
-        Combat.onMapSet += ChangeCam;
     }
 
     public void Login()
@@ -59,9 +56,8 @@ public class GameManager : Singleton<GameManager>
         GUIManager.Instance.loginPanel.Show();
     }
 
-    public void ChangeCam()
+    public void ChangeCam(bool isCombat)
     {
-        isCombat = !isCombat;
         followCam.gameObject.SetActive(isCombat);
         menuCam.gameObject.SetActive(!isCombat);
     }

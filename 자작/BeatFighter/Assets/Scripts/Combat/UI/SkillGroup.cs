@@ -10,6 +10,7 @@ public class SkillGroup : MonoBehaviour
 
     public void Initialize()
     {
+        Combat.onMapSet += Refresh;
         Combat.onMapSet += SetBaseData;
         Combat.onMapSet += LockSkillIcons;
         Combat.onMapEnd += Hide;
@@ -30,6 +31,14 @@ public class SkillGroup : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public void Refresh()
+    {
+        for (int i = 0; i < skillIcons.Length; i++)
+        {
+            skillIcons[i].Refresh();
+        }
     }
 
     /// <summary>

@@ -52,6 +52,11 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
         on = false;
     }
 
+    public void Refresh()
+    {
+        lastSkillTime = float.NegativeInfinity;
+    }
+
     public void SetBaseData(PlayerChar player, SkillInfo meta)
     {
         this.player = player;

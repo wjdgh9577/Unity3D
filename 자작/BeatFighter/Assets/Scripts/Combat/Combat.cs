@@ -36,7 +36,9 @@ public class Combat : Singleton<Combat>
     {
         base.Awake();
         onMapSet += CreateTargetParticle;
+        onMapEnd += ClearCombat;
         onStageSet += StartCurrentStage;
+        BaseChar.onPlayerDeath += PlayerDeath;
         BaseChar.onMobDeath += MobDeath;
         
         vitalSign.Initialize();
@@ -50,6 +52,8 @@ public class Combat : Singleton<Combat>
     /// <param name="mapID"></param>
     public void SetMap(int mapID)
     {
+        transform.position = Vector3.zero;
+
         this.mapID = mapID;
         stageIDs = new List<int>();
         
@@ -64,19 +68,13 @@ public class Combat : Singleton<Combat>
         {
             stageIDs.Add(mapInfo.stageList[i]);
         }
-
-        //int currentStage = GetAndRemoveCurrentStage();
-        //if (currentStage == -1)
-        //{
-        //    Debug.LogError("현재 맵에 스테이지가 존재하지 않음");
-        //    return;
-        //}
         
         field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, combatFieldTM);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
+        GameManager.Instance.ChangeCam(true);
         onMapSet();
-        //SetStage(currentStage);
+
         GotoNextStage(0);
     }
 
@@ -130,14 +128,14 @@ public class Combat : Singleton<Combat>
     {
         if (mobCount != 0) return;
 
-        StartCoroutine(NextStageRoutine(time));
+        StartCoroutine(GotoNextStageCoroutine(time));
     }
 
-    private IEnumerator NextStageRoutine(float time)
+    private IEnumerator GotoNextStageCoroutine(float time)
     {
         yield return new WaitForSeconds(time);
         int currentStage = GetAndRemoveCurrentStage();
-        if (currentStage != -1)
+        if (currentStage != -1 && Targetable(player))
         {
             player.Play("Run");
             Vector3 startPos = transform.position;
@@ -153,7 +151,30 @@ public class Combat : Singleton<Combat>
             player.CrossFade("Idle");
             SetStage(currentStage);
         }
-        else onMapEnd();
+        else
+        {
+            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox(
+                () =>
+                {
+                    GUIManager.Instance.FadeIn(() =>
+                    {
+                        onMapEnd();
+                        GUIManager.Instance.menuPanel.Show();
+                        GameManager.Instance.ChangeCam(false);
+                        GUIManager.Instance.FadeOut();
+                    });
+                },
+                () =>
+                {
+                    GUIManager.Instance.FadeIn(() =>
+                    {
+                        onMapEnd();
+                        GUIManager.Instance.menuPanel.Hide();
+                        Combat.Instance.SetMap(mapID);
+                        GUIManager.Instance.FadeOut();
+                    });
+                });
+        }
     }
 
     /// <summary>
@@ -193,6 +214,20 @@ public class Combat : Singleton<Combat>
     }
 
     /// <summary>
+    /// 전투상의 모든 오브젝트 제거
+    /// </summary>
+    private void ClearCombat()
+    {
+        field.Despawn();
+        player.Despawn();
+        for (int i = 0; i < mobs.Length; i++)
+        {
+            mobs[i]?.Despawn();
+        }
+        targeting.Despawn();
+    }
+
+    /// <summary>
     /// 타겟팅 표시 설정
     /// </summary>
     /// <param name="target"></param>
@@ -215,6 +250,16 @@ public class Combat : Singleton<Combat>
         if (mobIndexes.Count == 0) return null;
         int index = UnityEngine.Random.Range(0, mobIndexes.Count);
         return mobs[mobIndexes[index]];
+    }
+
+    /// <summary>
+    /// 플레이어가 죽는 순간 실행되는 함수
+    /// </summary>
+    public void PlayerDeath()
+    {
+        mobCount = 0;
+        onStageEnd();
+        GotoNextStage(2);
     }
 
     /// <summary>

@@ -9,6 +9,7 @@ public class GUIManager : Singleton<GUIManager>
     public LoginPanel loginPanel;
     public MenuPanel menuPanel;
     public CollectionPanel collectionPanel;
+    public MessageBoxPanel messageBoxPanel;
     public SkillMode skillMode;
 
     [SerializeField]

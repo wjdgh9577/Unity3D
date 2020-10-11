@@ -140,7 +140,7 @@ public class BaseChar : PoolObj
     }
 
     /// <summary>
-    /// 스킬 시전시 특정 캐스팅 동작 실행
+    /// 특정 애니메이션 스테이트를 즉시 실행
     /// </summary>
     /// <param name="stateName"></param>
     public void Play(string stateName)
@@ -148,6 +148,10 @@ public class BaseChar : PoolObj
         animator.Play(stateName, -1, 0);
     }
 
+    /// <summary>
+    /// 특정 애니메이션 스테이트를 부드럽게 실행
+    /// </summary>
+    /// <param name="stateName"></param>
     public void CrossFade(string stateName)
     {
         animator.CrossFade(stateName, 0.3f);

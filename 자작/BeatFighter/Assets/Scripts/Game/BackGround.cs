@@ -13,6 +13,7 @@ public class BackGround : Singleton<BackGround>
     protected override void Awake()
     {
         Combat.onMapSet += Hide;
+        Combat.onMapEnd += Show;
     }
 
     private void Update()
@@ -33,7 +34,7 @@ public class BackGround : Singleton<BackGround>
         gameObject.SetActive(true);
         fields = new List<Field>();
 
-        for (int i = 1000; i < 2000; i++)
+        for (int i = 11000; i < 12000; i++)
         {
             Field field = PoolingManager.Instance.Spawn<Field>(i, transform);
             if (field == null) continue;

@@ -9,7 +9,7 @@ public class MenuPanel : PanelBase
         GUIManager.Instance.FadeIn(() =>
         {
             GUIManager.Instance.menuPanel.Hide();
-            Combat.Instance.SetMap(30000);
+            Combat.Instance.SetMap(50000);
             GUIManager.Instance.FadeOut();
         });
     }

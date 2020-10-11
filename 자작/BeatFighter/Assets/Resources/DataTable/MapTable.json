@@ -1,12 +1,13 @@
 ﻿{
-	"md5": "e15da34a7e186177b690b35fa5d56b56",
+	"md5": "986d545fc0297e526e88a3614c9180ae",
 	"array": 
 		[
 			{
-				"typeID": 30000,
-				"stage1": 40000,
-				"stage2": 40001,
-				"rewardID": 60000
+				"typeID": 50000,
+				"fieldID": 11000,
+				"stage1": 60000,
+				"stage2": 60001,
+				"rewardID": 70000
 			}
 		]
 }

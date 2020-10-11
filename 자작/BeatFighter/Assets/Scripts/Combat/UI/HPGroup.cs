@@ -13,6 +13,7 @@ public class HPGroup : Singleton<HPGroup>
     {
         bars = new List<HPBar>();
         BaseChar.onTakeDamage += Refresh;
+        Combat.onMapEnd += Despawn;
         Combat.onStageSet += SetHPGroup;
     }
 

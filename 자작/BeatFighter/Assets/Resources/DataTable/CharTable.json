@@ -1,10 +1,10 @@
 ﻿{
-	"md5": "571572b2cff8c25362872d233ac453c6",
+	"md5": "bc01826a116ec1b22b2adcbc05cce9ff",
 	"array": 
 		[
 			{
-				"typeID": 10000,
-				"modelID": 0,
+				"typeID": 20000,
+				"modelID": 10000,
 				"atk": 5,
 				"def": 0,
 				"vit": 100,
@@ -15,8 +15,8 @@
 				"signSpeed": 1
 			},
 			{
-				"typeID": 10001,
-				"modelID": 1,
+				"typeID": 20001,
+				"modelID": 10001,
 				"atk": 5,
 				"def": 0,
 				"vit": 100,

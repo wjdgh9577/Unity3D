@@ -94,21 +94,34 @@ public static class PlayerData
     public static Dictionary<int, CharData> charDataDic;
     //public static Dictionary<int, ItemData> itemData; // 보유중인 모든 아이템
 
+    /// <summary>
+    /// 현재 캐릭터 변경
+    /// </summary>
+    /// <param name="typeID"></param>
+    public static void ChangeCurrentChar(int typeID)
+    {
+        currentChar = typeID;
+        currentSkills = charDataDic[currentChar].skills;
+    }
+
+    /// <summary>
+    /// 새 계정 생성
+    /// </summary>
     public static void NewAccountSetup()
     {
-        currentChar = 10000;
-        currentSkills = new List<int>() { 50000, 50001, 50002, 50003 };
+        currentChar = 20000;
+        currentSkills = new List<int>() { 40000, 40001, 40002, 40003 };
 
-        targetingParticle = 2000;
-        HPParticle = 2100;
-        MaxHPUI = 3000;
-        NoteUI = 3100;
+        targetingParticle = 12000;
+        HPParticle = 12100;
+        MaxHPUI = 13000;
+        NoteUI = 13100;
 
         CharData charData = new CharData();
-        charData.Initialize(10000);
+        charData.Initialize(20000);
         CharData charData1 = new CharData();
-        charData1.Initialize(10001);
-        charDataDic = new Dictionary<int, CharData>() { { 10000, charData }, { 10001, charData1 } };
+        charData1.Initialize(20001);
+        charDataDic = new Dictionary<int, CharData>() { { 20000, charData }, { 20001, charData1 } };
     }
 
     public static void SaveData()
