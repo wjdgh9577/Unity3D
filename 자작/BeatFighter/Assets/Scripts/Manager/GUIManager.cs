@@ -19,7 +19,7 @@ public class GUIManager : Singleton<GUIManager>
     [SerializeField]
     private Text loadingText;
 
-    public void FadeIn(Action action)
+    public void FadeIn(Action action = null)
     {
         StartCoroutine(FadeInCoroutine(action));
     }
@@ -36,7 +36,7 @@ public class GUIManager : Singleton<GUIManager>
             yield return null;
         }
         fadeScreen.gameObject.SetActive(false);
-        action();
+        action?.Invoke();
     }
 
     public void FadeOut()

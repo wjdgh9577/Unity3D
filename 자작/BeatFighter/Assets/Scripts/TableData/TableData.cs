@@ -25,6 +25,7 @@ public class TableData
     private Dictionary<int, RewardInfo> _rewardDataDic;
     private Dictionary<int, CharExpInfo> _charExpDataDic;
     private Dictionary<int, SkillExpInfo> _skillExpDataDic;
+    private Dictionary<string, StringInfo> _stringDataDic;
     
     public Dictionary<int, CharInfo> charDataDic => _charDataDic;
     public Dictionary<int, MobInfo> mobDataDic => _mobDataDic;
@@ -35,6 +36,7 @@ public class TableData
     public Dictionary<int, RewardInfo> rewardDataDic => _rewardDataDic;
     public Dictionary<int, CharExpInfo> charExpDataDic => _charExpDataDic;
     public Dictionary<int, SkillExpInfo> skillExpDataDic => _skillExpDataDic;
+    public Dictionary<string, StringInfo> stringDataDic => _stringDataDic;
 
     public void LoadTableDatas()
     {
@@ -51,6 +53,8 @@ public class TableData
         foreach (var pair in rewardDataDic) pair.Value.Setup();
         LoadTable<int, CharExpInfo>("CharExpTable", out _charExpDataDic);
         LoadTable<int, SkillExpInfo>("SkillExpTable", out _skillExpDataDic);
+        LoadTable<string, StringInfo>("StringTable", out _stringDataDic);
+        foreach (var pair in stringDataDic) pair.Value.Setup();
     }
 
     private void LoadTable<Key, Value>(string jsonFileName, out Dictionary<Key, Value> dataDic) where Value : IData<Key>
@@ -71,5 +75,14 @@ public class TableData
             Value item = data.array[i];
             dataDic.Add(item.Key(), item);
         }
+    }
+
+    public string GetString(string stringID)
+    {
+        if (stringDataDic.TryGetValue(stringID, out StringInfo info))
+        {
+            return info.message[PlayerData.language];
+        }
+        return "null";
     }
 }

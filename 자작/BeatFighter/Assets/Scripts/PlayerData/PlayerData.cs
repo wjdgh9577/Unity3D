@@ -4,6 +4,13 @@ using System.IO;
 using UnityEngine;
 
 [System.Serializable]
+public enum Language
+{
+    English,
+    Korean
+}
+
+[System.Serializable]
 public class DataFormat
 {
     public int currentChar;
@@ -82,6 +89,8 @@ public static class PlayerData
             skills = TableData.instance.skillSetDataDic[typeID].skillIDs.GetRange(0, 4);
         }
     }
+
+    public static Language language;
 
     public static int currentChar;
     public static List<int> currentSkills;
@@ -163,5 +172,10 @@ public static class PlayerData
     private static string GetPath()
     {
         return Path.Combine(Application.persistentDataPath, "save.bf");
+    }
+
+    public static void SetLanguage()
+    {
+        language = (Language)PlayerPrefs.GetInt("language");
     }
 }

@@ -16,6 +16,7 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        PlayerData.SetLanguage();
         menuCam.gameObject.SetActive(true);
         PreloadManager.Instance.PreloadResources();
         GUIManager.Instance.loginPanel.Show();

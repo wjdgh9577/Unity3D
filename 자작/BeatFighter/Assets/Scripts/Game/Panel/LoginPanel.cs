@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class LoginPanel : PanelBase
 {
+    public OptionMode optionMode;
+
     public void OnNewGameButton()
     {
-        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox(
-            () => 
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("NewAccount",
+            () =>
             {
                 PlayerData.NewAccountSetup();
                 PlayerData.SaveData();
                 GameManager.Instance.Login();
                 Hide();
-            }, 
-            () => 
-            {
-
             });
     }
 
@@ -24,20 +22,21 @@ public class LoginPanel : PanelBase
     {
         if (!PlayerData.LoadData())
         {
-            GUIManager.Instance.messageBoxPanel.CallOKMessageBox(
-                () =>
-                {
-
-                });
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("NotFoundAccount");
             return;
         }
         GameManager.Instance.Login();
         Hide();
     }
 
+    public void OnOptionButton()
+    {
+        optionMode.Show();
+    }
+
     public void OnExitButton()
     {
-        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox(
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("ExitGame",
             () =>
             {
 #if UNITY_EDITOR
@@ -45,10 +44,6 @@ public class LoginPanel : PanelBase
 #else
                 Application.Quit();
 #endif
-            },
-            () =>
-            {
-
             });
     }
 }

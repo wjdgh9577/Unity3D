@@ -1,0 +1,116 @@
+﻿{
+	"md5": "203bf5f222533f49299eb6d9f061f5c0",
+	"array": 
+		[
+			{
+				"typeID": "ExitGame",
+				"Korean": "게임을 종료하시겠습니까?",
+				"English": "Exit Game?"
+			},
+			{
+				"typeID": "LanguageChange",
+				"Korean": "변경한 언어가 정상적으로 적용되지 않을 수 있습니다.\n게임을 재시작 해주세요.",
+				"English": "The changed language may not be applied normally.\nPlease restart the game."
+			},
+			{
+				"typeID": "NewAccount",
+				"Korean": "기존의 데이터가 삭제됩니다.\n계속 진행하겠습니까?",
+				"English": "The existing data will be deleted.\nDo you want to continue?"
+			},
+			{
+				"typeID": "NotFoundAccount",
+				"Korean": "불러올 데이터가 없습니다.",
+				"English": "No Data."
+			},
+			{
+				"typeID": "RewardExpGold",
+				"Korean": "경험치와 골드 획득!\n\n경험치 : {0}\n골드 : {1}",
+				"English": "Get exp and gold!\n\nexp : {0}\ngold : {1}"
+			},
+			{
+				"typeID": "Back",
+				"Korean": "뒤로가기",
+				"English": "Back"
+			},
+			{
+				"typeID": "Collection",
+				"Korean": "콜렉션",
+				"English": "Collection"
+			},
+			{
+				"typeID": "Exit",
+				"Korean": "나가기",
+				"English": "Exit"
+			},
+			{
+				"typeID": "Item",
+				"Korean": "아이템",
+				"English": "Item"
+			},
+			{
+				"typeID": "Load",
+				"Korean": "불러오기",
+				"English": "Load"
+			},
+			{
+				"typeID": "Logout",
+				"Korean": "로그아웃",
+				"English": "Logout"
+			},
+			{
+				"typeID": "NewGame",
+				"Korean": "새 게임",
+				"English": "New Game"
+			},
+			{
+				"typeID": "No",
+				"Korean": "아니오",
+				"English": "No"
+			},
+			{
+				"typeID": "OK",
+				"Korean": "확인",
+				"English": "OK"
+			},
+			{
+				"typeID": "Option",
+				"Korean": "설정",
+				"English": "Option"
+			},
+			{
+				"typeID": "Retry",
+				"Korean": "재도전",
+				"English": "Retry"
+			},
+			{
+				"typeID": "Skill",
+				"Korean": "스킬",
+				"English": "Skill"
+			},
+			{
+				"typeID": "Tutorial",
+				"Korean": "튜토리얼",
+				"English": "Tutorial"
+			},
+			{
+				"typeID": "Yes",
+				"Korean": "예",
+				"English": "Yes"
+			},
+			{
+				"typeID": "Description",
+				"Korean": "설명",
+				"English": "Description"
+			},
+			{
+				"typeID": "List",
+				"Korean": "리스트",
+				"English": "List"
+			},
+			{
+				"typeID": "Slots",
+				"Korean": "슬롯",
+				"English": "Slots"
+			}
+		]
+}

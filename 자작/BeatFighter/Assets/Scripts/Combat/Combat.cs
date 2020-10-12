@@ -153,7 +153,7 @@ public class Combat : Singleton<Combat>
         }
         else
         {
-            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox(
+            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("RewardExpGold", 100, 1000,
                 () =>
                 {
                     GUIManager.Instance.FadeIn(() =>

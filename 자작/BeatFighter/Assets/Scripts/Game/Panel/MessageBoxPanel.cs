@@ -30,60 +30,64 @@ public class MessageBoxPanel : PanelBase
     private Action onExitButton;
     private Action onRetryButton;
 
-    public void CallOKMessageBox(Action okAction)
+    public void CallOKMessageBox(string stringID, Action okAction = null)
     {
         Show();
         okMessageBox.SetActive(true);
+        okMessage.text = TableData.instance.GetString(stringID);
         onOKButton = okAction;
     }
 
     public void OnOKButton()
     {
-        onOKButton();
+        onOKButton?.Invoke();
         okMessageBox.SetActive(false);
         Hide();
     }
 
-    public void CallYesNoMessageBox(Action yesAction, Action noAction)
+    public void CallYesNoMessageBox(string stringID, Action yesAction = null, Action noAction = null)
     {
         Show();
         yesNoMessageBox.SetActive(true);
+        yesNoMessage.text = TableData.instance.GetString(stringID);
         onYesButton = yesAction;
         onNoButton = noAction;
     }
 
     public void OnYesButton()
     {
-        onYesButton();
+        onYesButton?.Invoke();
         yesNoMessageBox.SetActive(false);
         Hide();
     }
 
     public void OnNoButton()
     {
-        onNoButton();
+        onNoButton?.Invoke();
         yesNoMessageBox.SetActive(false);
         Hide();
     }
 
-    public void CallRewardMessageBox(Action exitAction, Action retryAction)
+    public void CallRewardMessageBox(string stringID, int exp, int gold, Action exitAction = null, Action retryAction = null)
     {
         Show();
         rewardMessageBox.SetActive(true);
+        string format = string.Format(TableData.instance.GetString(stringID), exp, gold);
+        rewardMessage.text = format;
         onExitButton = exitAction;
         onRetryButton = retryAction;
     }
 
     public void OnExitButton()
     {
-        onExitButton();
+        onExitButton?.Invoke();
         rewardMessageBox.SetActive(false);
         Hide();
     }
 
     public void OnRetryButton()
     {
-        onRetryButton();
+        onRetryButton?.Invoke();
         rewardMessageBox.SetActive(false);
         Hide();
     }
