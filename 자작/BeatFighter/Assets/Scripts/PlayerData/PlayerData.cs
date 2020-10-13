@@ -13,6 +13,7 @@ public enum Language
 [System.Serializable]
 public class DataFormat
 {
+    public int tutorial;
     public int currentChar;
     public List<int> currentSkills;
 
@@ -31,7 +32,8 @@ public class DataFormat
     public static DataFormat GetCurrentData()
     {
         DataFormat data = new DataFormat();
-        
+
+        data.tutorial = PlayerData.tutorial;
         data.currentChar = PlayerData.currentChar;
         data.currentSkills = PlayerData.currentSkills;
         data.targetingParticle = PlayerData.targetingParticle;
@@ -56,6 +58,7 @@ public class DataFormat
     /// <param name="data"></param>
     public static void SetCurrentData(DataFormat data)
     {
+        PlayerData.tutorial = data.tutorial;
         PlayerData.currentChar = data.currentChar;
         PlayerData.currentSkills = data.currentSkills;
         PlayerData.targetingParticle = data.targetingParticle;
@@ -79,19 +82,55 @@ public static class PlayerData
         public int level;
         public int exp;
 
+        public List<int> currentSkills;
         public List<int> skills;
+        public List<SkillData> skillDatas;
         //장착 아이템 리스트 구현
 
         public void Initialize(int typeID)
         {
             level = 1;
             exp = 0;
-            skills = TableData.instance.skillSetDataDic[typeID].skillIDs.GetRange(0, 4);
+            currentSkills = TableData.instance.skillSetDataDic[typeID].skillIDs.GetRange(0, 4);
+            skills = TableData.instance.skillSetDataDic[typeID].skillIDs;
+            skillDatas = new List<SkillData>();
+            foreach (var skill in skills)
+            {
+                SkillData skillData = new SkillData();
+                skillData.initialize();
+                skillDatas.Add(skillData);
+            }
+        }
+
+        public void SetData(int level, int exp)
+        {
+            this.level = level;
+            this.exp = exp;
+        }
+    }
+
+    [System.Serializable]
+    public struct SkillData
+    {
+        public int level;
+        public int exp;
+
+        public void initialize()
+        {
+            level = 1;
+            exp = 0;
+        }
+
+        public void SetData(int level, int exp)
+        {
+            this.level = level;
+            this.exp = exp;
         }
     }
 
     public static Language language;
 
+    public static int tutorial;
     public static int currentChar;
     public static List<int> currentSkills;
 
@@ -110,7 +149,7 @@ public static class PlayerData
     public static void ChangeCurrentChar(int typeID)
     {
         currentChar = typeID;
-        currentSkills = charDataDic[currentChar].skills;
+        currentSkills = charDataDic[currentChar].currentSkills;
     }
 
     /// <summary>
@@ -118,6 +157,7 @@ public static class PlayerData
     /// </summary>
     public static void NewAccountSetup()
     {
+        tutorial = 0;
         currentChar = 20000;
         currentSkills = new List<int>() { 40000, 40001, 40002, 40003 };
 
@@ -128,11 +168,10 @@ public static class PlayerData
 
         CharData charData = new CharData();
         charData.Initialize(20000);
-        CharData charData1 = new CharData();
-        charData1.Initialize(20001);
-        charDataDic = new Dictionary<int, CharData>() { { 20000, charData }, { 20001, charData1 } };
+        charDataDic = new Dictionary<int, CharData>() { { 20000, charData } };
     }
 
+    #region Save / Load
     public static void SaveData()
     {
         if (File.Exists(GetPath()))
@@ -173,9 +212,16 @@ public static class PlayerData
     {
         return Path.Combine(Application.persistentDataPath, "save.bf");
     }
+    #endregion
 
     public static void SetLanguage()
     {
         language = (Language)PlayerPrefs.GetInt("language");
+    }
+
+    public static SkillData GetSkillData(int skillID)
+    {
+        int index = charDataDic[currentChar].skills.FindIndex(id => id == skillID);
+        return charDataDic[currentChar].skillDatas[index];
     }
 }

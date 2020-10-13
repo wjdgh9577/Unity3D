@@ -145,7 +145,7 @@ public abstract class Skill : PoolObj
     {
         if (!Combat.Targetable(target)) return;
         Stats stats = castInfo.from.stats;
-        stats.AddSkillParameter(metaData);
+        stats.AddSkillParameter(metaData, castInfo.from is PlayerChar ? PlayerData.GetSkillData(metaData.typeID).level : 1);
         castInfo.from.DoDamage(target, stats, judge, combo);
     }
 

@@ -33,7 +33,7 @@ public class SkillSlot : MonoBehaviour
         else
         {
             PlayerData.currentSkills[index] = GUIManager.Instance.skillMode.skillID;
-            PlayerData.charDataDic[typeID].skills[index] = GUIManager.Instance.skillMode.skillID;
+            PlayerData.charDataDic[typeID].currentSkills[index] = GUIManager.Instance.skillMode.skillID;
             Refresh(typeID, GUIManager.Instance.skillMode.skillID);
             GUIManager.Instance.skillMode.skillID = 0;
         }

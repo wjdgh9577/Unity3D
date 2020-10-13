@@ -58,6 +58,7 @@ public class BackGround : Singleton<BackGround>
         DeleteBackGroundCharacter();
         CharInfo info = TableData.instance.charDataDic[PlayerData.currentChar];
         backGroundChar = PoolingManager.Instance.Spawn<BaseChar>(info.modelID, transform);
+        backGroundChar.transform.localRotation = Quaternion.identity;
     }
 
     public void DeleteBackGroundCharacter()

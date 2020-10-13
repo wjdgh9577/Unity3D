@@ -22,7 +22,7 @@ public class Combat : Singleton<Combat>
     public CharSetting playerSetting;
     public List<CharSetting> mobSettings;
 
-    private int mapID;
+    private MapInfo meta;
     private List<int> stageIDs;
     private Field field;
     private Targeting targeting;
@@ -51,7 +51,7 @@ public class Combat : Singleton<Combat>
     {
         transform.position = Vector3.zero;
 
-        this.mapID = mapID;
+        meta = TableData.instance.mapDataDic[mapID];
         stageIDs = new List<int>();
         
         MapInfo mapInfo = TableData.instance.mapDataDic[mapID];
@@ -154,7 +154,12 @@ public class Combat : Singleton<Combat>
         }
         else
         {
-            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold", 100, 1000,
+            RewardInfo info = TableData.instance.rewardDataDic[meta.rewardID];
+            int rewardExp = info.exp;
+            int rewardGold = info.gold;
+
+            GameManager.Instance.GetExp(rewardExp);
+            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold", rewardExp, rewardGold,
                 () =>
                 {
                     GUIManager.Instance.FadeIn(() =>
@@ -173,7 +178,7 @@ public class Combat : Singleton<Combat>
                         ClearCombat();
                         onMapEnd();
                         GUIManager.Instance.menuPanel.Hide();
-                        Combat.Instance.SetMap(mapID);
+                        Combat.Instance.SetMap(meta.typeID);
                         GUIManager.Instance.FadeOut();
                     });
                 });

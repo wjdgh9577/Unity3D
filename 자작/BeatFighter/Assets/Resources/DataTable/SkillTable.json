@@ -1,40 +1,45 @@
 ﻿{
-	"md5": "66d6a28ae1376a8059626f926346b351",
+	"md5": "cacbd842c1970aa2b7ac6230b9fb04df",
 	"array": 
 		[
 			{
 				"typeID": 40000,
 				"skillType": "Active",
 				"stateName": "Attack0",
-				"atkMul": 1
+				"atkMul": 1,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40001,
 				"skillType": "Active",
 				"stateName": "Attack1",
 				"cooldown": 5,
-				"atkMul": 2
+				"atkMul": 2,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40002,
 				"skillType": "Active",
 				"stateName": "Attack2",
 				"cooldown": 5,
-				"atkAdd": 5
+				"atkAdd": 5,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40003,
 				"skillType": "Active",
 				"stateName": "Attack",
 				"cooldown": 10,
-				"atkMul": 2
+				"atkMul": 2,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40100,
 				"skillType": "Active",
 				"stateName": "Attack",
 				"cooldown": 5,
-				"atkMul": 2
+				"atkMul": 2,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40101,
@@ -43,13 +48,15 @@
 				"cooldown": 20,
 				"duration": 3,
 				"tickTime": 0.1,
-				"atkMul": 0.5
+				"atkMul": 0.5,
+				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40200,
 				"skillType": "Active",
 				"stateName": "Attack",
-				"atkMul": 2
+				"atkMul": 2,
+				"atkMulPerLevel": 1
 			}
 		]
 }

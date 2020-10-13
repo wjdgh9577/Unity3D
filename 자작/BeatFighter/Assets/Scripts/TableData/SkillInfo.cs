@@ -16,6 +16,11 @@ public class SkillInfo : TableData.IData<int>
     public int atkAdd = 0;
     public float defMul = 1;
     public int defAdd = 0;
+    public float atkMulPerLevel = 0;
+    public int atkAddPerLevel = 0;
+    public float defMulPerLevel = 0;
+    public int defAddPerLevel = 0;
+
     public float periodMul = 1;
     public float speedMul = 1;
 

@@ -27,9 +27,9 @@ public class SkillMode : PanelBase
         foreach (var content in contents) content.Despawn();
         contents.Clear();
 
-        for (int i = 0; i < PlayerData.charDataDic[typeID].skills.Count; i++)
+        for (int i = 0; i < PlayerData.charDataDic[typeID].currentSkills.Count; i++)
         {
-            int skill = PlayerData.charDataDic[typeID].skills[i];
+            int skill = PlayerData.charDataDic[typeID].currentSkills[i];
             slots[i].Refresh(typeID, skill);
         }
         foreach (int skill in TableData.instance.skillSetDataDic[typeID].skillIDs)

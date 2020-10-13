@@ -34,10 +34,14 @@ public struct Stats
         this.signSpeed = stats.ContainsKey("signS") ? stats["signS"] : 0;
     }
 
-    public void AddSkillParameter(SkillInfo info)
+    public void AddSkillParameter(SkillInfo info, int skillLevel)
     {
-        atk = (int)(atk * info.atkMul) + info.atkAdd;
-        def = (int)(def * info.defMul) + info.defAdd;
+        float atkMul = info.atkMul + (skillLevel - 1) * info.atkMulPerLevel;
+        int atkAdd = info.atkAdd + (skillLevel - 1) * info.atkAddPerLevel;
+        float defMul = info.defMul + (skillLevel - 1) * info.defMulPerLevel;
+        int defAdd = info.defAdd + (skillLevel - 1) * info.defAddPerLevel;
+        atk = (int)(atk * atkMul) + atkAdd;
+        def = (int)(def * defMul) + defAdd;
         signPeriod *= info.periodMul;
         signSpeed *= info.speedMul;
     }

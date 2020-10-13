@@ -5,7 +5,10 @@ using UnityEngine;
 public class MapInfo : TableData.IData<int>
 {
     public int typeID;
+
     public int fieldID;
+    public int rewardID;
+
     public int stage1;
     public int stage2;
     public int stage3;
