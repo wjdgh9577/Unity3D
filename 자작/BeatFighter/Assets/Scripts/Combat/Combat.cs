@@ -35,9 +35,6 @@ public class Combat : Singleton<Combat>
     protected override void Awake()
     {
         base.Awake();
-        onMapSet += CreateTargetParticle;
-        onMapEnd += ClearCombat;
-        onStageSet += StartCurrentStage;
         BaseChar.onPlayerDeath += PlayerDeath;
         BaseChar.onMobDeath += MobDeath;
         
@@ -73,6 +70,7 @@ public class Combat : Singleton<Combat>
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
         GameManager.Instance.ChangeCam(true);
+        CreateTargetParticle();
         onMapSet();
 
         GotoNextStage(0);
@@ -85,6 +83,8 @@ public class Combat : Singleton<Combat>
     private void SetStage(int stageID)
     {
         mobCount = 0;
+        for (int i = 0; i < mobs.Length; i++) mobs[i] = null;
+
         StageInfo stageInfo = TableData.instance.stageDataDic[stageID];
         if (stageInfo == null)
         {
@@ -101,6 +101,7 @@ public class Combat : Singleton<Combat>
 
         player.SetTarget(GetRandomMob());
         onStageSet();
+        StartCurrentStage();
     }
 
     /// <summary>
@@ -153,11 +154,12 @@ public class Combat : Singleton<Combat>
         }
         else
         {
-            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("RewardExpGold", 100, 1000,
+            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold", 100, 1000,
                 () =>
                 {
                     GUIManager.Instance.FadeIn(() =>
                     {
+                        ClearCombat();
                         onMapEnd();
                         GUIManager.Instance.menuPanel.Show();
                         GameManager.Instance.ChangeCam(false);
@@ -168,6 +170,7 @@ public class Combat : Singleton<Combat>
                 {
                     GUIManager.Instance.FadeIn(() =>
                     {
+                        ClearCombat();
                         onMapEnd();
                         GUIManager.Instance.menuPanel.Hide();
                         Combat.Instance.SetMap(mapID);
@@ -222,7 +225,8 @@ public class Combat : Singleton<Combat>
         player.Despawn();
         for (int i = 0; i < mobs.Length; i++)
         {
-            mobs[i]?.Despawn();
+            if (mobs[i] != null && !mobs[i].isDead) mobs[i].Despawn();
+            mobs[i] = null;
         }
         targeting.Despawn();
     }
@@ -283,6 +287,6 @@ public class Combat : Singleton<Combat>
     /// <returns></returns>
     public static bool Targetable(BaseChar target)
     {
-        return target != null && target.isActiveAndEnabled && !target.isDead;
+        return target != null && target.gameObject.activeInHierarchy && !target.isDead;
     }
 }

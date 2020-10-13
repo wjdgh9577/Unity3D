@@ -8,7 +8,7 @@ public class LoginPanel : PanelBase
 
     public void OnNewGameButton()
     {
-        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("NewAccount",
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("Message_NewAccount",
             () =>
             {
                 PlayerData.NewAccountSetup();
@@ -22,7 +22,7 @@ public class LoginPanel : PanelBase
     {
         if (!PlayerData.LoadData())
         {
-            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("NotFoundAccount");
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_NotFoundAccount");
             return;
         }
         GameManager.Instance.Login();
@@ -36,7 +36,7 @@ public class LoginPanel : PanelBase
 
     public void OnExitButton()
     {
-        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("ExitGame",
+        GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("Message_ExitGame",
             () =>
             {
 #if UNITY_EDITOR

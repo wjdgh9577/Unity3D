@@ -23,7 +23,7 @@ public class SkillListContent : PoolObj
 
         this.typeID = typeID;
         this.skillID = skillID;
-        this.skillIcon.sprite = PreloadManager.Instance.preloadSprites[skillID];
+        this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
         this.skillName.text = skillID.ToString();
 
         Deselected();

@@ -49,7 +49,7 @@ public class BaseChar : PoolObj
         animator = GetComponent<Animator>();
     }
 
-    public void Initialized(int typeID)
+    public void Initialize(int typeID)
     {
         isDead = false;
         transform.localPosition = Vector3.zero;

@@ -622,8 +622,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Tutorial
-  id: Tutorial
+  m_Text: Button_Tutorial
+  id: Button_Tutorial
 --- !u!222 &103008196
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1268,8 +1268,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uB098\uAC00\uAE30"
-  id: Exit
+  m_Text: Button_Exit
+  id: Button_Exit
 --- !u!222 &169466439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1976,8 +1976,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Exit
-  id: Exit
+  m_Text: Button_Exit
+  id: Button_Exit
 --- !u!222 &307598709
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2708,8 +2708,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Slots
-  id: Slots
+  m_Text: Title_Slots
+  id: Title_Slots
 --- !u!222 &426978014
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2786,8 +2786,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Back
-  id: Back
+  m_Text: Button_Back
+  id: Button_Back
 --- !u!222 &451410616
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3801,8 +3801,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC544\uB2C8\uC624"
-  id: No
+  m_Text: Button_No
+  id: Button_No
 --- !u!222 &668643558
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3922,8 +3922,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Load
-  id: Load
+  m_Text: Button_Load
+  id: Button_Load
 --- !u!222 &691877642
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4620,8 +4620,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Game
-  id: NewGame
+  m_Text: Button_New Game
+  id: Button_NewGame
 --- !u!222 &806793857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5106,8 +5106,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC608"
-  id: Yes
+  m_Text: Button_Yes
+  id: Button_Yes
 --- !u!222 &914146439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5677,8 +5677,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC7AC\uB3C4\uC804"
-  id: Retry
+  m_Text: Button_Retry
+  id: Button_Retry
 --- !u!222 &984645549
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7453,8 +7453,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Logout
-  id: Logout
+  m_Text: Button_Logout
+  id: Button_Logout
 --- !u!222 &1312362066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7604,8 +7604,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Item
-  id: Item
+  m_Text: Button_Item
+  id: Button_Item
 --- !u!222 &1343830828
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7961,8 +7961,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Option
-  id: Option
+  m_Text: Button_Option
+  id: Button_Option
 --- !u!222 &1428435393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8140,8 +8140,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: List
-  id: List
+  m_Text: Title_List
+  id: Title_List
 --- !u!222 &1438786066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8218,8 +8218,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Back
-  id: Back
+  m_Text: Button_Back
+  id: Button_Back
 --- !u!222 &1443175931
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8296,8 +8296,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Skill
-  id: Skill
+  m_Text: Button_Skill
+  id: Button_Skill
 --- !u!222 &1465557875
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8803,8 +8803,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uD655\uC778"
-  id: OK
+  m_Text: Button_OK
+  id: Button_OK
 --- !u!222 &1520650544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9337,8 +9337,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Description
-  id: Description
+  m_Text: Title_Description
+  id: Title_Description
 --- !u!222 &1645602177
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10449,8 +10449,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Collection
-  id: Collection
+  m_Text: Button_Collection
+  id: Button_Collection
 --- !u!222 &1903646622
 CanvasRenderer:
   m_ObjectHideFlags: 0

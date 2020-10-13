@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PreloadManager : Singleton<PreloadManager>
 {
-    public Dictionary<int, GameObject> preloadObjs { get; private set; }
-    public Dictionary<int, Sprite> preloadSprites { get; private set; }
+    private Dictionary<int, GameObject> preloadObjs;
+    private Dictionary<int, Sprite> preloadSprites;
 
     public void PreloadResources()
     {
@@ -69,5 +69,17 @@ public class PreloadManager : Singleton<PreloadManager>
             preloadSprites.Add(typeID, sprites[i]);
         }
         yield return null;
+    }
+
+    public GameObject TryGetGameObject(int typeID)
+    {
+        if (preloadObjs.TryGetValue(typeID, out GameObject obj)) return obj;
+        return null;
+    }
+
+    public Sprite TryGetSprite(int typeID)
+    {
+        if (preloadSprites.TryGetValue(typeID, out Sprite spt)) return spt;
+        return null;
     }
 }

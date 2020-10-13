@@ -66,7 +66,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
 
     private void SetSkillIcon(int typeID)
     {
-        _skillIcon.sprite = PreloadManager.Instance.preloadSprites[typeID];
+        _skillIcon.sprite = PreloadManager.Instance.TryGetSprite(typeID);
     }
 
     public void Lock()

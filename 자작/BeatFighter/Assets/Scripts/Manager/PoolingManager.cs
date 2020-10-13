@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PoolingManager : Singleton<PoolingManager>
 {
-    private Dictionary<int, List<PoolObj>> poolingObjs;
-    private Dictionary<GameObject, List<PoolObj>> poolingObjs2;
+    private Dictionary<GameObject, Queue<PoolObj>> poolingObjs;
 
     /// <summary>
     /// 해당 타입의 프리팹을 스폰
@@ -17,23 +16,12 @@ public class PoolingManager : Singleton<PoolingManager>
     /// <returns></returns>
     public T Spawn<T>(int typeID, Transform parent = null)
     {
-        if (poolingObjs == null) poolingObjs = new Dictionary<int, List<PoolObj>>();
+        if (poolingObjs == null) poolingObjs = new Dictionary<GameObject, Queue<PoolObj>>();
 
-        if (poolingObjs.ContainsKey(typeID) && poolingObjs[typeID].Count > 0)
-        {
-            PoolObj pooledObj = poolingObjs[typeID][0];
-            poolingObjs[typeID].RemoveAt(0);
-            pooledObj.SetActive(true);
-            pooledObj.transform.SetParent(parent);
-            pooledObj.transform.localPosition = Vector3.zero;
+        GameObject obj = PreloadManager.Instance.TryGetGameObject(typeID);
+        T spawnObj = Spawn<T>(obj, parent);
 
-            return pooledObj.GetComponent<T>();
-        }
-
-        if (!PreloadManager.Instance.preloadObjs.ContainsKey(typeID)) return default(T);
-        GameObject spawnObj = Instantiate(PreloadManager.Instance.preloadObjs[typeID], parent);
-
-        return spawnObj.GetComponent<T>();
+        return spawnObj;
     }
 
     /// <summary>
@@ -46,12 +34,11 @@ public class PoolingManager : Singleton<PoolingManager>
     /// <returns></returns>
     public T Spawn<T>(GameObject obj, Transform parent = null)
     {
-        if (poolingObjs2 == null) poolingObjs2 = new Dictionary<GameObject, List<PoolObj>>();
-
-        if (poolingObjs2.ContainsKey(obj) && poolingObjs2[obj].Count > 0)
+        if (obj == null) return default(T);
+        
+        if (poolingObjs.ContainsKey(obj) && poolingObjs[obj].Count > 0)
         {
-            PoolObj pooledObj = poolingObjs2[obj][0];
-            poolingObjs2[obj].RemoveAt(0);
+            PoolObj pooledObj = poolingObjs[obj].Dequeue();
             pooledObj.SetActive(true);
             pooledObj.transform.SetParent(parent);
             pooledObj.transform.localPosition = Vector3.zero;
@@ -74,16 +61,11 @@ public class PoolingManager : Singleton<PoolingManager>
         obj.SetActive(false);
         obj.transform.SetParent(transform);
 
-        //int typeID = int.Parse(obj.name.Split('_')[0]);
-        if (int.TryParse(obj.name.Split('_')[0], out int typeID))
-        {
-            if (poolingObjs.ContainsKey(typeID)) poolingObjs[typeID].Add(obj);
-            else poolingObjs[typeID] = new List<PoolObj>() { obj };
-        }
+        if (poolingObjs.ContainsKey(obj.prefeb)) poolingObjs[obj.prefeb].Enqueue(obj);
         else
         {
-            if (poolingObjs2.ContainsKey(obj.prefeb)) poolingObjs2[obj.prefeb].Add(obj);
-            else poolingObjs2[obj.prefeb] = new List<PoolObj>() { obj };
+            poolingObjs[obj.prefeb] = new Queue<PoolObj>();
+            poolingObjs[obj.prefeb].Enqueue(obj);
         }
     }
 }

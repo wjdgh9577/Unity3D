@@ -26,6 +26,7 @@ public class CustomText : Text
     {
         base.Start();
         SetText();
+        OptionMode.languageChange += SetText;
     }
 
     public void SetText()

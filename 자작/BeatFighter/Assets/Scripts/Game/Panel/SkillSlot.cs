@@ -21,7 +21,7 @@ public class SkillSlot : MonoBehaviour
     {
         this.typeID = typeID;
         this.skillID = skillID;
-        this.skillIcon.sprite = PreloadManager.Instance.preloadSprites[skillID];
+        this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
     }
 
     public void OnSelected()
