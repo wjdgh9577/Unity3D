@@ -10,15 +10,15 @@ public class RewardInfo : TableData.IData<int>
     public int gold;
 
     public int item0;
-    public int percent0;
+    public float percent0;
     public int item1;
-    public int percent1;
+    public float percent1;
     public int item2;
-    public int percent2;
+    public float percent2;
     public int character;
-    public int percent3;
+    public float percent3;
 
-    public Dictionary<string, Dictionary<int, int>> rewards;
+    private Dictionary<string, Dictionary<int, float>> rewards;
 
     public int Key()
     {
@@ -27,9 +27,9 @@ public class RewardInfo : TableData.IData<int>
 
     public void Setup()
     {
-        rewards = new Dictionary<string, Dictionary<int, int>>();
-        rewards.Add("character", new Dictionary<int, int>());
-        rewards.Add("item", new Dictionary<int, int>());
+        rewards = new Dictionary<string, Dictionary<int, float>>();
+        rewards.Add("character", new Dictionary<int, float>());
+        rewards.Add("item", new Dictionary<int, float>());
 
         Add("item", item0, percent0);
         Add("item", item1, percent1);
@@ -37,7 +37,26 @@ public class RewardInfo : TableData.IData<int>
         Add("character", character, percent3);
     }
 
-    private void Add(string key, int item, int percent)
+    public Dictionary<string, List<int>> GetReward()
+    {
+        Dictionary<string, List<int>> reward = new Dictionary<string, List<int>>();
+        reward.Add("character", new List<int>());
+        reward.Add("item", new List<int>());
+
+        foreach (var pair1 in rewards)
+        {
+            if (pair1.Value.Count == 0) continue;
+            foreach (var pair2 in rewards[pair1.Key])
+            {
+                float percent = UnityEngine.Random.Range(0, 100);
+                if (percent <= pair2.Value) reward[pair1.Key].Add(pair2.Key);
+            }
+        }
+
+        return reward;
+    }
+
+    private void Add(string key, int item, float percent)
     {
         if (percent != 0) rewards[key].Add(item, percent);
     }

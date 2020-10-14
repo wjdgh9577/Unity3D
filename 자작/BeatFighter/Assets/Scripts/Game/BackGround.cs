@@ -64,16 +64,19 @@ public class BackGround : Singleton<BackGround>
     public void DeleteBackGroundCharacter()
     {
         backGroundChar?.Despawn();
+        backGroundChar = null;
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
+        SetBackGroundCharacter();
     }
 
     public void Hide()
     {
         time = 0;
+        DeleteBackGroundCharacter();
         gameObject.SetActive(false);
     }
 }

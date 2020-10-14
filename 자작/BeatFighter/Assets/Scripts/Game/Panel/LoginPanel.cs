@@ -15,14 +15,14 @@ public class LoginPanel : PanelBase
                 PlayerData.SaveData();
                 GameManager.Instance.Login();
                 Hide();
-            });
+            }, null);
     }
 
     public void OnLoadButton()
     {
         if (!PlayerData.LoadData())
         {
-            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_NotFoundAccount");
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_NotFoundAccount", null);
             return;
         }
         GameManager.Instance.Login();
@@ -44,6 +44,6 @@ public class LoginPanel : PanelBase
 #else
                 Application.Quit();
 #endif
-            });
+            }, null);
     }
 }

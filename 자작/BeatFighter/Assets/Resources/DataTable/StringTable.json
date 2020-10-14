@@ -1,11 +1,16 @@
 ﻿{
-	"md5": "11bc672777a32896249f5078b81e5c9a",
+	"md5": "57b7730dbc0b17c6e6e66c54a2ebbc22",
 	"array": 
 		[
 			{
 				"typeID": "Message_ExitGame",
 				"Korean": "게임을 종료하시겠습니까?",
 				"English": "Exit Game?"
+			},
+			{
+				"typeID": "Message_GetNewCharacter",
+				"Korean": "새로운 캐릭터 획득!\n\n{0}",
+				"English": "New character!\n\n{0}"
 			},
 			{
 				"typeID": "Message_LanguageChange",
@@ -98,6 +103,16 @@
 				"English": "Yes"
 			},
 			{
+				"typeID": 20000,
+				"Korean": "워리어",
+				"English": "Warrior"
+			},
+			{
+				"typeID": 20001,
+				"Korean": "소서리스",
+				"English": "Sorceress"
+			},
+			{
 				"typeID": "Title_Description",
 				"Korean": "설명",
 				"English": "Description"
@@ -111,6 +126,76 @@
 				"typeID": "Title_Slots",
 				"Korean": "슬롯",
 				"English": "Slots"
+			},
+			{
+				"typeID": 40000,
+				"Korean": "워리어 테스트1",
+				"English": "Warrior test1"
+			},
+			{
+				"typeID": 40001,
+				"Korean": "워리어 테스트2",
+				"English": "Warrior test2"
+			},
+			{
+				"typeID": 40002,
+				"Korean": "워리어 테스트3",
+				"English": "Warrior test3"
+			},
+			{
+				"typeID": 40003,
+				"Korean": "워리어 테스트4",
+				"English": "Warrior test4"
+			},
+			{
+				"typeID": 40100,
+				"Korean": "소서리스 테스트1",
+				"English": "Sorceress test1"
+			},
+			{
+				"typeID": 40101,
+				"Korean": "소서리스 테스트2",
+				"English": "Sorceress test2"
+			},
+			{
+				"typeID": 40200,
+				"Korean": "닌자 테스트1",
+				"English": "Ninja test1"
+			},
+			{
+				"typeID": "Collection_Stats",
+				"Korean": "{0}\n레벨 : {1}\n경험치 : {2}\n생명력 : {3}\n공격력 : {4}\n방어력 : {5}\n신호 주기 : {6}\n신호 속도 : {7}",
+				"English": "{0}\nLevel : {1}\nExp : {2}\nHP : {3}\nAtk : {4}\nDef : {5}\nSign period : {6}\nSign speed : {7}"
+			},
+			{
+				"typeID": "Description_40000",
+				"Korean": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다.",
+				"English": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다."
+			},
+			{
+				"typeID": "Description_40001",
+				"Korean": "대검을 앞으로 길게 뻗어 휘두르며 단일 대상에게 피해를 입힌다.",
+				"English": "대검을 앞으로 길게 뻗어 휘두르며 단일 대상에게 피해를 입힌다."
+			},
+			{
+				"typeID": "Description_40002",
+				"Korean": "대검을 아래에서 위로 휘둘러 단일 대상에게 추가 고정피해를 입힌다.",
+				"English": "대검을 아래에서 위로 휘둘러 단일 대상에게 추가 고정피해를 입힌다."
+			},
+			{
+				"typeID": "Description_40003",
+				"Korean": "대검을 세 번 휘둘러 단일 대상에게 피해를 입힌다.\n세번째 공격은 모든 적에게 피해를 입힌다.",
+				"English": "대검을 세 번 휘둘러 단일 대상에게 피해를 입힌다.\n세번째 공격은 모든 적에게 피해를 입힌다."
+			},
+			{
+				"typeID": "Description_40100",
+				"Korean": "단일 대상에게 폭발을 일으켜 피해를 입힌다.",
+				"English": "단일 대상에게 폭발을 일으켜 피해를 입힌다."
+			},
+			{
+				"typeID": "Description_40101",
+				"Korean": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다.",
+				"English": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다."
 			}
 		]
 }

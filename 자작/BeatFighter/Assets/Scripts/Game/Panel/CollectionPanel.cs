@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectionPanel : PanelBase
 {
     public SkillMode skillMode;
+    public Text statText;
 
     private Dictionary<int, PlayerData.CharData> charDic;
     private List<int> charList;
@@ -24,6 +26,25 @@ public class CollectionPanel : PanelBase
         }
         charList.Sort();
         index = charList.IndexOf(PlayerData.currentChar);
+        SetStats();
+    }
+
+    private void SetStats()
+    {
+        CharInfo charInfo = TableData.instance.charDataDic[PlayerData.currentChar];
+        PlayerData.CharData charData = PlayerData.charDataDic[PlayerData.currentChar];
+        CharExpInfo expInfo = TableData.instance.charExpDataDic[charData.level];
+
+        string name = TableData.instance.GetString(PlayerData.currentChar.ToString());
+        int level = charData.level;
+        string exp = string.Format("{0} / {1}", charData.exp, expInfo.requireExp);
+        int vit = charInfo.vit + (level - 1) * charInfo.vitPerLevel;
+        int atk = charInfo.atk + (level - 1) * charInfo.atkPerLevel;
+        int def = charInfo.def + (level - 1) * charInfo.defPerLevel;
+        float signPeriod = charInfo.signPeriod;
+        float signSpeed = charInfo.signSpeed;
+
+        statText.text = string.Format(TableData.instance.GetString("Collection_Stats"), name, level, exp, vit, atk, def, signPeriod, signSpeed);
     }
 
     public void OnSkillButton()
@@ -53,5 +74,6 @@ public class CollectionPanel : PanelBase
         else if (index < 0) index = charList.Count - 1;
         PlayerData.ChangeCurrentChar(charList[index]);
         BackGround.Instance.SetBackGroundCharacter();
+        SetStats();
     }
 }

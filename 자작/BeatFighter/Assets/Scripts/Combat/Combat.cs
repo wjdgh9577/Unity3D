@@ -159,13 +159,15 @@ public class Combat : Singleton<Combat>
             int rewardGold = info.gold;
 
             GameManager.Instance.GetExp(rewardExp);
-            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold", rewardExp, rewardGold,
+            GameManager.Instance.GetReward(info.GetReward());
+            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold",
                 () =>
                 {
                     GUIManager.Instance.FadeIn(() =>
                     {
                         ClearCombat();
                         onMapEnd();
+                        GameManager.Instance.DequeuePopups();
                         GUIManager.Instance.menuPanel.Show();
                         GameManager.Instance.ChangeCam(false);
                         GUIManager.Instance.FadeOut();
@@ -177,11 +179,10 @@ public class Combat : Singleton<Combat>
                     {
                         ClearCombat();
                         onMapEnd();
-                        GUIManager.Instance.menuPanel.Hide();
-                        Combat.Instance.SetMap(meta.typeID);
+                        SetMap(meta.typeID);
                         GUIManager.Instance.FadeOut();
                     });
-                });
+                }, rewardExp, rewardGold);
         }
     }
 
@@ -227,13 +228,16 @@ public class Combat : Singleton<Combat>
     private void ClearCombat()
     {
         field.Despawn();
+        field = null;
         player.Despawn();
+        player = null;
         for (int i = 0; i < mobs.Length; i++)
         {
             if (mobs[i] != null && !mobs[i].isDead) mobs[i].Despawn();
             mobs[i] = null;
         }
         targeting.Despawn();
+        targeting = null;
     }
 
     /// <summary>

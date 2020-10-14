@@ -24,7 +24,7 @@ public class SkillListContent : PoolObj
         this.typeID = typeID;
         this.skillID = skillID;
         this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
-        this.skillName.text = skillID.ToString();
+        this.skillName.text = string.Format("Lv.{0} {1}", PlayerData.GetSkillData(skillID).level, TableData.instance.GetString(skillID.ToString()));
 
         Deselected();
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillMode : PanelBase
 {
@@ -11,9 +12,15 @@ public class SkillMode : PanelBase
     [Header("Skill Slots")]
     public SkillSlot[] slots;
 
+    [Header("Skill Description")]
+    public Image skillIcon;
+    public Text skillName;
+    public Text skillDescription;
+    public Text skillExp;
+
     [System.NonSerialized]
     public List<SkillListContent> contents;
-
+    [System.NonSerialized]
     public int skillID;
 
     /// <summary>
@@ -59,7 +66,13 @@ public class SkillMode : PanelBase
     /// <param name="skillID"></param>
     public void SetDescription(int skillID)
     {
-        Debug.LogError("스킬 설명 출력 구현 필요");
+        skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
+        skillName.text = TableData.instance.GetString(skillID.ToString());
+        skillDescription.text = TableData.instance.GetString("Description_" + skillID);
+        PlayerData.SkillData skillData = PlayerData.GetSkillData(skillID);
+        int exp = skillData.exp;
+        int requireExp = TableData.instance.skillExpDataDic[skillData.level].requireExp;
+        skillExp.text = string.Format("{0} / {1}", exp, requireExp);
     }
 
     public void OnBackButton()

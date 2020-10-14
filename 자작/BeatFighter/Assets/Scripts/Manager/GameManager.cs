@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +14,12 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Cinemachine.CinemachineDollyCart cart;
 
+    private static Queue<Action> popupQueue;
+
     protected override void Awake()
     {
         base.Awake();
+        popupQueue = new Queue<Action>();
         PlayerData.SetLanguage();
         menuCam.gameObject.SetActive(true);
         PreloadManager.Instance.PreloadResources();
@@ -111,5 +115,41 @@ public class GameManager : Singleton<GameManager>
         PlayerData.charDataDic[PlayerData.currentChar] = charData;
 
         PlayerData.SaveData();
+    }
+
+    public void GetReward(Dictionary<string, List<int>> reward)
+    {
+        foreach (var pair in reward)
+        {
+            if (pair.Key == "character")
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    int typeID = pair.Value[i];
+                    if (PlayerData.charDataDic.ContainsKey(typeID)) continue;
+                    PlayerData.CharData newChar = new PlayerData.CharData();
+                    newChar.Initialize(typeID);
+                    PlayerData.charDataDic.Add(typeID, newChar);
+                    popupQueue.Enqueue(() => { GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString())); });
+                }
+            }
+            else if (pair.Key == "item")
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    // 아이템 구현 이후
+                }
+            }
+            else Debug.LogError("유효하지 않은 보상");
+        }
+
+        PlayerData.SaveData();
+    }
+
+    public void DequeuePopups()
+    {
+        if (popupQueue.Count == 0) return;
+        Action popup = popupQueue.Dequeue();
+        popup?.Invoke();
     }
 }

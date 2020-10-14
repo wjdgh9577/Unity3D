@@ -30,49 +30,49 @@ public class MessageBoxPanel : PanelBase
     private Action onExitButton;
     private Action onRetryButton;
 
-    public void CallOKMessageBox(string stringID, Action okAction = null)
+    public void CallOKMessageBox(string stringID, Action okAction, params object[] args)
     {
         Show();
         okMessageBox.SetActive(true);
-        okMessage.text = TableData.instance.GetString(stringID);
+        okMessage.text = string.Format(TableData.instance.GetString(stringID), args);
         onOKButton = okAction;
     }
 
     public void OnOKButton()
     {
-        onOKButton?.Invoke();
         okMessageBox.SetActive(false);
         Hide();
+        onOKButton?.Invoke();
     }
 
-    public void CallYesNoMessageBox(string stringID, Action yesAction = null, Action noAction = null)
+    public void CallYesNoMessageBox(string stringID, Action yesAction, Action noAction, params object[] args)
     {
         Show();
         yesNoMessageBox.SetActive(true);
-        yesNoMessage.text = TableData.instance.GetString(stringID);
+        yesNoMessage.text = string.Format(TableData.instance.GetString(stringID), args);
         onYesButton = yesAction;
         onNoButton = noAction;
     }
 
     public void OnYesButton()
     {
-        onYesButton?.Invoke();
         yesNoMessageBox.SetActive(false);
         Hide();
+        onYesButton?.Invoke();
     }
 
     public void OnNoButton()
     {
-        onNoButton?.Invoke();
         yesNoMessageBox.SetActive(false);
         Hide();
+        onNoButton?.Invoke();
     }
 
-    public void CallRewardMessageBox(string stringID, int exp, int gold, Action exitAction = null, Action retryAction = null)
+    public void CallRewardMessageBox(string stringID, Action exitAction, Action retryAction, params object[] args)
     {
         Show();
         rewardMessageBox.SetActive(true);
-        string format = string.Format(TableData.instance.GetString(stringID), exp, gold);
+        string format = string.Format(TableData.instance.GetString(stringID), args);
         rewardMessage.text = format;
         onExitButton = exitAction;
         onRetryButton = retryAction;
@@ -80,15 +80,15 @@ public class MessageBoxPanel : PanelBase
 
     public void OnExitButton()
     {
-        onExitButton?.Invoke();
         rewardMessageBox.SetActive(false);
         Hide();
+        onExitButton?.Invoke();
     }
 
     public void OnRetryButton()
     {
-        onRetryButton?.Invoke();
         rewardMessageBox.SetActive(false);
         Hide();
+        onRetryButton?.Invoke();
     }
 }
