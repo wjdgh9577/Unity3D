@@ -68,6 +68,7 @@ public class Combat : Singleton<Combat>
         }
         
         field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, combatFieldTM);
+        field.SetBossTrigger(stageIDs.Count);
         player = playerSetting.SetPlayer(PlayerData.currentChar);
         vitalSign.SetPlayer(player);
         GameManager.Instance.ChangeCam(true);
@@ -176,6 +177,9 @@ public class Combat : Singleton<Combat>
 
         if (Targetable(player))
         {
+            // tutorial clear
+            if (meta.typeID == 50000) PlayerData.tutorial = 1;
+
             RewardInfo info = TableData.instance.rewardDataDic[meta.rewardID];
             rewardExp = info.exp;
             rewardGold = info.gold;

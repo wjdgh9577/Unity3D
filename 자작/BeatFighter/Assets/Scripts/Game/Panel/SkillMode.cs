@@ -74,9 +74,4 @@ public class SkillMode : PanelBase
         int requireExp = TableData.instance.skillExpDataDic[skillData.level].requireExp;
         skillExp.text = string.Format("{0} / {1}", exp, requireExp);
     }
-
-    public void OnBackButton()
-    {
-        Hide();
-    }
 }

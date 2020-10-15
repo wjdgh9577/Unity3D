@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "e92ba4dd8a9874124a618ccf76381786",
+	"md5": "f269c611e51091f0468d9ef31e313945",
 	"array": 
 		[
 			{
@@ -216,6 +216,16 @@
 				"typeID": "Title_Effect",
 				"Korean": "이펙트",
 				"English": "Effect"
+			},
+			{
+				"typeID": "Button_Journey",
+				"Korean": "탐험",
+				"English": "Journey"
+			},
+			{
+				"typeID": "Button_Play",
+				"Korean": "입장",
+				"English": "Play"
 			}
 		]
 }

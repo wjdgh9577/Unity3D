@@ -18,6 +18,11 @@ public class PoolObj : MonoBehaviour
         AudioManager.OnEffectSoundChange += SetAudioVolume;
     }
 
+    public void Position(float x, float y, float z)
+    {
+        transform.position = new Vector3(x, y, z);
+    }
+
     public virtual void Despawn()
     {
         AudioManager.OnEffectSoundChange -= SetAudioVolume;

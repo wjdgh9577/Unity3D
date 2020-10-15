@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossTrigger : MonoBehaviour
+public class BossTrigger : PoolObj
 {
     private void OnTriggerEnter(Collider other)
     {

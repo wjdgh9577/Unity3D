@@ -36,6 +36,7 @@ public class DataFormat
         data.tutorial = PlayerData.tutorial;
         data.currentChar = PlayerData.currentChar;
         data.currentSkills = PlayerData.currentSkills;
+
         data.targetingParticle = PlayerData.targetingParticle;
         data.HPParticle = PlayerData.HPParticle;
         data.MaxHPUI = PlayerData.MaxHPUI;
@@ -43,6 +44,7 @@ public class DataFormat
 
         data.charDataDicKeys = new List<int>();
         data.charDataDicValues = new List<PlayerData.CharData>();
+
         foreach (var pair in PlayerData.charDataDic)
         {
             data.charDataDicKeys.Add(pair.Key);
@@ -61,12 +63,14 @@ public class DataFormat
         PlayerData.tutorial = data.tutorial;
         PlayerData.currentChar = data.currentChar;
         PlayerData.currentSkills = data.currentSkills;
+
         PlayerData.targetingParticle = data.targetingParticle;
         PlayerData.HPParticle = data.HPParticle;
         PlayerData.MaxHPUI = data.MaxHPUI;
         PlayerData.NoteUI = data.NoteUI;
 
         PlayerData.charDataDic = new Dictionary<int, PlayerData.CharData>();
+
         for (int i = 0; i < data.charDataDicKeys.Count; i++)
         {
             PlayerData.charDataDic.Add(data.charDataDicKeys[i], data.charDataDicValues[i]);

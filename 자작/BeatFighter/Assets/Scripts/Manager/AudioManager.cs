@@ -45,6 +45,7 @@ public class AudioManager : Singleton<AudioManager>
         effectSoundDegree = PlayerData.effectSoundDegree;
     }
 
+    #region Audio Control
     private void PlayOneShot(AudioClip clip)
     {
         audioSource.clip = clip;
@@ -65,6 +66,7 @@ public class AudioManager : Singleton<AudioManager>
     {
         audioSource.Stop();
     }
+    #endregion
 
     #region Sound Volume Setting
     public void SetMusicSoundDegree()

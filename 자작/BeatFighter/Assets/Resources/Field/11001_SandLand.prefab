@@ -213,6 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b83285b3625464088f12c38353fc02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossTrigger: {fileID: 1180244855946045258, guid: 8d063205c6b79f74ca14c4dffd300ffc,
+    type: 3}
 --- !u!1 &9064581372547692252
 GameObject:
   m_ObjectHideFlags: 0
