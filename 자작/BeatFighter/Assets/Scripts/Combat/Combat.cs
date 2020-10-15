@@ -23,7 +23,7 @@ public class Combat : Singleton<Combat>
     public List<CharSetting> mobSettings;
 
     private MapInfo meta;
-    private List<int> stageIDs;
+    private Queue<int> stageIDs;
     private Field field;
     private Targeting targeting;
 
@@ -52,7 +52,7 @@ public class Combat : Singleton<Combat>
         transform.position = Vector3.zero;
 
         meta = TableData.instance.mapDataDic[mapID];
-        stageIDs = new List<int>();
+        stageIDs = new Queue<int>();
         
         MapInfo mapInfo = TableData.instance.mapDataDic[mapID];
         if (mapInfo == null)
@@ -63,7 +63,7 @@ public class Combat : Singleton<Combat>
         
         for (int i = 0; i < mapInfo.stageList.Count; i++)
         {
-            stageIDs.Add(mapInfo.stageList[i]);
+            stageIDs.Enqueue(mapInfo.stageList[i]);
         }
         
         field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, combatFieldTM);
@@ -72,6 +72,7 @@ public class Combat : Singleton<Combat>
         GameManager.Instance.ChangeCam(true);
         CreateTargetParticle();
         onMapSet();
+        AudioManager.Instance.PlayBattle(meta.fieldID);
 
         GotoNextStage(0);
     }
@@ -127,16 +128,17 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void GotoNextStage(float time)
     {
-        if (mobCount != 0) return;
+        int nextStage = GetAndRemoveCurrentStage();
 
-        StartCoroutine(GotoNextStageCoroutine(time));
+        if (nextStage != -1) StartCoroutine(EndStageCoroutine(nextStage, time));
+        else EndMap(time);
     }
 
-    private IEnumerator GotoNextStageCoroutine(float time)
+    private IEnumerator EndStageCoroutine(int nextStage, float time)
     {
         yield return new WaitForSeconds(time);
-        int currentStage = GetAndRemoveCurrentStage();
-        if (currentStage != -1 && Targetable(player))
+
+        if (Targetable(player))
         {
             player.Play("Run");
             Vector3 startPos = transform.position;
@@ -150,40 +152,67 @@ public class Combat : Singleton<Combat>
                 yield return null;
             }
             player.CrossFade("Idle");
-            SetStage(currentStage);
+            SetStage(nextStage);
         }
-        else
+    }
+
+    /// <summary>
+    /// 모든 스테이지 클리어 또는 플레이어 사망시 맵 종료
+    /// </summary>
+    /// <param name="time"></param>
+    private void EndMap(float time)
+    {
+        AudioManager.Instance.Stop();
+        StartCoroutine(EndMapCoroutine(time));
+    }
+
+    private IEnumerator EndMapCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        int rewardExp = 0;
+        int rewardGold = 0;
+
+        if (Targetable(player))
         {
             RewardInfo info = TableData.instance.rewardDataDic[meta.rewardID];
-            int rewardExp = info.exp;
-            int rewardGold = info.gold;
+            rewardExp = info.exp;
+            rewardGold = info.gold;
 
             GameManager.Instance.GetExp(rewardExp);
             GameManager.Instance.GetReward(info.GetReward());
-            GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold",
-                () =>
-                {
-                    GUIManager.Instance.FadeIn(() =>
-                    {
-                        ClearCombat();
-                        onMapEnd();
-                        GameManager.Instance.DequeuePopups();
-                        GUIManager.Instance.menuPanel.Show();
-                        GameManager.Instance.ChangeCam(false);
-                        GUIManager.Instance.FadeOut();
-                    });
-                },
-                () =>
-                {
-                    GUIManager.Instance.FadeIn(() =>
-                    {
-                        ClearCombat();
-                        onMapEnd();
-                        SetMap(meta.typeID);
-                        GUIManager.Instance.FadeOut();
-                    });
-                }, rewardExp, rewardGold);
+
+            AudioManager.Instance.PlayVictory();
         }
+        else
+        {
+            AudioManager.Instance.PlayGameover();
+        }
+        
+        GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold",
+            () =>
+            {
+                GUIManager.Instance.FadeIn(() =>
+                {
+                    ClearCombat();
+                    onMapEnd();
+                    GameManager.Instance.DequeuePopups();
+                    GUIManager.Instance.menuPanel.Show();
+                    GameManager.Instance.ChangeCam(false);
+                    AudioManager.Instance.PlayMain();
+                    GUIManager.Instance.FadeOut();
+                });
+            },
+            () =>
+            {
+                GUIManager.Instance.FadeIn(() =>
+                {
+                    ClearCombat();
+                    onMapEnd();
+                    SetMap(meta.typeID);
+                    GUIManager.Instance.FadeOut();
+                });
+            }, rewardExp, rewardGold);
     }
 
     /// <summary>
@@ -195,11 +224,28 @@ public class Combat : Singleton<Combat>
         
         if (stageIDs.Count > 0)
         {
-            currentStage = stageIDs[0];
-            stageIDs.RemoveAt(0);
+            currentStage = stageIDs.Dequeue();
         }
         
         return currentStage;
+    }
+
+    /// <summary>
+    /// 전투상의 모든 오브젝트 제거
+    /// </summary>
+    private void ClearCombat()
+    {
+        field.Despawn();
+        field = null;
+        player.Despawn();
+        player = null;
+        for (int i = 0; i < mobs.Length; i++)
+        {
+            if (mobs[i] != null && !mobs[i].isDead) mobs[i].Despawn();
+            mobs[i] = null;
+        }
+        targeting.Despawn();
+        targeting = null;
     }
 
     /// <summary>
@@ -220,24 +266,6 @@ public class Combat : Singleton<Combat>
         HPParticle particle = PoolingManager.Instance.Spawn<HPParticle>(PlayerData.HPParticle);
         particle.transform.position = info.to.transform.position;
         particle.SetMesh(info);
-    }
-
-    /// <summary>
-    /// 전투상의 모든 오브젝트 제거
-    /// </summary>
-    private void ClearCombat()
-    {
-        field.Despawn();
-        field = null;
-        player.Despawn();
-        player = null;
-        for (int i = 0; i < mobs.Length; i++)
-        {
-            if (mobs[i] != null && !mobs[i].isDead) mobs[i].Despawn();
-            mobs[i] = null;
-        }
-        targeting.Despawn();
-        targeting = null;
     }
 
     /// <summary>
@@ -272,7 +300,7 @@ public class Combat : Singleton<Combat>
     {
         mobCount = 0;
         onStageEnd();
-        GotoNextStage(2);
+        EndMap(2);
     }
 
     /// <summary>

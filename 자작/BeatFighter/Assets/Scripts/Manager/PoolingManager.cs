@@ -40,14 +40,16 @@ public class PoolingManager : Singleton<PoolingManager>
         {
             PoolObj pooledObj = poolingObjs[obj].Dequeue();
             pooledObj.SetActive(true);
+            pooledObj.SetAudioVolume();
             pooledObj.transform.SetParent(parent);
             pooledObj.transform.localPosition = Vector3.zero;
 
             return pooledObj.GetComponent<T>();
         }
 
-        GameObject spawnObj = Instantiate(obj, parent);
-        spawnObj.GetComponent<PoolObj>().prefeb = obj;
+        PoolObj spawnObj = Instantiate(obj, parent).GetComponent<PoolObj>();
+        spawnObj.prefeb = obj;
+        spawnObj.SetAudioVolume();
         
         return spawnObj.GetComponent<T>();
     }

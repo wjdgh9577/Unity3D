@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +13,24 @@ public class PoolObj : MonoBehaviour
         gameObject.SetActive(active);
     }
 
+    public virtual void OnEnable()
+    {
+        AudioManager.OnEffectSoundChange += SetAudioVolume;
+    }
+
     public virtual void Despawn()
     {
+        AudioManager.OnEffectSoundChange -= SetAudioVolume;
         PoolingManager.Instance.Despawn(this);
+    }
+
+    public void SetAudioVolume()
+    {
+        AudioSource[] audioSources = GetComponentsInChildren<AudioSource>();
+
+        for (int i = 0; i < audioSources.Length; i++)
+        {
+            audioSources[i].volume = AudioManager.Instance.GetEffectSoundDegree();
+        }
     }
 }

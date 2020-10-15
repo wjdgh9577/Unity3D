@@ -45,7 +45,7 @@ public class SkillMode : PanelBase
             content.Refresh(typeID, skill);
             contents.Add(content);
         }
-
+        SetDescription(PlayerData.currentSkills[0]);
         skillID = 0;
     }
 

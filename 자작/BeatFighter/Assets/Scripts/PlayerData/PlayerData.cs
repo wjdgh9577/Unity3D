@@ -129,6 +129,8 @@ public static class PlayerData
     }
 
     public static Language language;
+    public static float musicSoundDegree;
+    public static float effectSoundDegree;
 
     public static int tutorial;
     public static int currentChar;
@@ -217,6 +219,18 @@ public static class PlayerData
     public static void SetLanguage()
     {
         language = (Language)PlayerPrefs.GetInt("language");
+    }
+
+    public static void SetMusicSoundDegree()
+    {
+        if (PlayerPrefs.HasKey("musicSoundDegree")) musicSoundDegree = PlayerPrefs.GetFloat("musicSoundDegree");
+        else musicSoundDegree = 1;
+    }
+
+    public static void SetEffectSoundDegree()
+    {
+        if (PlayerPrefs.HasKey("effectSoundDegree")) effectSoundDegree = PlayerPrefs.GetFloat("effectSoundDegree");
+        else effectSoundDegree = 1;
     }
 
     public static SkillData GetSkillData(int skillID)

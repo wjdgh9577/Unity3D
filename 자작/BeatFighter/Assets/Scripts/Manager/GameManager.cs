@@ -21,6 +21,9 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
         popupQueue = new Queue<Action>();
         PlayerData.SetLanguage();
+        PlayerData.SetMusicSoundDegree();
+        PlayerData.SetEffectSoundDegree();
+        AudioManager.Instance.Setup();
         menuCam.gameObject.SetActive(true);
         PreloadManager.Instance.PreloadResources();
         GUIManager.Instance.loginPanel.Show();

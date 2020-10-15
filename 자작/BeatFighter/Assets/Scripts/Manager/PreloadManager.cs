@@ -47,6 +47,7 @@ public class PreloadManager : Singleton<PreloadManager>
         GUIManager.Instance.SetLoadingText("Loading Complete\n100%");
         yield return new WaitForSeconds(0.3f);
         GUIManager.Instance.HideLoading();
+        AudioManager.Instance.PlayMain();
     }
 
     private IEnumerator LoadAll(string path)

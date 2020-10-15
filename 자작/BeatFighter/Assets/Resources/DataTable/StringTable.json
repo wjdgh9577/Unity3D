@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "57b7730dbc0b17c6e6e66c54a2ebbc22",
+	"md5": "e92ba4dd8a9874124a618ccf76381786",
 	"array": 
 		[
 			{
@@ -196,6 +196,26 @@
 				"typeID": "Description_40101",
 				"Korean": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다.",
 				"English": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다."
+			},
+			{
+				"typeID": "Title_Language",
+				"Korean": "언어",
+				"English": "Language"
+			},
+			{
+				"typeID": "Title_Sound",
+				"Korean": "사운드",
+				"English": "Sound"
+			},
+			{
+				"typeID": "Title_Music",
+				"Korean": "음악",
+				"English": "Music"
+			},
+			{
+				"typeID": "Title_Effect",
+				"Korean": "이펙트",
+				"English": "Effect"
 			}
 		]
 }

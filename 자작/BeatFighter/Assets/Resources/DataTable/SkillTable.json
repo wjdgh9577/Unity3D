@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "cacbd842c1970aa2b7ac6230b9fb04df",
+	"md5": "863984d0c8e86aacc45e18aa01d5e95d",
 	"array": 
 		[
 			{
@@ -57,6 +57,12 @@
 				"stateName": "Attack",
 				"atkMul": 2,
 				"atkMulPerLevel": 1
+			},
+			{
+				"typeID": 41000,
+				"skillType": "Active",
+				"stateName": "Attack",
+				"atkMul": 1
 			}
 		]
 }

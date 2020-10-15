@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "eb6681e114b737c86d0e0e5724914bc3",
+	"md5": "b59108fe235f54299090b20f97d6453c",
 	"array": 
 		[
 			{
@@ -14,9 +14,9 @@
 				"signPeriod": 5
 			},
 			{
-				"typeID": 30001,
-				"modelID": 10101,
-				"atk": 5,
+				"typeID": 39000,
+				"modelID": 10900,
+				"atk": 50,
 				"def": 0,
 				"vit": 100,
 				"atkPerLevel": 1,

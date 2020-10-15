@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "bc01826a116ec1b22b2adcbc05cce9ff",
+	"md5": "184ea07caaf69500a51016c4916e9ed5",
 	"array": 
 		[
 			{
@@ -17,7 +17,7 @@
 			{
 				"typeID": 20001,
 				"modelID": 10001,
-				"atk": 5,
+				"atk": 8,
 				"def": 0,
 				"vit": 100,
 				"atkPerLevel": 1,

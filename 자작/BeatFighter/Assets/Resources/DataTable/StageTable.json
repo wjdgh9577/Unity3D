@@ -1,19 +1,19 @@
 ﻿{
-	"md5": "42d1ba5fac04da24afe46addd4bc6bf4",
+	"md5": "b14c83fc51468c6455b7908f74498778",
 	"array": 
 		[
 			{
 				"typeID": 60000,
 				"mob1": 30000,
-				"mob1Level": 1
+				"mob1Level": 1,
+				"mob2": 30000,
+				"mob2Level": 1,
+				"mob3": 30000,
+				"mob3Level": 1
 			},
 			{
 				"typeID": 60001,
-				"mob1": 30000,
-				"mob1Level": 2,
-				"mob2": 30000,
-				"mob2Level": 2,
-				"mob3": 30001,
+				"mob3": 39000,
 				"mob3Level": 1
 			}
 		]
