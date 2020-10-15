@@ -17,6 +17,7 @@ public class Combat : Singleton<Combat>
     public VitalSign vitalSign;
     public HPGroup hpGroup;
     public SkillGroup skillGroup;
+    public ComboText comboText;
 
     [Header("Character Setting")]
     public CharSetting playerSetting;
@@ -275,6 +276,14 @@ public class Combat : Singleton<Combat>
     public void SetTarget(BaseChar target)
     {
         targeting.transform.position = target.transform.position + Vector3.up * 0.1f;
+    }
+
+    /// <summary>
+    /// 콤보 UI를 표시
+    /// </summary>
+    public void SetComboUI()
+    {
+        comboText.Show(vitalSign.combo);
     }
 
     /// <summary>
