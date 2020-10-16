@@ -18,6 +18,7 @@ public class Combat : Singleton<Combat>
     public HPGroup hpGroup;
     public SkillGroup skillGroup;
     public ComboText comboText;
+    public WarningScreen warningScreen;
 
     [Header("Character Setting")]
     public CharSetting playerSetting;
@@ -328,6 +329,12 @@ public class Combat : Singleton<Combat>
             onStageEnd();
             GotoNextStage(2);
         }
+    }
+
+    public void EnterBossTrigger()
+    {
+        AudioManager.Instance.PlayBoss(meta.fieldID);
+        warningScreen.StartWarningScreen();
     }
 
     /// <summary>

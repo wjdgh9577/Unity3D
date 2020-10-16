@@ -8,7 +8,7 @@ public class BossTrigger : PoolObj
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            AudioManager.Instance.PlayBoss();
+            Combat.Instance.EnterBossTrigger();
         }
     }
 }

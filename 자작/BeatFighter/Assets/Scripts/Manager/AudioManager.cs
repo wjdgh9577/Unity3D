@@ -100,7 +100,7 @@ public class AudioManager : Singleton<AudioManager>
         PlayLoop(battle[index]);
     }
 
-    public void PlayBoss()
+    public void PlayBoss(int fieldID)
     {
         PlayLoop(boss);
     }
