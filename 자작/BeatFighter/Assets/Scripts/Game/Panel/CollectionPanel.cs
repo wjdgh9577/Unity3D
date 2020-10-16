@@ -55,7 +55,7 @@ public class CollectionPanel : PanelBase
 
     public void OnItemButton()
     {
-        Debug.LogError("아이템창 구현 필요!");
+        GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Develop", null);
     }
 
     public void OnBackButton()

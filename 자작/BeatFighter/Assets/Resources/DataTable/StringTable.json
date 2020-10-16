@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "568ff95f2020a306768b93c00244f63a",
+	"md5": "405c3bbc5e1e31a1a57b85107627da55",
 	"array": 
 		[
 			{
@@ -231,6 +231,81 @@
 				"typeID": "Description_Touch",
 				"Korean": "배경을 터치하여 뒤로가기",
 				"English": "Touch to back"
+			},
+			{
+				"typeID": "Description_Boss",
+				"Korean": "보스 : ",
+				"English": "Boss : "
+			},
+			{
+				"typeID": "Description_Note",
+				"Korean": "특이사항 : ",
+				"English": "Note : "
+			},
+			{
+				"typeID": "Description_50000",
+				"Korean": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다...",
+				"English": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다..."
+			},
+			{
+				"typeID": "Description_50001",
+				"Korean": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까.",
+				"English": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까."
+			},
+			{
+				"typeID": "Description_50002",
+				"Korean": "예림이 그 손패 봐봐",
+				"English": "예림이 그 손패 봐봐"
+			},
+			{
+				"typeID": "Map_50000",
+				"Korean": "튜토리얼",
+				"English": "Tutorial"
+			},
+			{
+				"typeID": "Map_50001",
+				"Korean": "테스트 맵 2",
+				"English": "Test map 2"
+			},
+			{
+				"typeID": "Map_50002",
+				"Korean": "테스트 맵 3",
+				"English": "Test map 3"
+			},
+			{
+				"typeID": "Boss_50000",
+				"Korean": "테스트 보스 1",
+				"English": "Test boss 1"
+			},
+			{
+				"typeID": "Boss_50001",
+				"Korean": "테스트 보스 2",
+				"English": "Test boss 2"
+			},
+			{
+				"typeID": "Boss_50002",
+				"Korean": "테스트 보스 3",
+				"English": "Test boss 3"
+			},
+			{
+				"typeID": "Note_50000",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Note_50001",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Note_50002",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Develop",
+				"Korean": "개발중",
+				"English": "under development"
 			}
 		]
 }
