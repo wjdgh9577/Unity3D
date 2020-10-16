@@ -25,6 +25,8 @@ public class DataFormat
     public List<int> charDataDicKeys;
     public List<PlayerData.CharData> charDataDicValues;
 
+    public List<int> completedMaps;
+
     /// <summary>
     /// 세이브를 위한 데이터 포맷 변경
     /// </summary>
@@ -51,6 +53,8 @@ public class DataFormat
             data.charDataDicValues.Add(pair.Value);
         }
 
+        data.completedMaps = PlayerData.completedMaps;
+
         return data;
     }
 
@@ -75,6 +79,8 @@ public class DataFormat
         {
             PlayerData.charDataDic.Add(data.charDataDicKeys[i], data.charDataDicValues[i]);
         }
+
+        PlayerData.completedMaps = data.completedMaps;
     }
 }
 
@@ -148,6 +154,8 @@ public static class PlayerData
     public static Dictionary<int, CharData> charDataDic;
     //public static Dictionary<int, ItemData> itemData; // 보유중인 모든 아이템
 
+    public static List<int> completedMaps;
+
     /// <summary>
     /// 현재 캐릭터 변경
     /// </summary>
@@ -175,6 +183,8 @@ public static class PlayerData
         CharData charData = new CharData();
         charData.Initialize(20000);
         charDataDic = new Dictionary<int, CharData>() { { 20000, charData } };
+
+        completedMaps = new List<int>();
     }
 
     #region Save / Load
@@ -241,5 +251,11 @@ public static class PlayerData
     {
         int index = charDataDic[currentChar].skills.FindIndex(id => id == skillID);
         return charDataDic[currentChar].skillDatas[index];
+    }
+
+    public static void CompleteMap(int mapID)
+    {
+        if (completedMaps.Contains(mapID)) return;
+        completedMaps.Add(mapID);
     }
 }

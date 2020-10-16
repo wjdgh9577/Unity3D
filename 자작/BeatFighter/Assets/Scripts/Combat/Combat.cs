@@ -187,6 +187,7 @@ public class Combat : Singleton<Combat>
 
             GameManager.Instance.GetExp(rewardExp);
             GameManager.Instance.GetReward(info.GetReward());
+            PlayerData.CompleteMap(meta.typeID);
 
             AudioManager.Instance.PlayVictory();
         }

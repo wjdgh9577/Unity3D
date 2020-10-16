@@ -9,7 +9,17 @@ public class DungeonListContent : MonoBehaviour
     [SerializeField]
     private GameObject playText;
     [SerializeField]
+    private GameObject Lock;
+    [SerializeField]
     private int mapID;
+
+    public bool isLock { get; private set; }
+
+    private void OnEnable()
+    {
+        isLock = mapID % 100 != 0 && !PlayerData.completedMaps.Contains(mapID - 1);
+        Lock.SetActive(isLock);
+    }
 
     public void Switch()
     {
@@ -20,7 +30,11 @@ public class DungeonListContent : MonoBehaviour
 
     public void OnClick()
     {
-        if (GUIManager.Instance.menuPanel.journeyMode.mapID == this.mapID)
+        if (isLock)
+        {
+            GUIManager.Instance.menuPanel.journeyMode.Switch(this, mapID);
+        }
+        else if (GUIManager.Instance.menuPanel.journeyMode.mapID == this.mapID)
         {
             GUIManager.Instance.FadeIn(() =>
             {

@@ -35,10 +35,11 @@ public class JourneyMode : PanelBase
 
     public void Switch(DungeonListContent dungeon, int mapID)
     {
-        this.dungeon?.Switch();
+        if (this.dungeon?.isLock == false) this.dungeon?.Switch();
         this.dungeon = dungeon;
         this.mapID = mapID;
-        SetDescription();
+        if (this.dungeon.isLock) SetLockedDescription();
+        else SetDescription();
     }
 
     private void SetDescription()
@@ -48,5 +49,14 @@ public class JourneyMode : PanelBase
         description.text = TableData.instance.GetString("Description_" + mapID);
         bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + mapID);
         note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + mapID);
+    }
+
+    private void SetLockedDescription()
+    {
+        descriptionPanel.SetActive(true);
+        mapName.text = TableData.instance.GetString("Map_" + mapID);
+        description.text = TableData.instance.GetString("Description_Unknown");
+        bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_Unknown");
+        note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_Unknown");
     }
 }

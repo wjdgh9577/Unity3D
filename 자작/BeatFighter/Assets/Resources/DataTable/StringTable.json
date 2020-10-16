@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "405c3bbc5e1e31a1a57b85107627da55",
+	"md5": "852c306381d80e81179fbaff15b94738",
 	"array": 
 		[
 			{
@@ -306,6 +306,21 @@
 				"typeID": "Develop",
 				"Korean": "개발중",
 				"English": "under development"
+			},
+			{
+				"typeID": "Description_Unknown",
+				"Korean": "아직은 무리야...",
+				"English": "Not yet!"
+			},
+			{
+				"typeID": "Boss_Unknown",
+				"Korean": "미확인",
+				"English": "Unknown"
+			},
+			{
+				"typeID": "Note_Unknown",
+				"Korean": "미확인",
+				"English": "Unknown"
 			}
 		]
 }

@@ -133,7 +133,11 @@ public class GameManager : Singleton<GameManager>
                     PlayerData.CharData newChar = new PlayerData.CharData();
                     newChar.Initialize(typeID);
                     PlayerData.charDataDic.Add(typeID, newChar);
-                    popupQueue.Enqueue(() => { GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString())); });
+                    popupQueue.Enqueue(
+                        () =>
+                        {
+                            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString()));
+                        });
                 }
             }
             else if (pair.Key == "item")
@@ -143,7 +147,7 @@ public class GameManager : Singleton<GameManager>
                     // 아이템 구현 이후
                 }
             }
-            else Debug.LogError("유효하지 않은 보상");
+            else Debug.LogErrorFormat("유효하지 않은 보상: {0}", pair);
         }
 
         PlayerData.SaveData();
