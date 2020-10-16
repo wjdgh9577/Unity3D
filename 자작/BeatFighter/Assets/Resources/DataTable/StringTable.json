@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "f269c611e51091f0468d9ef31e313945",
+	"md5": "568ff95f2020a306768b93c00244f63a",
 	"array": 
 		[
 			{
@@ -226,6 +226,11 @@
 				"typeID": "Button_Play",
 				"Korean": "입장",
 				"English": "Play"
+			},
+			{
+				"typeID": "Description_Touch",
+				"Korean": "배경을 터치하여 뒤로가기",
+				"English": "Touch to back"
 			}
 		]
 }
