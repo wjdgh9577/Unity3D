@@ -12,6 +12,7 @@ public class Combat : Singleton<Combat>
     public static Action onStageEnd;
 
     [Header("References")]
+    public ReturnButton returnButton;
     public Transform combatFieldTM;
     public Transform cameraPoint;
     public VitalSign vitalSign;
@@ -28,6 +29,10 @@ public class Combat : Singleton<Combat>
     private Queue<int> stageIDs;
     private Field field;
     private Targeting targeting;
+
+    private IEnumerator startCurrentStageCoroutine;
+    private IEnumerator endStageCoroutine;
+    private IEnumerator endMapCoroutine;
 
     public PlayerChar player { get; private set; }
     public MobChar[] mobs { get; private set; } = new MobChar[5];
@@ -75,6 +80,7 @@ public class Combat : Singleton<Combat>
         GameManager.Instance.ChangeCam(true);
         CreateTargetParticle();
         onMapSet();
+        returnButton.Show();
         AudioManager.Instance.PlayBattle(meta.fieldID);
 
         GotoNextStage(0);
@@ -113,10 +119,11 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void StartCurrentStage()
     {
-        StartCoroutine(StartCurrentStageRoutine());
+        this.startCurrentStageCoroutine = StartCurrentStageCoroutine();
+        StartCoroutine(this.startCurrentStageCoroutine);
     }
 
-    private IEnumerator StartCurrentStageRoutine()
+    private IEnumerator StartCurrentStageCoroutine()
     {
         yield return new WaitForSeconds(1);
         onStageStart();
@@ -133,8 +140,16 @@ public class Combat : Singleton<Combat>
     {
         int nextStage = GetAndRemoveCurrentStage();
 
-        if (nextStage != -1) StartCoroutine(EndStageCoroutine(nextStage, time));
-        else EndMap(time);
+        if (nextStage != -1)
+        {
+            this.endStageCoroutine = EndStageCoroutine(nextStage, time);
+            StartCoroutine(this.endStageCoroutine);
+        }
+        else
+        {
+            returnButton.Hide();
+            EndMap(time);
+        }
     }
 
     private IEnumerator EndStageCoroutine(int nextStage, float time)
@@ -166,7 +181,8 @@ public class Combat : Singleton<Combat>
     private void EndMap(float time)
     {
         AudioManager.Instance.Stop();
-        StartCoroutine(EndMapCoroutine(time));
+        this.endMapCoroutine = EndMapCoroutine(time);
+        StartCoroutine(this.endMapCoroutine);
     }
 
     private IEnumerator EndMapCoroutine(float time)
@@ -185,9 +201,9 @@ public class Combat : Singleton<Combat>
             rewardExp = info.exp;
             rewardGold = info.gold;
 
+            PlayerData.CompleteMap(meta.typeID);
             GameManager.Instance.GetExp(rewardExp);
             GameManager.Instance.GetReward(info.GetReward());
-            PlayerData.CompleteMap(meta.typeID);
 
             AudioManager.Instance.PlayVictory();
         }
@@ -220,6 +236,37 @@ public class Combat : Singleton<Combat>
                     GUIManager.Instance.FadeOut();
                 });
             }, rewardExp, rewardGold);
+    }
+
+    /// <summary>
+    /// 마을로 귀환할 경우 실행되는 함수
+    /// </summary>
+    public void Return()
+    {
+        if (this.startCurrentStageCoroutine != null) StopCoroutine(this.startCurrentStageCoroutine);
+        if (this.endStageCoroutine != null) StopCoroutine(this.endStageCoroutine);
+        if (this.endMapCoroutine != null) StopCoroutine(this.endMapCoroutine);
+
+        this.player.isCombat = false;
+        for (int i = 0; i < this.mobs.Length; i++)
+        {
+            if (this.mobs[i] == null) continue;
+            this.mobs[i].isCombat = false;
+        }
+
+        returnButton.Hide();
+
+        GUIManager.Instance.FadeIn(() =>
+        {
+            ClearCombat();
+            onStageEnd();
+            onMapEnd();
+            GameManager.Instance.DequeuePopups();
+            GUIManager.Instance.menuPanel.Show();
+            GameManager.Instance.ChangeCam(false);
+            AudioManager.Instance.PlayMain();
+            GUIManager.Instance.FadeOut();
+        });
     }
 
     /// <summary>

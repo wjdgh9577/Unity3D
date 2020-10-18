@@ -55,6 +55,7 @@ public class VitalSign : MonoBehaviour
     public void Hide()
     {
         combo = 0;
+        DespawnAll();
         gameObject.SetActive(false);
     }
 

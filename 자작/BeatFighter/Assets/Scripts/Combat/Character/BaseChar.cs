@@ -42,6 +42,7 @@ public class BaseChar : PoolObj
 
     [System.NonSerialized]
     public bool isDead = false;
+    public bool isCombat = false;
     private Skill currentSkill;
 
     private void Awake()
@@ -49,7 +50,7 @@ public class BaseChar : PoolObj
         animator = GetComponent<Animator>();
     }
 
-    public void Initialize(int typeID)
+    public virtual void Initialize(int typeID)
     {
         isDead = false;
         transform.localPosition = Vector3.zero;
@@ -104,7 +105,8 @@ public class BaseChar : PoolObj
     /// <param name="damage"></param>
     public void GetDamage(DamageInfo info)
     {
-        stats.hp = Mathf.Clamp(stats.hp - info.damage, 0, stats.maxHp);
+        int damage = this.isCombat ? info.damage : 0;
+        stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
         Combat.Instance.CreateDmgParticle(info);
         onTakeDamage();
         if (stats.hp <= 0)

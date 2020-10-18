@@ -8,6 +8,12 @@ public class PlayerChar : BaseChar
     public static Action onSkillPrepared;
     public static Action onSkillInitialized;
 
+    public override void Initialize(int typeID)
+    {
+        this.isCombat = true;
+        base.Initialize(typeID);
+    }
+
     /// <summary>
     /// 공격 대상에게 타겟 표시 활성화
     /// </summary>

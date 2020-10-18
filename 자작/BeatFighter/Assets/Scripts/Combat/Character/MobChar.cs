@@ -7,7 +7,6 @@ public class MobChar : BaseChar
 {
     private Dictionary<SkillInfo, float> skills;
     private float lastSignTime;
-    private bool isCombat = false;
 
     private void Update()
     {

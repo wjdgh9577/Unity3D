@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "852c306381d80e81179fbaff15b94738",
+	"md5": "7bb980dbc4cdb91da533e61ad810f11b",
 	"array": 
 		[
 			{
@@ -164,7 +164,7 @@
 			},
 			{
 				"typeID": "Collection_Stats",
-				"Korean": "{0}\n레벨 : {1}\n경험치 : {2}\n생명력 : {3}\n공격력 : {4}\n방어력 : {5}\n신호 주기 : {6}\n신호 속도 : {7}",
+				"Korean": "{0}\n레벨 : {1}\n경험치 : {2}\n생명력 : {3}\n공격력 : {4}\n방어력 : {5}\n박동 주기 : {6}\n박동 속도 : {7}",
 				"English": "{0}\nLevel : {1}\nExp : {2}\nHP : {3}\nAtk : {4}\nDef : {5}\nSign period : {6}\nSign speed : {7}"
 			},
 			{
@@ -219,7 +219,7 @@
 			},
 			{
 				"typeID": "Button_Journey",
-				"Korean": "탐험",
+				"Korean": "모험",
 				"English": "Journey"
 			},
 			{
@@ -321,6 +321,11 @@
 				"typeID": "Note_Unknown",
 				"Korean": "미확인",
 				"English": "Unknown"
+			},
+			{
+				"typeID": "Message_Return",
+				"Korean": "전투에서 귀환하시겠습니까?",
+				"English": "Would you like to return from the battle?"
 			}
 		]
 }
