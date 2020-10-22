@@ -23,6 +23,11 @@ public class SkillMode : PanelBase
     [System.NonSerialized]
     public int skillID;
 
+    public override void Initialize()
+    {
+        
+    }
+
     /// <summary>
     /// 스킬 선택창 활성화시 초기화
     /// </summary>

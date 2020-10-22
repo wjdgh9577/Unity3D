@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class GUIManager : Singleton<GUIManager>
 {
+    public CombatPanel combatPanel;
     public LoginPanel loginPanel;
     public MenuPanel menuPanel;
     public CollectionPanel collectionPanel;
     public MessageBoxPanel messageBoxPanel;
-    public SkillMode skillMode;
 
     [SerializeField]
     private Image fadeScreen;
@@ -19,6 +19,15 @@ public class GUIManager : Singleton<GUIManager>
     [SerializeField]
     private Text loadingText;
 
+    public void Initialize()
+    {
+        this.combatPanel.Initialize();
+        this.loginPanel.Initialize();
+        this.menuPanel.Initialize();
+        this.collectionPanel.Initialize();
+        this.messageBoxPanel.Initialize();
+    }
+
     public void FadeIn(Action action = null)
     {
         StartCoroutine(FadeInCoroutine(action));
@@ -26,22 +35,22 @@ public class GUIManager : Singleton<GUIManager>
 
     IEnumerator FadeInCoroutine(Action action)
     {
-        fadeScreen.gameObject.SetActive(true);
+        this.fadeScreen.gameObject.SetActive(true);
         float alpha = 0;
-        Image fade = fadeScreen;
+        Image fade = this.fadeScreen;
         while (alpha < 1)
         {
             alpha += Time.deltaTime;
             fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, alpha);
             yield return null;
         }
-        fadeScreen.gameObject.SetActive(false);
+        this.fadeScreen.gameObject.SetActive(false);
         action?.Invoke();
     }
 
     public void FadeOut()
     {
-        StartCoroutine(FadeOutCoroutine(fadeScreen));
+        StartCoroutine(FadeOutCoroutine(this.fadeScreen));
     }
 
     IEnumerator FadeOutCoroutine(Image image)
@@ -60,17 +69,17 @@ public class GUIManager : Singleton<GUIManager>
 
     public void ShowLoading()
     {
-        loadingScreen.gameObject.SetActive(true);
+        this.loadingScreen.gameObject.SetActive(true);
     }
 
     public void HideLoading()
     {
-        loadingText.gameObject.SetActive(false);
-        StartCoroutine(FadeOutCoroutine(loadingScreen));
+        this.loadingText.gameObject.SetActive(false);
+        StartCoroutine(FadeOutCoroutine(this.loadingScreen));
     }
 
     public void SetLoadingText(string text)
     {
-        loadingText.text = text;
+        this.loadingText.text = text;
     }
 }

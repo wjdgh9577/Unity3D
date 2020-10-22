@@ -42,16 +42,14 @@ public class BaseChar : PoolObj
 
     [System.NonSerialized]
     public bool isDead = false;
+    [System.NonSerialized]
     public bool isCombat = false;
     private Skill currentSkill;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
     public virtual void Initialize(int typeID)
     {
+        animator = GetComponent<Animator>();
+
         isDead = false;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
@@ -107,7 +105,7 @@ public class BaseChar : PoolObj
     {
         int damage = this.isCombat ? info.damage : 0;
         stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
-        Combat.Instance.CreateDmgParticle(info);
+        CombatManager.Instance.CreateDmgParticle(info);
         onTakeDamage();
         if (stats.hp <= 0)
         {

@@ -14,7 +14,7 @@ public class VitalSign : MonoBehaviour
     public RectTransform heartTM;
     public RectTransform judgeTM;
 
-    private List<RectTransform> notes;
+    private List<Note> notes;
     private PlayerChar player;
 
     public int combo { get; private set; } = 0;
@@ -24,25 +24,25 @@ public class VitalSign : MonoBehaviour
 
     public void Initialize()
     {
-        Combat.onMapEnd += Hide;
-        Combat.onStageSet += Show;
-        Combat.onStageStart += UnlockPoolNote;
-        Combat.onStageEnd += DespawnAll;
-        notes = new List<RectTransform>();
+        CombatManager.onMapEnd += Hide;
+        CombatManager.onStageSet += Show;
+        CombatManager.onStageStart += UnlockPoolNote;
+        CombatManager.onStageEnd += DespawnAll;
+        this.notes = new List<Note>();
         Hide();
     }
 
     private void FixedUpdate()
     {
-        if (!poolLock)
+        if (!this.poolLock)
         {
-            time += Time.fixedDeltaTime;
-            if (!player.isDead && time >= period) PoolNote();
-            if (notes.Count > 0 && notes[0].anchoredPosition.y < 0)
+            this.time += Time.fixedDeltaTime;
+            if (!this.player.isDead && this.time >= this.period) PoolNote();
+            if (this.notes.Count > 0 && this.notes[0].TM.anchoredPosition.y < 0)
             {
-                combo = 0;
-                notes[0].GetComponent<Note>().Despawn();
-                notes.RemoveAt(0);
+                this.combo = 0;
+                this.notes[0].Despawn();
+                this.notes.RemoveAt(0);
             }
         }
     }
@@ -54,7 +54,7 @@ public class VitalSign : MonoBehaviour
 
     public void Hide()
     {
-        combo = 0;
+        this.combo = 0;
         DespawnAll();
         gameObject.SetActive(false);
     }
@@ -69,15 +69,15 @@ public class VitalSign : MonoBehaviour
     /// </summary>
     public void PoolNote()
     {
-        time = 0;
-        Note newNote = PoolingManager.Instance.Spawn<Note>(PlayerData.NoteUI, heartTM);
-        RectTransform newNoteTM = newNote.GetComponent<RectTransform>();
-        notes.Add(newNoteTM);
-        List<float> sign = player.stats.GetSign();
-        period = sign[0];
+        this.time = 0;
+        Note newNote = PoolingManager.Instance.Spawn<Note>(PlayerData.NoteUI, this.heartTM);
+        newNote.Initialize();
+        this.notes.Add(newNote);
+        List<float> sign = this.player.stats.GetSign();
+        this.period = sign[0];
         newNote.SetSpeed(sign[1]);
-        newNote.judgeTime = Time.time + period;
-        newNoteTM.anchoredPosition = judgeTM.anchoredPosition + Vector2.up * period * newNote.speed;
+        newNote.judgeTime = Time.time + this.period;
+        newNote.TM.anchoredPosition = this.judgeTM.anchoredPosition + Vector2.up * this.period * newNote.speed;
     }
 
     /// <summary>
@@ -85,8 +85,8 @@ public class VitalSign : MonoBehaviour
     /// </summary>
     public void UnlockPoolNote()
     {
-        poolLock = false;
-        time = float.PositiveInfinity;
+        this.poolLock = false;
+        this.time = float.PositiveInfinity;
     }
 
     /// <summary>
@@ -95,26 +95,26 @@ public class VitalSign : MonoBehaviour
     /// <returns></returns>
     public JudgeRank Judge()
     {
-        if (notes.Count > 0)
+        if (this.notes.Count > 0)
         {
-            Note note = notes[0].GetComponent<Note>();
+            Note note = this.notes[0];
             float gap = Mathf.Abs(Time.time - note.judgeTime);
             if (gap < 0.03f)
             {
-                combo += 1;
+                this.combo += 1;
                 note.Despawn();
-                notes.RemoveAt(0);
+                this.notes.RemoveAt(0);
                 return JudgeRank.critical;
             }
             else if (gap < 0.1f)
             {
-                combo += 1;
+                this.combo += 1;
                 note.Despawn();
-                notes.RemoveAt(0);
+                this.notes.RemoveAt(0);
                 return JudgeRank.Normal;
             }
         }
-        combo = 0;
+        this.combo = 0;
         return JudgeRank.Fail;
     }
 
@@ -123,11 +123,11 @@ public class VitalSign : MonoBehaviour
     /// </summary>
     public void DespawnAll()
     {
-        for (int i = 0; i < notes.Count; i++)
+        for (int i = 0; i < this.notes.Count; i++)
         {
-            notes[0].GetComponent<Note>().Despawn();
+            this.notes[0].Despawn();
         }
-        notes.Clear();
-        poolLock = true;
+        this.notes.Clear();
+        this.poolLock = true;
     }
 }

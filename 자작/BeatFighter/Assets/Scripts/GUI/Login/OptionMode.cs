@@ -17,6 +17,11 @@ public class OptionMode : PanelBase
     [SerializeField]
     private Text effectDegree;
 
+    public override void Initialize()
+    {
+        
+    }
+
     public override void Show()
     {
         base.Show();

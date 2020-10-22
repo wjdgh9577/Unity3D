@@ -26,16 +26,16 @@ public class SkillSlot : MonoBehaviour
 
     public void OnSelected()
     {
-        if (GUIManager.Instance.skillMode.skillID == 0)
+        if (GUIManager.Instance.collectionPanel.skillMode.skillID == 0)
         {
-            GUIManager.Instance.skillMode.SetDescription(skillID);
+            GUIManager.Instance.collectionPanel.skillMode.SetDescription(skillID);
         }
         else
         {
-            PlayerData.currentSkills[index] = GUIManager.Instance.skillMode.skillID;
-            PlayerData.charDataDic[typeID].currentSkills[index] = GUIManager.Instance.skillMode.skillID;
-            Refresh(typeID, GUIManager.Instance.skillMode.skillID);
-            GUIManager.Instance.skillMode.skillID = 0;
+            PlayerData.currentSkills[index] = GUIManager.Instance.collectionPanel.skillMode.skillID;
+            PlayerData.charDataDic[typeID].currentSkills[index] = GUIManager.Instance.collectionPanel.skillMode.skillID;
+            Refresh(typeID, GUIManager.Instance.collectionPanel.skillMode.skillID);
+            GUIManager.Instance.collectionPanel.skillMode.skillID = 0;
         }
     }
 }

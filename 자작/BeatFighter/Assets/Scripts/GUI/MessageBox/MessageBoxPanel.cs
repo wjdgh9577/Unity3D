@@ -30,65 +30,67 @@ public class MessageBoxPanel : PanelBase
     private Action onExitButton;
     private Action onRetryButton;
 
+    public override void Initialize() { }
+
     public void CallOKMessageBox(string stringID, Action okAction, params object[] args)
     {
         Show();
-        okMessageBox.SetActive(true);
-        okMessage.text = string.Format(TableData.instance.GetString(stringID), args);
-        onOKButton = okAction;
+        this.okMessageBox.SetActive(true);
+        this.okMessage.text = string.Format(TableData.instance.GetString(stringID), args);
+        this.onOKButton = okAction;
     }
 
     public void OnOKButton()
     {
-        okMessageBox.SetActive(false);
+        this.okMessageBox.SetActive(false);
         Hide();
-        onOKButton?.Invoke();
+        this.onOKButton?.Invoke();
     }
 
     public void CallYesNoMessageBox(string stringID, Action yesAction, Action noAction, params object[] args)
     {
         Show();
-        yesNoMessageBox.SetActive(true);
-        yesNoMessage.text = string.Format(TableData.instance.GetString(stringID), args);
-        onYesButton = yesAction;
-        onNoButton = noAction;
+        this.yesNoMessageBox.SetActive(true);
+        this.yesNoMessage.text = string.Format(TableData.instance.GetString(stringID), args);
+        this.onYesButton = yesAction;
+        this.onNoButton = noAction;
     }
 
     public void OnYesButton()
     {
-        yesNoMessageBox.SetActive(false);
+        this.yesNoMessageBox.SetActive(false);
         Hide();
-        onYesButton?.Invoke();
+        this.onYesButton?.Invoke();
     }
 
     public void OnNoButton()
     {
-        yesNoMessageBox.SetActive(false);
+        this.yesNoMessageBox.SetActive(false);
         Hide();
-        onNoButton?.Invoke();
+        this.onNoButton?.Invoke();
     }
 
     public void CallRewardMessageBox(string stringID, Action exitAction, Action retryAction, params object[] args)
     {
         Show();
-        rewardMessageBox.SetActive(true);
+        this.rewardMessageBox.SetActive(true);
         string format = string.Format(TableData.instance.GetString(stringID), args);
-        rewardMessage.text = format;
-        onExitButton = exitAction;
-        onRetryButton = retryAction;
+        this.rewardMessage.text = format;
+        this.onExitButton = exitAction;
+        this.onRetryButton = retryAction;
     }
 
     public void OnExitButton()
     {
-        rewardMessageBox.SetActive(false);
+        this.rewardMessageBox.SetActive(false);
         Hide();
-        onExitButton?.Invoke();
+        this.onExitButton?.Invoke();
     }
 
     public void OnRetryButton()
     {
-        rewardMessageBox.SetActive(false);
+        this.rewardMessageBox.SetActive(false);
         Hide();
-        onRetryButton?.Invoke();
+        this.onRetryButton?.Invoke();
     }
 }

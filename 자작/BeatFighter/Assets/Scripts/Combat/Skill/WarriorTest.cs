@@ -22,6 +22,6 @@ public class WarriorTest : Skill
 
     protected override void OnAlive()
     {
-        if (!Combat.Targetable(castInfo.from)) Despawn();
+        if (!CombatManager.Targetable(castInfo.from)) Despawn();
     }
 }

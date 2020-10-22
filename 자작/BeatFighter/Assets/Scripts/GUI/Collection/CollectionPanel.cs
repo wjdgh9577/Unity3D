@@ -12,20 +12,25 @@ public class CollectionPanel : PanelBase
     private List<int> charList;
     private int index;
 
+    public override void Initialize()
+    {
+        this.skillMode.Initialize();
+    }
+
     /// <summary>
     /// 판넬 활성화시 초기화
     /// </summary>
     protected override void Refresh()
     {
-        charDic = PlayerData.charDataDic;
-        if (charList == null) charList = new List<int>();
-        charList.Clear();
-        foreach (var key in charDic.Keys)
+        this.charDic = PlayerData.charDataDic;
+        if (this.charList == null) this.charList = new List<int>();
+        this.charList.Clear();
+        foreach (var key in this.charDic.Keys)
         {
-            charList.Add(key);
+            this.charList.Add(key);
         }
-        charList.Sort();
-        index = charList.IndexOf(PlayerData.currentChar);
+        this.charList.Sort();
+        this.index = this.charList.IndexOf(PlayerData.currentChar);
         SetStats();
     }
 
@@ -44,13 +49,13 @@ public class CollectionPanel : PanelBase
         float signPeriod = charInfo.signPeriod;
         float signSpeed = charInfo.signSpeed;
 
-        statText.text = string.Format(TableData.instance.GetString("Collection_Stats"), name, level, exp, vit, atk, def, signPeriod, signSpeed);
+        this.statText.text = string.Format(TableData.instance.GetString("Collection_Stats"), name, level, exp, vit, atk, def, signPeriod, signSpeed);
     }
 
     public void OnSkillButton()
     {
-        skillMode.Show();
-        skillMode.Refresh(charList[index]);
+        this.skillMode.Show();
+        this.skillMode.Refresh(this.charList[index]);
     }
 
     public void OnItemButton()
@@ -67,12 +72,12 @@ public class CollectionPanel : PanelBase
 
     public void OnCharacterChangeButton(bool isRightSide)
     {
-        if (charList.Count == 1) return;
+        if (this.charList.Count == 1) return;
 
-        index = isRightSide ? index + 1 : index - 1;
-        if (index >= charList.Count) index = 0;
-        else if (index < 0) index = charList.Count - 1;
-        PlayerData.ChangeCurrentChar(charList[index]);
+        this.index = isRightSide ? this.index + 1 : this.index - 1;
+        if (this.index >= this.charList.Count) this.index = 0;
+        else if (this.index < 0) this.index = this.charList.Count - 1;
+        PlayerData.ChangeCurrentChar(this.charList[this.index]);
         BackGround.Instance.SetBackGroundCharacter();
         SetStats();
     }

@@ -11,18 +11,23 @@ public class MenuPanel : PanelBase
 
     public JourneyMode journeyMode;
 
+    public override void Initialize()
+    {
+        this.journeyMode.Initialize();
+    }
+
     public override void Show()
     {
         base.Show();
         if (PlayerData.tutorial == 0)
         {
-            tutorialButton.SetActive(true);
-            journeyButton.SetActive(false);
+            this.tutorialButton.SetActive(true);
+            this.journeyButton.SetActive(false);
         }
         else
         {
-            tutorialButton.SetActive(false);
-            journeyButton.SetActive(true);
+            this.tutorialButton.SetActive(false);
+            this.journeyButton.SetActive(true);
         }
     }
 
@@ -31,17 +36,12 @@ public class MenuPanel : PanelBase
     /// </summary>
     public void OnTutorialButton()
     {
-        GUIManager.Instance.FadeIn(() =>
-        {
-            GUIManager.Instance.menuPanel.Hide();
-            Combat.Instance.SetMap(50000);
-            GUIManager.Instance.FadeOut();
-        });
+        GameManager.Instance.SetTutorial();
     }
 
     public void OnJourneyButton()
     {
-        journeyMode.Show();
+        this.journeyMode.Show();
     }
 
     public void OnLogoutButton()

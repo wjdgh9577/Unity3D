@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Combat : Singleton<Combat>
+public class CombatManager : Singleton<CombatManager>
 {
     public static Action onMapSet;
     public static Action onMapEnd;
@@ -12,14 +12,9 @@ public class Combat : Singleton<Combat>
     public static Action onStageEnd;
 
     [Header("References")]
-    public ReturnButton returnButton;
     public Transform combatFieldTM;
+    public Transform combatTM;
     public Transform cameraPoint;
-    public VitalSign vitalSign;
-    public HPGroup hpGroup;
-    public SkillGroup skillGroup;
-    public ComboText comboText;
-    public WarningScreen warningScreen;
 
     [Header("Character Setting")]
     public CharSetting playerSetting;
@@ -39,15 +34,10 @@ public class Combat : Singleton<Combat>
     [NonSerialized]
     public int mobCount;
 
-    protected override void Awake()
+    public void Initialize()
     {
-        base.Awake();
         BaseChar.onPlayerDeath += PlayerDeath;
         BaseChar.onMobDeath += MobDeath;
-        
-        vitalSign.Initialize();
-        hpGroup.Initialize();
-        skillGroup.Initialize();
     }
 
     /// <summary>
@@ -56,32 +46,26 @@ public class Combat : Singleton<Combat>
     /// <param name="mapID"></param>
     public void SetMap(int mapID)
     {
-        transform.position = Vector3.zero;
+        this.combatTM.position = Vector3.zero;
 
-        meta = TableData.instance.mapDataDic[mapID];
-        stageIDs = new Queue<int>();
+        this.meta = TableData.instance.mapDataDic[mapID];
+        this.stageIDs = new Queue<int>();
         
         MapInfo mapInfo = TableData.instance.mapDataDic[mapID];
-        if (mapInfo == null)
-        {
-            Debug.LogError("존재하지 않는 맵");
-            return;
-        }
         
         for (int i = 0; i < mapInfo.stageList.Count; i++)
         {
-            stageIDs.Enqueue(mapInfo.stageList[i]);
+            this.stageIDs.Enqueue(mapInfo.stageList[i]);
         }
         
-        field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, combatFieldTM);
-        field.SetBossTrigger(stageIDs.Count);
-        player = playerSetting.SetPlayer(PlayerData.currentChar);
-        vitalSign.SetPlayer(player);
-        GameManager.Instance.ChangeCam(true);
+        this.field = PoolingManager.Instance.Spawn<Field>(mapInfo.fieldID, this.combatFieldTM);
+        this.field.SetBossTrigger(this.stageIDs.Count);
+        this.player = playerSetting.SetPlayer(PlayerData.currentChar);
+        GUIManager.Instance.combatPanel.SetPlayer(this.player);
         CreateTargetParticle();
         onMapSet();
-        returnButton.Show();
-        AudioManager.Instance.PlayBattle(meta.fieldID);
+        GUIManager.Instance.combatPanel.ShowReturnButton();
+        AudioManager.Instance.PlayBattle(this.meta.fieldID);
 
         GotoNextStage(0);
     }
@@ -92,24 +76,20 @@ public class Combat : Singleton<Combat>
     /// <param name="stageID"></param>
     private void SetStage(int stageID)
     {
-        mobCount = 0;
-        for (int i = 0; i < mobs.Length; i++) mobs[i] = null;
+        this.mobCount = 0;
+        for (int i = 0; i < this.mobs.Length; i++) this.mobs[i] = null;
 
         StageInfo stageInfo = TableData.instance.stageDataDic[stageID];
-        if (stageInfo == null)
-        {
-            Debug.LogError("존재하지 않는 스테이지");
-            return;
-        }
 
         foreach (var pair in stageInfo.mobList)
         {
-            mobs[pair.Key] = mobSettings[pair.Key].SetMob(pair.Value[0], pair.Value[1]);
-            mobs[pair.Key].SetTarget(player);
-            mobCount += 1;
+            this.mobs[pair.Key] = this.mobSettings[pair.Key].SetMob(pair.Value[0], pair.Value[1]);
+            this.mobs[pair.Key].SetTarget(this.player);
+            this.mobCount += 1;
         }
 
-        player.SetTarget(GetRandomMob());
+        this.player.SetTarget(GetRandomMob());
+        GUIManager.Instance.combatPanel.SetHPGroup(this.player, this.mobs);
         onStageSet();
         StartCurrentStage();
     }
@@ -127,15 +107,16 @@ public class Combat : Singleton<Combat>
     {
         yield return new WaitForSeconds(1);
         onStageStart();
-        for (int i = 0; i < mobs.Length; i++)
+        for (int i = 0; i < this.mobs.Length; i++)
         {
-            if (Targetable(mobs[i])) mobs[i].StartCombat();
+            if (Targetable(this.mobs[i])) this.mobs[i].StartCombat();
         }
     }
 
     /// <summary>
     /// 다음 스테이지로 이동
     /// </summary>
+    /// <param name="time"></param>
     public void GotoNextStage(float time)
     {
         int nextStage = GetAndRemoveCurrentStage();
@@ -147,7 +128,7 @@ public class Combat : Singleton<Combat>
         }
         else
         {
-            returnButton.Hide();
+            GUIManager.Instance.combatPanel.HideReturnButton();
             EndMap(time);
         }
     }
@@ -156,20 +137,20 @@ public class Combat : Singleton<Combat>
     {
         yield return new WaitForSeconds(time);
 
-        if (Targetable(player))
+        if (Targetable(this.player))
         {
-            player.Play("Run");
-            Vector3 startPos = transform.position;
-            Vector3 endPos = transform.position + Vector3.right * 20;
+            this.player.Play("Run");
+            Vector3 startPos = this.combatTM.position;
+            Vector3 endPos = this.combatTM.position + Vector3.right * 20;
             float progress = 0;
             while (true)
             {
-                if (transform.position == endPos) break;
+                if (this.combatTM.position == endPos) break;
                 progress += Time.deltaTime * 0.5f;
-                transform.position = Vector3.Lerp(startPos, endPos, progress);
+                this.combatTM.position = Vector3.Lerp(startPos, endPos, progress);
                 yield return null;
             }
-            player.CrossFade("Idle");
+            this.player.CrossFade("Idle");
             SetStage(nextStage);
         }
     }
@@ -192,16 +173,16 @@ public class Combat : Singleton<Combat>
         int rewardExp = 0;
         int rewardGold = 0;
 
-        if (Targetable(player))
+        if (Targetable(this.player))
         {
             // tutorial clear
-            if (meta.typeID == 50000) PlayerData.tutorial = 1;
+            if (this.meta.typeID == 50000) PlayerData.tutorial = 1;
 
-            RewardInfo info = TableData.instance.rewardDataDic[meta.rewardID];
+            RewardInfo info = TableData.instance.rewardDataDic[this.meta.rewardID];
             rewardExp = info.exp;
             rewardGold = info.gold;
 
-            PlayerData.CompleteMap(meta.typeID);
+            PlayerData.CompleteMap(this.meta.typeID);
             GameManager.Instance.GetExp(rewardExp);
             GameManager.Instance.GetReward(info.GetReward());
 
@@ -213,26 +194,23 @@ public class Combat : Singleton<Combat>
         }
         
         GUIManager.Instance.messageBoxPanel.CallRewardMessageBox("Message_RewardExpGold",
-            () =>
+            () => // 마을로 귀환
             {
                 GUIManager.Instance.FadeIn(() =>
                 {
                     ClearCombat();
                     onMapEnd();
-                    GameManager.Instance.DequeuePopups();
-                    GUIManager.Instance.menuPanel.Show();
-                    GameManager.Instance.ChangeCam(false);
-                    AudioManager.Instance.PlayMain();
+                    GameManager.Instance.EndCombat();
                     GUIManager.Instance.FadeOut();
                 });
             },
-            () =>
+            () => // 다시하기
             {
                 GUIManager.Instance.FadeIn(() =>
                 {
                     ClearCombat();
                     onMapEnd();
-                    SetMap(meta.typeID);
+                    SetMap(this.meta.typeID);
                     GUIManager.Instance.FadeOut();
                 });
             }, rewardExp, rewardGold);
@@ -243,9 +221,10 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void Return()
     {
-        if (this.startCurrentStageCoroutine != null) StopCoroutine(this.startCurrentStageCoroutine);
-        if (this.endStageCoroutine != null) StopCoroutine(this.endStageCoroutine);
-        if (this.endMapCoroutine != null) StopCoroutine(this.endMapCoroutine);
+        //if (this.startCurrentStageCoroutine != null) StopCoroutine(this.startCurrentStageCoroutine);
+        //if (this.endStageCoroutine != null) StopCoroutine(this.endStageCoroutine);
+        //if (this.endMapCoroutine != null) StopCoroutine(this.endMapCoroutine);
+        StopAllCoroutines();
 
         this.player.isCombat = false;
         for (int i = 0; i < this.mobs.Length; i++)
@@ -254,17 +233,14 @@ public class Combat : Singleton<Combat>
             this.mobs[i].isCombat = false;
         }
 
-        returnButton.Hide();
+        GUIManager.Instance.combatPanel.HideReturnButton();
 
         GUIManager.Instance.FadeIn(() =>
         {
             ClearCombat();
             onStageEnd();
             onMapEnd();
-            GameManager.Instance.DequeuePopups();
-            GUIManager.Instance.menuPanel.Show();
-            GameManager.Instance.ChangeCam(false);
-            AudioManager.Instance.PlayMain();
+            GameManager.Instance.EndCombat();
             GUIManager.Instance.FadeOut();
         });
     }
@@ -276,9 +252,9 @@ public class Combat : Singleton<Combat>
     {
         int currentStage = -1;
         
-        if (stageIDs.Count > 0)
+        if (this.stageIDs.Count > 0)
         {
-            currentStage = stageIDs.Dequeue();
+            currentStage = this.stageIDs.Dequeue();
         }
         
         return currentStage;
@@ -289,26 +265,16 @@ public class Combat : Singleton<Combat>
     /// </summary>
     private void ClearCombat()
     {
-        field.Despawn();
-        field = null;
-        player.Despawn();
-        player = null;
-        for (int i = 0; i < mobs.Length; i++)
+        this.field.Despawn();
+        this.field = null;
+        this.player.Despawn();
+        this.player = null;
+        for (int i = 0; i < this.mobs.Length; i++)
         {
-            if (mobs[i] != null && !mobs[i].isDead) mobs[i].Despawn();
-            mobs[i] = null;
+            if (this.mobs[i] != null && !this.mobs[i].isDead) this.mobs[i].Despawn();
+            this.mobs[i] = null;
         }
-        targeting.Despawn();
-        targeting = null;
-    }
-
-    /// <summary>
-    /// 타겟팅 표시 생성
-    /// </summary>
-    private void CreateTargetParticle()
-    {
-        targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, transform);
-        targeting.SetActive(false);
+        DespawnTargetParticle();
     }
 
     /// <summary>
@@ -323,12 +289,30 @@ public class Combat : Singleton<Combat>
     }
 
     /// <summary>
+    /// 타겟팅 표시 생성
+    /// </summary>
+    private void CreateTargetParticle()
+    {
+        this.targeting = PoolingManager.Instance.Spawn<Targeting>(PlayerData.targetingParticle, transform);
+        this.targeting.SetActive(false);
+    }
+
+    /// <summary>
+    /// 타겟팅 표시 제거
+    /// </summary>
+    private void DespawnTargetParticle()
+    {
+        this.targeting.Despawn();
+        this.targeting = null;
+    }
+
+    /// <summary>
     /// 타겟팅 표시 설정
     /// </summary>
     /// <param name="target"></param>
     public void SetTarget(BaseChar target)
     {
-        targeting.transform.position = target.transform.position + Vector3.up * 0.1f;
+        this.targeting.transform.position = target.transform.position + Vector3.up * 0.1f;
     }
 
     /// <summary>
@@ -336,7 +320,7 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void SetComboUI()
     {
-        comboText.Show(vitalSign.combo);
+        GUIManager.Instance.combatPanel.SetCombo();
     }
 
     /// <summary>
@@ -346,13 +330,13 @@ public class Combat : Singleton<Combat>
     private MobChar GetRandomMob()
     {
         List<int> mobIndexes = new List<int>();
-        for (int i = 0; i < mobs.Length; i++)
+        for (int i = 0; i < this.mobs.Length; i++)
         {
-            if (Targetable(mobs[i])) mobIndexes.Add(i);
+            if (Targetable(this.mobs[i])) mobIndexes.Add(i);
         }
         if (mobIndexes.Count == 0) return null;
         int index = UnityEngine.Random.Range(0, mobIndexes.Count);
-        return mobs[mobIndexes[index]];
+        return this.mobs[mobIndexes[index]];
     }
 
     /// <summary>
@@ -360,7 +344,7 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void PlayerDeath()
     {
-        mobCount = 0;
+        this.mobCount = 0;
         onStageEnd();
         EndMap(2);
     }
@@ -370,9 +354,9 @@ public class Combat : Singleton<Combat>
     /// </summary>
     public void MobDeath()
     {
-        mobCount -= 1;
-        if (mobCount != 0 && player.Target.isDead) player.SetTarget(GetRandomMob());
-        else if (mobCount == 0)
+        this.mobCount -= 1;
+        if (this.mobCount != 0 && this.player.Target.isDead) this.player.SetTarget(GetRandomMob());
+        else if (this.mobCount == 0)
         {
             onStageEnd();
             GotoNextStage(2);
@@ -381,8 +365,8 @@ public class Combat : Singleton<Combat>
 
     public void EnterBossTrigger()
     {
-        AudioManager.Instance.PlayBoss(meta.fieldID);
-        warningScreen.StartWarningScreen();
+        AudioManager.Instance.PlayBoss(this.meta.fieldID);
+        GUIManager.Instance.combatPanel.SetWarning();
     }
 
     /// <summary>

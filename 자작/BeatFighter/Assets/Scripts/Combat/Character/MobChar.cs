@@ -10,7 +10,7 @@ public class MobChar : BaseChar
 
     private void Update()
     {
-        if (isCombat && !isDead && Combat.Targetable(Target))
+        if (isCombat && !isDead && CombatManager.Targetable(Target))
         {
             if (Time.time - lastSignTime >= stats.signPeriod)
             {

@@ -40,6 +40,7 @@ public class PoolingManager : Singleton<PoolingManager>
         {
             PoolObj pooledObj = poolingObjs[obj].Dequeue();
             pooledObj.SetActive(true);
+            pooledObj.OnSpawn();
             pooledObj.SetAudioVolume();
             pooledObj.transform.SetParent(parent);
             pooledObj.transform.localPosition = Vector3.zero;
@@ -49,6 +50,7 @@ public class PoolingManager : Singleton<PoolingManager>
 
         PoolObj spawnObj = Instantiate(obj, parent).GetComponent<PoolObj>();
         spawnObj.prefeb = obj;
+        spawnObj.OnSpawn();
         spawnObj.SetAudioVolume();
         
         return spawnObj.GetComponent<T>();

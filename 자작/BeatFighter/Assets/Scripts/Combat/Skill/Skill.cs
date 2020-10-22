@@ -143,7 +143,7 @@ public abstract class Skill : PoolObj
 
     protected void DoSkillDamage(BaseChar target)
     {
-        if (!Combat.Targetable(target)) return;
+        if (!CombatManager.Targetable(target)) return;
         Stats stats = castInfo.from.stats;
         stats.AddSkillParameter(metaData, castInfo.from is PlayerChar ? PlayerData.GetSkillData(metaData.typeID).level : 1);
         castInfo.from.DoDamage(target, stats, judge, combo);
@@ -151,7 +151,7 @@ public abstract class Skill : PoolObj
 
     protected void DoSkillDamageAllEnemies()
     {
-        foreach (BaseChar target in Combat.Instance.mobs)
+        foreach (BaseChar target in CombatManager.Instance.mobs)
         {
             DoSkillDamage(target);
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class PanelBase : MonoBehaviour
 {
+    public abstract void Initialize();
+
     private void SetActive(bool active)
     {
         gameObject.SetActive(active);

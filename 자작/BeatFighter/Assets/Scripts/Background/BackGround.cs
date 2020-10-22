@@ -10,10 +10,10 @@ public class BackGround : Singleton<BackGround>
     private float time = 0;
     private int index = 0;
 
-    protected override void Awake()
+    public void Initialize()
     {
-        Combat.onMapSet += Hide;
-        Combat.onMapEnd += Show;
+        CombatManager.onMapSet += Hide;
+        CombatManager.onMapEnd += Show;
     }
 
     private void Update()

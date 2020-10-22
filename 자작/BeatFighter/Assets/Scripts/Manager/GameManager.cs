@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Camera")]
     [SerializeField]
     private Cinemachine.CinemachineVirtualCamera followCam;
     [SerializeField]
@@ -16,23 +17,32 @@ public class GameManager : Singleton<GameManager>
 
     private static Queue<Action> popupQueue;
 
-    protected override void Awake()
+    private IEnumerator Start()
     {
-        base.Awake();
         popupQueue = new Queue<Action>();
+
+        // device setting
         PlayerData.SetLanguage();
         PlayerData.SetMusicSoundDegree();
         PlayerData.SetEffectSoundDegree();
         AudioManager.Instance.Setup();
-        menuCam.gameObject.SetActive(true);
-        PreloadManager.Instance.PreloadResources();
-        GUIManager.Instance.loginPanel.Show();
+        
+        // data load
+        yield return StartCoroutine(PreloadManager.Instance.PreloadResources());
+
+        // initialize
+        GUIManager.Instance.Initialize();
+        BackGround.Instance.Initialize();
+        CombatManager.Instance.Initialize();
+
+        AudioManager.Instance.PlayMain();
+        ChangeCam(false);
     }
 
     #region Login System
     public void Login()
     {
-        cart.m_Speed = 10;
+        this.cart.m_Speed = 10;
         StartCoroutine(LoginCoroutine());
     }
 
@@ -40,7 +50,7 @@ public class GameManager : Singleton<GameManager>
     {
         while (true)
         {
-            if (cart.m_Position == track.PathLength) break;
+            if (this.cart.m_Position == this.track.PathLength) break;
             yield return null;
         }
         
@@ -50,7 +60,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Logout()
     {
-        cart.m_Speed = -10;
+        this.cart.m_Speed = -10;
         StartCoroutine(LogoutCoroutine());
     }
 
@@ -59,17 +69,50 @@ public class GameManager : Singleton<GameManager>
         BackGround.Instance.DeleteBackGroundCharacter();
         while (true)
         {
-            if (cart.m_Position == 0) break;
+            if (this.cart.m_Position == 0) break;
             yield return null;
         }
         GUIManager.Instance.loginPanel.Show();
     }
     #endregion
 
-    public void ChangeCam(bool isCombat)
+    public void SetTutorial()
     {
-        followCam.gameObject.SetActive(isCombat);
-        menuCam.gameObject.SetActive(!isCombat);
+        GUIManager.Instance.FadeIn(() =>
+        {
+            GUIManager.Instance.menuPanel.Hide();
+            CombatManager.Instance.SetMap(50000);
+            ChangeCam(true);
+
+            GUIManager.Instance.FadeOut();
+        });
+    }
+
+    public void SetCombat(int mapID)
+    {
+        GUIManager.Instance.FadeIn(() =>
+        {
+            GUIManager.Instance.menuPanel.journeyMode.Hide();
+            GUIManager.Instance.menuPanel.Hide();
+            CombatManager.Instance.SetMap(mapID);
+            ChangeCam(true);
+
+            GUIManager.Instance.FadeOut();
+        });
+    }
+
+    public void EndCombat()
+    {
+        GUIManager.Instance.menuPanel.Show();
+        AudioManager.Instance.PlayMain();
+        DequeuePopups();
+        ChangeCam(false);
+    }
+    
+    private void ChangeCam(bool isCombat)
+    {
+        this.followCam.gameObject.SetActive(isCombat);
+        this.menuCam.gameObject.SetActive(!isCombat);
     }
 
     public void GetExp(int exp)
@@ -133,11 +176,7 @@ public class GameManager : Singleton<GameManager>
                     PlayerData.CharData newChar = new PlayerData.CharData();
                     newChar.Initialize(typeID);
                     PlayerData.charDataDic.Add(typeID, newChar);
-                    popupQueue.Enqueue(
-                        () =>
-                        {
-                            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString()));
-                        });
+                    popupQueue.Enqueue(() => { GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString())); });
                 }
             }
             else if (pair.Key == "item")
@@ -153,7 +192,7 @@ public class GameManager : Singleton<GameManager>
         PlayerData.SaveData();
     }
 
-    public void DequeuePopups()
+    private void DequeuePopups()
     {
         if (popupQueue.Count == 0) return;
         Action popup = popupQueue.Dequeue();

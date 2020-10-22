@@ -10,13 +10,12 @@ public class SkillGroup : MonoBehaviour
 
     public void Initialize()
     {
-        Combat.onMapSet += Refresh;
-        Combat.onMapSet += SetBaseData;
-        Combat.onMapSet += LockSkillIcons;
-        Combat.onMapEnd += Hide;
-        Combat.onStageSet += Show;
-        Combat.onStageStart += UnlockSkillIcons;
-        Combat.onStageEnd += LockSkillIcons;
+        CombatManager.onMapSet += Refresh;
+        CombatManager.onMapSet += LockSkillIcons;
+        CombatManager.onMapEnd += Hide;
+        CombatManager.onStageSet += Show;
+        CombatManager.onStageStart += UnlockSkillIcons;
+        CombatManager.onStageEnd += LockSkillIcons;
         PlayerChar.onSkillPrepared += LockSkillIcons;
         PlayerChar.onSkillInitialized += UnlockSkillIcons;
         Hide();
@@ -41,11 +40,12 @@ public class SkillGroup : MonoBehaviour
     }
 
     /// <summary>
-    /// 맵이 생성될 때 스킬아이콘을 초기화한다. 
+    /// 맵이 생성될 때 스킬아이콘을 초기화한다.
     /// </summary>
-    public void SetBaseData()
+    /// <param name="player"></param>
+    public void SetBaseData(PlayerChar player)
     {
-        player = Combat.Instance.player;
+        this.player = player;
         for (int i = 0; i < skillIcons.Length; i++)
         {
             SkillInfo info = TableData.instance.skillDataDic[PlayerData.currentSkills[i]];
@@ -63,7 +63,7 @@ public class SkillGroup : MonoBehaviour
 
     public void UnlockSkillIcons()
     {
-        if (Combat.Instance.mobCount == 0) return;
+        if (CombatManager.Instance.mobCount == 0) return;
         for (int i = 0; i < skillIcons.Length; i++)
         {
             skillIcons[i].Unlock();

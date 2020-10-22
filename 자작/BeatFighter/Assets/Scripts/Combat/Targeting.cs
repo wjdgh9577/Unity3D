@@ -7,10 +7,18 @@ public class Targeting : PoolObj
     [SerializeField]
     private float rotationSpeed;
 
-    private void Awake()
+    public override void OnSpawn()
     {
-        Combat.onStageSet += Show;
-        Combat.onStageEnd += Hide;
+        base.OnSpawn();
+        CombatManager.onStageSet += Show;
+        CombatManager.onStageEnd += Hide;
+    }
+
+    public override void Despawn()
+    {
+        CombatManager.onStageSet -= Show;
+        CombatManager.onStageEnd -= Hide;
+        base.Despawn();
     }
 
     private void FixedUpdate()

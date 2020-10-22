@@ -6,6 +6,12 @@ public class LoginPanel : PanelBase
 {
     public OptionMode optionMode;
 
+    public override void Initialize()
+    {
+        this.optionMode.Initialize();
+        Show();
+    }
+
     public void OnNewGameButton()
     {
         GUIManager.Instance.messageBoxPanel.CallYesNoMessageBox("Message_NewAccount",
@@ -31,7 +37,7 @@ public class LoginPanel : PanelBase
 
     public void OnOptionButton()
     {
-        optionMode.Show();
+        this.optionMode.Show();
     }
 
     public void OnExitButton()

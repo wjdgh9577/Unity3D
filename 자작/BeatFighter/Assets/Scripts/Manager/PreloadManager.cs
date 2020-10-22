@@ -8,16 +8,11 @@ public class PreloadManager : Singleton<PreloadManager>
     private Dictionary<int, GameObject> preloadObjs;
     private Dictionary<int, Sprite> preloadSprites;
 
-    public void PreloadResources()
+    public IEnumerator PreloadResources()
     {
         if (preloadObjs == null) preloadObjs = new Dictionary<int, GameObject>();
         if (preloadSprites == null) preloadSprites = new Dictionary<int, Sprite>();
 
-        StartCoroutine(PreloadCoroutine());
-    }
-
-    private IEnumerator PreloadCoroutine()
-    {
         GUIManager.Instance.ShowLoading();
         GUIManager.Instance.SetLoadingText("TableData Loading\n16%");
         TableData.instance = new TableData();
@@ -47,7 +42,6 @@ public class PreloadManager : Singleton<PreloadManager>
         GUIManager.Instance.SetLoadingText("Loading Complete\n100%");
         yield return new WaitForSeconds(0.3f);
         GUIManager.Instance.HideLoading();
-        AudioManager.Instance.PlayMain();
     }
 
     private IEnumerator LoadAll(string path)

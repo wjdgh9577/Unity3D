@@ -21,7 +21,7 @@ public class PlayerChar : BaseChar
     public override void SetTarget(BaseChar target)
     {
         base.SetTarget(target);
-        if (target != null) Combat.Instance.SetTarget(target);
+        if (target != null) CombatManager.Instance.SetTarget(target);
     }
 
     public override void Hit(int skillHash = 0)

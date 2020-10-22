@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ReturnPanel : PanelBase
 {
+    public override void Initialize() { }
+
     public void OnReturnButton()
     {
-        Combat.Instance.Return();
+        CombatManager.Instance.Return();
     }
 }

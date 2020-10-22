@@ -12,11 +12,6 @@ public class HPBar : PoolObj
     private BaseChar owner;
     private RectTransform TM;
 
-    private void Start()
-    {
-        TM = GetComponent<RectTransform>();
-    }
-
     private void Update()
     {
         TM.position = Camera.main.WorldToScreenPoint(owner.transform.parent.position + Vector3.up * owner.GetHeight());
@@ -24,6 +19,8 @@ public class HPBar : PoolObj
 
     public void Initialize(BaseChar owner)
     {
+        TM = GetComponent<RectTransform>();
+
         this.owner = owner;
         Refresh();
     }

@@ -187,6 +187,18 @@ public static class PlayerData
         completedMaps = new List<int>();
     }
 
+    public static SkillData GetSkillData(int skillID)
+    {
+        int index = charDataDic[currentChar].skills.FindIndex(id => id == skillID);
+        return charDataDic[currentChar].skillDatas[index];
+    }
+
+    public static void CompleteMap(int mapID)
+    {
+        if (completedMaps.Contains(mapID)) return;
+        completedMaps.Add(mapID);
+    }
+
     #region Save / Load
     public static void SaveData()
     {
@@ -230,6 +242,7 @@ public static class PlayerData
     }
     #endregion
 
+    #region Device Setting
     public static void SetLanguage()
     {
         language = (Language)PlayerPrefs.GetInt("language");
@@ -246,16 +259,5 @@ public static class PlayerData
         if (PlayerPrefs.HasKey("effectSoundDegree")) effectSoundDegree = PlayerPrefs.GetFloat("effectSoundDegree");
         else effectSoundDegree = 1;
     }
-
-    public static SkillData GetSkillData(int skillID)
-    {
-        int index = charDataDic[currentChar].skills.FindIndex(id => id == skillID);
-        return charDataDic[currentChar].skillDatas[index];
-    }
-
-    public static void CompleteMap(int mapID)
-    {
-        if (completedMaps.Contains(mapID)) return;
-        completedMaps.Add(mapID);
-    }
+    #endregion
 }

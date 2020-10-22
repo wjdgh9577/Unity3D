@@ -7,18 +7,18 @@ public class Note : PoolObj
     private float _speed;
     private float _defaultSpeed = 100f;
 
-    private RectTransform rectTransform;
+    public RectTransform TM;
     public float speed { get { return _speed; }}
     public float judgeTime { get; set; }
-    
-    void Start()
+
+    public void Initialize()
     {
-        rectTransform = GetComponent<RectTransform>();
+        this.TM = GetComponent<RectTransform>();
     }
 
     void FixedUpdate()
     {
-        rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y - speed * Time.fixedDeltaTime);
+        this.TM.anchoredPosition = new Vector2(this.TM.anchoredPosition.x, this.TM.anchoredPosition.y - speed * Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class Note : PoolObj
     /// <param name="speed"></param>
     public void SetSpeed(float speed)
     {
-        _speed = _defaultSpeed * speed;
+        this._speed = this._defaultSpeed * speed;
     }
 
     public override void Despawn()

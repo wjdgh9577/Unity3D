@@ -20,10 +20,12 @@ public class JourneyMode : PanelBase
     private DungeonListContent dungeon;
     public int mapID { get; private set; }
 
+    public override void Initialize() { }
+
     public override void Hide()
     {
         this.dungeon?.Switch();
-        descriptionPanel.SetActive(false);
+        this.descriptionPanel.SetActive(false);
         base.Hide();
     }
 
@@ -44,19 +46,19 @@ public class JourneyMode : PanelBase
 
     private void SetDescription()
     {
-        descriptionPanel.SetActive(true);
-        mapName.text = TableData.instance.GetString("Map_" + mapID);
-        description.text = TableData.instance.GetString("Description_" + mapID);
-        bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + mapID);
-        note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + mapID);
+        this.descriptionPanel.SetActive(true);
+        this.mapName.text = TableData.instance.GetString("Map_" + this.mapID);
+        this.description.text = TableData.instance.GetString("Description_" + this.mapID);
+        this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + this.mapID);
+        this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + this.mapID);
     }
 
     private void SetLockedDescription()
     {
-        descriptionPanel.SetActive(true);
-        mapName.text = TableData.instance.GetString("Map_" + mapID);
-        description.text = TableData.instance.GetString("Description_Unknown");
-        bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_Unknown");
-        note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_Unknown");
+        this.descriptionPanel.SetActive(true);
+        this.mapName.text = TableData.instance.GetString("Map_" + this.mapID);
+        this.description.text = TableData.instance.GetString("Description_Unknown");
+        this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_Unknown");
+        this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_Unknown");
     }
 }

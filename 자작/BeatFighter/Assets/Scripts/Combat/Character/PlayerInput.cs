@@ -12,28 +12,28 @@ public class PlayerInput : MonoBehaviour
     private RaycastHit hit;
     private PlayerChar player;
 
-    private void Awake()
+    private void Start()
     {
-        player = GetComponent<PlayerChar>();
+        this.player = GetComponent<PlayerChar>();
     }
 
     private void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, maxDistance))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, this.maxDistance))
             {
-                layerMask = hit.transform.gameObject.layer;
+                this.layerMask = this.hit.transform.gameObject.layer;
             }
         }
         if (Input.GetMouseButtonUp(0))
         {
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, maxDistance))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.ScreenPointToRay(Input.mousePosition).direction, out hit, this.maxDistance))
             {
-                if (layerMask.value == LayerMask.NameToLayer("Enemy"))
+                if (this.layerMask.value == LayerMask.NameToLayer("Enemy"))
                 {
-                    BaseChar target = hit.transform.GetComponent<MobChar>();
-                    if (!target.isDead) player.SetTarget(target);
+                    BaseChar target = this.hit.transform.GetComponent<MobChar>();
+                    if (!target.isDead) this.player.SetTarget(target);
                 }
             }
         }

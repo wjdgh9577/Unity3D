@@ -36,13 +36,7 @@ public class DungeonListContent : MonoBehaviour
         }
         else if (GUIManager.Instance.menuPanel.journeyMode.mapID == this.mapID)
         {
-            GUIManager.Instance.FadeIn(() =>
-            {
-                GUIManager.Instance.menuPanel.journeyMode.Hide();
-                GUIManager.Instance.menuPanel.Hide();
-                Combat.Instance.SetMap(mapID);
-                GUIManager.Instance.FadeOut();
-            });
+            GameManager.Instance.SetCombat(this.mapID);
         }
         else
         {

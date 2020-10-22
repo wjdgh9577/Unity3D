@@ -36,9 +36,9 @@ public class SkillListContent : PoolObj
 
     public void OnSelected()
     {
-        GUIManager.Instance.skillMode.DeselectAll();
-        GUIManager.Instance.skillMode.skillID = skillID;
-        GUIManager.Instance.skillMode.SetDescription(skillID);
+        GUIManager.Instance.collectionPanel.skillMode.DeselectAll();
+        GUIManager.Instance.collectionPanel.skillMode.skillID = skillID;
+        GUIManager.Instance.collectionPanel.skillMode.SetDescription(skillID);
         image.color = new Color(image.color.r, image.color.g, image.color.b, (float)150 / 255);
     }
 }

@@ -13,7 +13,7 @@ public class PoolObj : MonoBehaviour
         gameObject.SetActive(active);
     }
 
-    public virtual void OnEnable()
+    public virtual void OnSpawn()
     {
         AudioManager.OnEffectSoundChange += SetAudioVolume;
     }
