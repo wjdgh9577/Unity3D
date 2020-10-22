@@ -33,11 +33,14 @@ public class CombatManager : Singleton<CombatManager>
     public MobChar[] mobs { get; private set; } = new MobChar[5];
     [NonSerialized]
     public int mobCount;
+    public bool isCombat { get; private set; }
 
     public void Initialize()
     {
         BaseChar.onPlayerDeath += PlayerDeath;
         BaseChar.onMobDeath += MobDeath;
+
+        this.isCombat = false;
     }
 
     /// <summary>
@@ -106,6 +109,7 @@ public class CombatManager : Singleton<CombatManager>
     private IEnumerator StartCurrentStageCoroutine()
     {
         yield return new WaitForSeconds(1);
+        this.isCombat = true;
         onStageStart();
         for (int i = 0; i < this.mobs.Length; i++)
         {
@@ -226,12 +230,7 @@ public class CombatManager : Singleton<CombatManager>
         //if (this.endMapCoroutine != null) StopCoroutine(this.endMapCoroutine);
         StopAllCoroutines();
 
-        this.player.isCombat = false;
-        for (int i = 0; i < this.mobs.Length; i++)
-        {
-            if (this.mobs[i] == null) continue;
-            this.mobs[i].isCombat = false;
-        }
+        this.isCombat = false;
 
         GUIManager.Instance.combatPanel.HideReturnButton();
 
@@ -345,6 +344,7 @@ public class CombatManager : Singleton<CombatManager>
     public void PlayerDeath()
     {
         this.mobCount = 0;
+        this.isCombat = false;
         onStageEnd();
         EndMap(2);
     }
@@ -358,6 +358,7 @@ public class CombatManager : Singleton<CombatManager>
         if (this.mobCount != 0 && this.player.Target.isDead) this.player.SetTarget(GetRandomMob());
         else if (this.mobCount == 0)
         {
+            this.isCombat = false;
             onStageEnd();
             GotoNextStage(2);
         }

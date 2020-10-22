@@ -10,7 +10,6 @@ public class PlayerChar : BaseChar
 
     public override void Initialize(int typeID)
     {
-        this.isCombat = true;
         base.Initialize(typeID);
     }
 

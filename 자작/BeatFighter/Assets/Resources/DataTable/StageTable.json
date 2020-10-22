@@ -1,19 +1,19 @@
 ﻿{
-	"md5": "7c120094f264f0059386b746038eb93a",
+	"md5": "3eb650eab48fd40394e3c682fcba4f58",
 	"array": 
 		[
 			{
 				"typeID": 60000,
-				"mob1": 30000,
-				"mob1Level": 1,
-				"mob2": 30000,
-				"mob2Level": 1,
 				"mob3": 30000,
 				"mob3Level": 1
 			},
 			{
 				"typeID": 60001,
-				"mob3": 39000,
+				"mob1": 30000,
+				"mob1Level": 1,
+				"mob2": 30000,
+				"mob2Level": 1,
+				"mob3": 30000,
 				"mob3Level": 1
 			},
 			{
@@ -62,16 +62,8 @@
 			},
 			{
 				"typeID": 60022,
-				"mob1": 30000,
-				"mob1Level": 5,
-				"mob2": 30000,
-				"mob2Level": 5,
-				"mob3": 30000,
-				"mob3Level": 5,
-				"mob4": 30000,
-				"mob4Level": 5,
-				"mob5": 30000,
-				"mob5Level": 5
+				"mob3": 39000,
+				"mob3Level": 1
 			}
 		]
 }

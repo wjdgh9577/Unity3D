@@ -42,8 +42,6 @@ public class BaseChar : PoolObj
 
     [System.NonSerialized]
     public bool isDead = false;
-    [System.NonSerialized]
-    public bool isCombat = false;
     private Skill currentSkill;
 
     public virtual void Initialize(int typeID)
@@ -103,7 +101,7 @@ public class BaseChar : PoolObj
     /// <param name="damage"></param>
     public void GetDamage(DamageInfo info)
     {
-        if (!this.isCombat) return;
+        if (!CombatManager.Instance.isCombat) return;
         int damage = info.damage;
         stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
         CombatManager.Instance.CreateDmgParticle(info);

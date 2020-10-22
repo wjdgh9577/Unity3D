@@ -1,12 +1,10 @@
 ﻿{
-	"md5": "3d17adcbe88dd80473ea5fa89a293282",
+	"md5": "10da214919178fcf50f669059474329a",
 	"array": 
 		[
 			{
 				"typeID": 70000,
-				"exp": 100,
-				"character": 20001,
-				"percent3": 100
+				"exp": 100
 			},
 			{
 				"typeID": 70001,
@@ -14,7 +12,9 @@
 			},
 			{
 				"typeID": 70002,
-				"exp": 400
+				"exp": 400,
+				"character": 20001,
+				"percent3": 100
 			}
 		]
 }

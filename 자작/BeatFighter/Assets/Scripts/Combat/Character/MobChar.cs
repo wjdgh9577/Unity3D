@@ -10,7 +10,7 @@ public class MobChar : BaseChar
 
     private void Update()
     {
-        if (isCombat && !isDead && CombatManager.Targetable(Target))
+        if (CombatManager.Instance.isCombat && !isDead && CombatManager.Targetable(Target))
         {
             if (Time.time - lastSignTime >= stats.signPeriod)
             {
@@ -31,7 +31,6 @@ public class MobChar : BaseChar
     public void StartCombat()
     {
         lastSignTime = Time.time;
-        isCombat = true;
 
         if (skills == null) skills = new Dictionary<SkillInfo, float>();
         skills.Clear();
@@ -39,11 +38,5 @@ public class MobChar : BaseChar
         {
             skills.Add(TableData.instance.skillDataDic[id], lastSignTime);
         }
-    }
-
-    public override void Despawn()
-    {
-        isCombat = false;
-        base.Despawn();
     }
 }
