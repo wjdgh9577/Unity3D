@@ -33,9 +33,9 @@ public class SkillGroup : MonoBehaviour
 
     public void Refresh()
     {
-        for (int i = 0; i < skillIcons.Length; i++)
+        for (int i = 0; i < this.skillIcons.Length; i++)
         {
-            skillIcons[i].Refresh();
+            this.skillIcons[i].Refresh();
         }
     }
 
@@ -46,27 +46,27 @@ public class SkillGroup : MonoBehaviour
     public void SetBaseData(PlayerChar player)
     {
         this.player = player;
-        for (int i = 0; i < skillIcons.Length; i++)
+        for (int i = 0; i < this.skillIcons.Length; i++)
         {
             SkillInfo info = TableData.instance.skillDataDic[PlayerData.currentSkills[i]];
-            skillIcons[i].SetBaseData(player, info);
+            this.skillIcons[i].SetBaseData(player, info);
         }
     }
 
     public void LockSkillIcons()
     {
-        for (int i = 0; i < skillIcons.Length; i++)
+        for (int i = 0; i < this.skillIcons.Length; i++)
         {
-            skillIcons[i].Lock();
+            this.skillIcons[i].Lock();
         }
     }
 
     public void UnlockSkillIcons()
     {
         if (CombatManager.Instance.mobCount == 0) return;
-        for (int i = 0; i < skillIcons.Length; i++)
+        for (int i = 0; i < this.skillIcons.Length; i++)
         {
-            skillIcons[i].Unlock();
+            this.skillIcons[i].Unlock();
         }
     }
 }

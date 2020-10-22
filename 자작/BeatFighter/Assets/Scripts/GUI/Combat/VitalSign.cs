@@ -18,8 +18,8 @@ public class VitalSign : MonoBehaviour
     private PlayerChar player;
 
     public int combo { get; private set; } = 0;
-    private float time;
-    private float period;
+    private float afterSpawnTime;
+    private float nextSpawnTime;
     private bool poolLock = true;
 
     public void Initialize()
@@ -29,15 +29,14 @@ public class VitalSign : MonoBehaviour
         CombatManager.onStageStart += UnlockPoolNote;
         CombatManager.onStageEnd += DespawnAll;
         this.notes = new List<Note>();
-        Hide();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (!this.poolLock)
         {
-            this.time += Time.fixedDeltaTime;
-            if (!this.player.isDead && this.time >= this.period) PoolNote();
+            this.afterSpawnTime += Time.deltaTime;
+            if (!this.player.isDead && this.afterSpawnTime >= this.nextSpawnTime) PoolNote();
             if (this.notes.Count > 0 && this.notes[0].TM.anchoredPosition.y < 0)
             {
                 this.combo = 0;
@@ -69,15 +68,13 @@ public class VitalSign : MonoBehaviour
     /// </summary>
     public void PoolNote()
     {
-        this.time = 0;
         Note newNote = PoolingManager.Instance.Spawn<Note>(PlayerData.NoteUI, this.heartTM);
-        newNote.Initialize();
         this.notes.Add(newNote);
+
         List<float> sign = this.player.stats.GetSign();
-        this.period = sign[0];
-        newNote.SetSpeed(sign[1]);
-        newNote.judgeTime = Time.time + this.period;
-        newNote.TM.anchoredPosition = this.judgeTM.anchoredPosition + Vector2.up * this.period * newNote.speed;
+        this.afterSpawnTime = 0;
+        this.nextSpawnTime = sign[0];
+        newNote.Initialize(sign[1], Time.time + this.nextSpawnTime, this.judgeTM);
     }
 
     /// <summary>
@@ -86,7 +83,7 @@ public class VitalSign : MonoBehaviour
     public void UnlockPoolNote()
     {
         this.poolLock = false;
-        this.time = float.PositiveInfinity;
+        this.afterSpawnTime = float.PositiveInfinity;
     }
 
     /// <summary>
@@ -125,7 +122,7 @@ public class VitalSign : MonoBehaviour
     {
         for (int i = 0; i < this.notes.Count; i++)
         {
-            this.notes[0].Despawn();
+            this.notes[i].Despawn();
         }
         this.notes.Clear();
         this.poolLock = true;

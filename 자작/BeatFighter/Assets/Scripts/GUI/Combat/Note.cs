@@ -4,31 +4,28 @@ using UnityEngine;
 
 public class Note : PoolObj
 {
-    private float _speed;
-    private float _defaultSpeed = 100f;
+    private float defaultSpeed = 100f;
+    private float speed;
+
+    private float spawnTime;
+    public float judgeTime;
 
     public RectTransform TM;
-    public float speed { get { return _speed; }}
-    public float judgeTime { get; set; }
+    private RectTransform judgeTM;
 
-    public void Initialize()
+    public void Initialize(float speed, float judgeTime, RectTransform judgeTM)
     {
-        this.TM = GetComponent<RectTransform>();
+        if (this.TM == null) this.TM = GetComponent<RectTransform>();
+
+        this.speed = this.defaultSpeed * speed;
+        this.judgeTime = judgeTime;
+        this.judgeTM = judgeTM;
+        Update();
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        this.TM.anchoredPosition = new Vector2(this.TM.anchoredPosition.x, this.TM.anchoredPosition.y - speed * Time.fixedDeltaTime);
-    }
-
-    /// <summary>
-    /// 노트의 속도 설정
-    /// 기본 속도에 파라미터값이 곱해짐
-    /// </summary>
-    /// <param name="speed"></param>
-    public void SetSpeed(float speed)
-    {
-        this._speed = this._defaultSpeed * speed;
+        this.TM.anchoredPosition = new Vector2(0, this.judgeTM.anchoredPosition.y + (this.judgeTime - Time.time) * this.speed);
     }
 
     public override void Despawn()
