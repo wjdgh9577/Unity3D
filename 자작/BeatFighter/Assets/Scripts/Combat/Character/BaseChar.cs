@@ -103,7 +103,8 @@ public class BaseChar : PoolObj
     /// <param name="damage"></param>
     public void GetDamage(DamageInfo info)
     {
-        int damage = this.isCombat ? info.damage : 0;
+        if (!this.isCombat) return;
+        int damage = info.damage;
         stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
         CombatManager.Instance.CreateDmgParticle(info);
         onTakeDamage();

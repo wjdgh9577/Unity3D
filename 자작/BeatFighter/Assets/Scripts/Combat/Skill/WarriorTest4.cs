@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorTest : Skill
+public class WarriorTest4 : Skill
 {
     protected override void OnStart()
     {

@@ -1,7 +1,92 @@
 ﻿{
-	"md5": "7bb980dbc4cdb91da533e61ad810f11b",
+	"md5": "d2ec03f58781fc647c45c6ec3ba64d3a",
 	"array": 
 		[
+			{
+				"typeID": "Description_Boss",
+				"Korean": "보스 : ",
+				"English": "Boss : "
+			},
+			{
+				"typeID": "Boss_50000",
+				"Korean": "테스트 보스 1",
+				"English": "Test boss 1"
+			},
+			{
+				"typeID": "Boss_50001",
+				"Korean": "테스트 보스 2",
+				"English": "Test boss 2"
+			},
+			{
+				"typeID": "Boss_50002",
+				"Korean": "테스트 보스 3",
+				"English": "Test boss 3"
+			},
+			{
+				"typeID": "Boss_Unknown",
+				"Korean": "미확인",
+				"English": "Unknown"
+			},
+			{
+				"typeID": "Description_50000",
+				"Korean": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다...",
+				"English": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다..."
+			},
+			{
+				"typeID": "Description_50001",
+				"Korean": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까.",
+				"English": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까."
+			},
+			{
+				"typeID": "Description_50002",
+				"Korean": "예림이 그 손패 봐봐",
+				"English": "예림이 그 손패 봐봐"
+			},
+			{
+				"typeID": "Description_Unknown",
+				"Korean": "아직은 무리야...",
+				"English": "Not yet!"
+			},
+			{
+				"typeID": "Description_Note",
+				"Korean": "특이사항 : ",
+				"English": "Note : "
+			},
+			{
+				"typeID": "Note_50000",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Note_50001",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Note_50002",
+				"Korean": "없음",
+				"English": "None"
+			},
+			{
+				"typeID": "Note_Unknown",
+				"Korean": "미확인",
+				"English": "Unknown"
+			},
+			{
+				"typeID": "Map_50000",
+				"Korean": "튜토리얼",
+				"English": "Tutorial"
+			},
+			{
+				"typeID": "Map_50001",
+				"Korean": "테스트 맵 2",
+				"English": "Test map 2"
+			},
+			{
+				"typeID": "Map_50002",
+				"Korean": "테스트 맵 3",
+				"English": "Test map 3"
+			},
 			{
 				"typeID": "Message_ExitGame",
 				"Korean": "게임을 종료하시겠습니까?",
@@ -28,6 +113,11 @@
 				"English": "No Data."
 			},
 			{
+				"typeID": "Message_Return",
+				"Korean": "전투에서 귀환하시겠습니까?",
+				"English": "Would you like to return from the battle?"
+			},
+			{
 				"typeID": "Message_RewardExpGold",
 				"Korean": "경험치와 골드 획득!\n\n경험치 : {0}\n골드 : {1}",
 				"English": "Get exp and gold!\n\nexp : {0}\ngold : {1}"
@@ -51,6 +141,11 @@
 				"typeID": "Button_Item",
 				"Korean": "아이템",
 				"English": "Item"
+			},
+			{
+				"typeID": "Button_Journey",
+				"Korean": "모험",
+				"English": "Journey"
 			},
 			{
 				"typeID": "Button_Load",
@@ -83,6 +178,11 @@
 				"English": "Option"
 			},
 			{
+				"typeID": "Button_Play",
+				"Korean": "입장",
+				"English": "Play"
+			},
+			{
 				"typeID": "Button_Retry",
 				"Korean": "재도전",
 				"English": "Retry"
@@ -103,47 +203,27 @@
 				"English": "Yes"
 			},
 			{
-				"typeID": 20000,
-				"Korean": "워리어",
-				"English": "Warrior"
-			},
-			{
-				"typeID": 20001,
-				"Korean": "소서리스",
-				"English": "Sorceress"
-			},
-			{
-				"typeID": "Title_Description",
-				"Korean": "설명",
-				"English": "Description"
-			},
-			{
-				"typeID": "Title_List",
-				"Korean": "리스트",
-				"English": "List"
-			},
-			{
-				"typeID": "Title_Slots",
-				"Korean": "슬롯",
-				"English": "Slots"
-			},
-			{
 				"typeID": 40000,
+				"Korean": "워리어 테스트0",
+				"English": "Warrior test0"
+			},
+			{
+				"typeID": 40001,
 				"Korean": "워리어 테스트1",
 				"English": "Warrior test1"
 			},
 			{
-				"typeID": 40001,
+				"typeID": 40002,
 				"Korean": "워리어 테스트2",
 				"English": "Warrior test2"
 			},
 			{
-				"typeID": 40002,
+				"typeID": 40003,
 				"Korean": "워리어 테스트3",
 				"English": "Warrior test3"
 			},
 			{
-				"typeID": 40003,
+				"typeID": 40004,
 				"Korean": "워리어 테스트4",
 				"English": "Warrior test4"
 			},
@@ -163,27 +243,22 @@
 				"English": "Ninja test1"
 			},
 			{
-				"typeID": "Collection_Stats",
-				"Korean": "{0}\n레벨 : {1}\n경험치 : {2}\n생명력 : {3}\n공격력 : {4}\n방어력 : {5}\n박동 주기 : {6}\n박동 속도 : {7}",
-				"English": "{0}\nLevel : {1}\nExp : {2}\nHP : {3}\nAtk : {4}\nDef : {5}\nSign period : {6}\nSign speed : {7}"
-			},
-			{
-				"typeID": "Description_40000",
+				"typeID": "Description_40001",
 				"Korean": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다.",
 				"English": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다."
 			},
 			{
-				"typeID": "Description_40001",
+				"typeID": "Description_40002",
 				"Korean": "대검을 앞으로 길게 뻗어 휘두르며 단일 대상에게 피해를 입힌다.",
 				"English": "대검을 앞으로 길게 뻗어 휘두르며 단일 대상에게 피해를 입힌다."
 			},
 			{
-				"typeID": "Description_40002",
+				"typeID": "Description_40003",
 				"Korean": "대검을 아래에서 위로 휘둘러 단일 대상에게 추가 고정피해를 입힌다.",
 				"English": "대검을 아래에서 위로 휘둘러 단일 대상에게 추가 고정피해를 입힌다."
 			},
 			{
-				"typeID": "Description_40003",
+				"typeID": "Description_40004",
 				"Korean": "대검을 세 번 휘둘러 단일 대상에게 피해를 입힌다.\n세번째 공격은 모든 적에게 피해를 입힌다.",
 				"English": "대검을 세 번 휘둘러 단일 대상에게 피해를 입힌다.\n세번째 공격은 모든 적에게 피해를 입힌다."
 			},
@@ -198,19 +273,24 @@
 				"English": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다."
 			},
 			{
-				"typeID": "Title_Language",
-				"Korean": "언어",
-				"English": "Language"
+				"typeID": 20000,
+				"Korean": "워리어",
+				"English": "Warrior"
 			},
 			{
-				"typeID": "Title_Sound",
-				"Korean": "사운드",
-				"English": "Sound"
+				"typeID": 20001,
+				"Korean": "소서리스",
+				"English": "Sorceress"
 			},
 			{
-				"typeID": "Title_Music",
-				"Korean": "음악",
-				"English": "Music"
+				"typeID": "Collection_Stats",
+				"Korean": "{0}\n레벨 : {1}\n경험치 : {2}\n생명력 : {3}\n공격력 : {4}\n방어력 : {5}\n박동 주기 : {6}\n박동 속도 : {7}",
+				"English": "{0}\nLevel : {1}\nExp : {2}\nHP : {3}\nAtk : {4}\nDef : {5}\nSign period : {6}\nSign speed : {7}"
+			},
+			{
+				"typeID": "Title_Description",
+				"Korean": "설명",
+				"English": "Description"
 			},
 			{
 				"typeID": "Title_Effect",
@@ -218,14 +298,29 @@
 				"English": "Effect"
 			},
 			{
-				"typeID": "Button_Journey",
-				"Korean": "모험",
-				"English": "Journey"
+				"typeID": "Title_Language",
+				"Korean": "언어",
+				"English": "Language"
 			},
 			{
-				"typeID": "Button_Play",
-				"Korean": "입장",
-				"English": "Play"
+				"typeID": "Title_List",
+				"Korean": "리스트",
+				"English": "List"
+			},
+			{
+				"typeID": "Title_Music",
+				"Korean": "음악",
+				"English": "Music"
+			},
+			{
+				"typeID": "Title_Slots",
+				"Korean": "슬롯",
+				"English": "Slots"
+			},
+			{
+				"typeID": "Title_Sound",
+				"Korean": "사운드",
+				"English": "Sound"
 			},
 			{
 				"typeID": "Description_Touch",
@@ -233,99 +328,14 @@
 				"English": "Touch to back"
 			},
 			{
-				"typeID": "Description_Boss",
-				"Korean": "보스 : ",
-				"English": "Boss : "
-			},
-			{
-				"typeID": "Description_Note",
-				"Korean": "특이사항 : ",
-				"English": "Note : "
-			},
-			{
-				"typeID": "Description_50000",
-				"Korean": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다...",
-				"English": "싸늘하다...\n가슴에 비수가 날아와 꽂힌다..."
-			},
-			{
-				"typeID": "Description_50001",
-				"Korean": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까.",
-				"English": "하지만 걱정하지 마라.\n손은 눈보다 빠르니까."
-			},
-			{
-				"typeID": "Description_50002",
-				"Korean": "예림이 그 손패 봐봐",
-				"English": "예림이 그 손패 봐봐"
-			},
-			{
-				"typeID": "Map_50000",
-				"Korean": "튜토리얼",
-				"English": "Tutorial"
-			},
-			{
-				"typeID": "Map_50001",
-				"Korean": "테스트 맵 2",
-				"English": "Test map 2"
-			},
-			{
-				"typeID": "Map_50002",
-				"Korean": "테스트 맵 3",
-				"English": "Test map 3"
-			},
-			{
-				"typeID": "Boss_50000",
-				"Korean": "테스트 보스 1",
-				"English": "Test boss 1"
-			},
-			{
-				"typeID": "Boss_50001",
-				"Korean": "테스트 보스 2",
-				"English": "Test boss 2"
-			},
-			{
-				"typeID": "Boss_50002",
-				"Korean": "테스트 보스 3",
-				"English": "Test boss 3"
-			},
-			{
-				"typeID": "Note_50000",
-				"Korean": "없음",
-				"English": "None"
-			},
-			{
-				"typeID": "Note_50001",
-				"Korean": "없음",
-				"English": "None"
-			},
-			{
-				"typeID": "Note_50002",
-				"Korean": "없음",
-				"English": "None"
-			},
-			{
 				"typeID": "Develop",
 				"Korean": "개발중",
 				"English": "under development"
 			},
 			{
-				"typeID": "Description_Unknown",
-				"Korean": "아직은 무리야...",
-				"English": "Not yet!"
-			},
-			{
-				"typeID": "Boss_Unknown",
-				"Korean": "미확인",
-				"English": "Unknown"
-			},
-			{
-				"typeID": "Note_Unknown",
-				"Korean": "미확인",
-				"English": "Unknown"
-			},
-			{
-				"typeID": "Message_Return",
-				"Korean": "전투에서 귀환하시겠습니까?",
-				"English": "Would you like to return from the battle?"
+				"typeID": "Description_40000",
+				"Korean": "단일 대상에게 강력한 미들킥을 찬다.",
+				"English": "단일 대상에게 강력한 미들킥을 찬다."
 			}
 		]
 }

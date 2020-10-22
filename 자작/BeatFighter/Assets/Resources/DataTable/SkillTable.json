@@ -1,34 +1,46 @@
 ﻿{
-	"md5": "863984d0c8e86aacc45e18aa01d5e95d",
+	"md5": "eb618794872226220a123b03c320c964",
 	"array": 
 		[
 			{
 				"typeID": 40000,
 				"skillType": "Active",
-				"stateName": "Attack0",
+				"stateName": "Test0",
+				"unlockLevel": 1,
 				"atkMul": 1,
 				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40001,
 				"skillType": "Active",
-				"stateName": "Attack1",
-				"cooldown": 5,
-				"atkMul": 2,
+				"stateName": "Test1",
+				"unlockLevel": 1,
+				"atkMul": 1,
 				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40002,
 				"skillType": "Active",
-				"stateName": "Attack2",
+				"stateName": "Test2",
+				"unlockLevel": 1,
 				"cooldown": 5,
-				"atkAdd": 5,
+				"atkMul": 2,
 				"atkMulPerLevel": 1
 			},
 			{
 				"typeID": 40003,
 				"skillType": "Active",
-				"stateName": "Attack",
+				"stateName": "Test3",
+				"unlockLevel": 1,
+				"cooldown": 5,
+				"atkAdd": 5,
+				"atkMulPerLevel": 1
+			},
+			{
+				"typeID": 40004,
+				"skillType": "Active",
+				"stateName": "Test4_1",
+				"unlockLevel": 3,
 				"cooldown": 10,
 				"atkMul": 2,
 				"atkMulPerLevel": 1
@@ -37,6 +49,7 @@
 				"typeID": 40100,
 				"skillType": "Active",
 				"stateName": "Attack",
+				"unlockLevel": 1,
 				"cooldown": 5,
 				"atkMul": 2,
 				"atkMulPerLevel": 1
@@ -45,6 +58,7 @@
 				"typeID": 40101,
 				"skillType": "Active",
 				"stateName": "Attack",
+				"unlockLevel": 1,
 				"cooldown": 20,
 				"duration": 3,
 				"tickTime": 0.1,
@@ -55,6 +69,7 @@
 				"typeID": 40200,
 				"skillType": "Active",
 				"stateName": "Attack",
+				"unlockLevel": 1,
 				"atkMul": 2,
 				"atkMulPerLevel": 1
 			},
@@ -62,6 +77,7 @@
 				"typeID": 41000,
 				"skillType": "Active",
 				"stateName": "Attack",
+				"unlockLevel": 1,
 				"atkMul": 1
 			}
 		]

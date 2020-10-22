@@ -36,6 +36,7 @@ public class SkillSlot : MonoBehaviour
             PlayerData.charDataDic[typeID].currentSkills[index] = GUIManager.Instance.collectionPanel.skillMode.skillID;
             Refresh(typeID, GUIManager.Instance.collectionPanel.skillMode.skillID);
             GUIManager.Instance.collectionPanel.skillMode.skillID = 0;
+            GUIManager.Instance.collectionPanel.skillMode.DeselectAll();
         }
     }
 }

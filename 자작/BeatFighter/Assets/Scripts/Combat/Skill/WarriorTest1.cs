@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorAttack1 : Skill
+public class WarriorTest1 : Skill
 {
     protected override void OnOneShot()
     {

@@ -7,9 +7,11 @@ public class SkillListContent : PoolObj
 {
     public Image skillIcon;
     public Text skillName;
+    public GameObject Lock;
 
     private int typeID;
     private int skillID;
+    private int unlockLevel;
     private Image image;
 
     /// <summary>
@@ -19,26 +21,29 @@ public class SkillListContent : PoolObj
     /// <param name="skillID"></param>
     public void Refresh(int typeID, int skillID)
     {
-        if (image == null) image = GetComponent<Image>();
+        if (this.image == null) this.image = GetComponent<Image>();
 
         this.typeID = typeID;
         this.skillID = skillID;
+        this.unlockLevel = TableData.instance.skillDataDic[skillID].unlockLevel;
         this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
         this.skillName.text = string.Format("Lv.{0} {1}", PlayerData.GetSkillData(skillID).level, TableData.instance.GetString(skillID.ToString()));
+
+        Lock.SetActive(PlayerData.charDataDic[typeID].level < this.unlockLevel);
 
         Deselected();
     }
 
     public void Deselected()
     {
-        image.color = new Color(image.color.r, image.color.g, image.color.b, (float)100 / 255);
+        this.image.color = new Color(this.image.color.r, this.image.color.g, this.image.color.b, (float)100 / 255);
     }
 
     public void OnSelected()
     {
         GUIManager.Instance.collectionPanel.skillMode.DeselectAll();
-        GUIManager.Instance.collectionPanel.skillMode.skillID = skillID;
+        GUIManager.Instance.collectionPanel.skillMode.skillID = PlayerData.charDataDic[typeID].level < this.unlockLevel ? 0 : skillID;
         GUIManager.Instance.collectionPanel.skillMode.SetDescription(skillID);
-        image.color = new Color(image.color.r, image.color.g, image.color.b, (float)150 / 255);
+        this.image.color = new Color(this.image.color.r, this.image.color.g, this.image.color.b, (float)150 / 255);
     }
 }

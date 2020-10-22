@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "b85b132a0b90bf342e3e6982e75a3072",
+	"md5": "55c2f5e1a1c6b838757a51109e99b06f",
 	"array": 
 		[
 			{
@@ -7,7 +7,8 @@
 				"skillID0": 40000,
 				"skillID1": 40001,
 				"skillID2": 40002,
-				"skillID3": 40003
+				"skillID3": 40003,
+				"skillID4": 40004
 			},
 			{
 				"typeID": 20001,

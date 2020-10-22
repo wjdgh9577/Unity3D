@@ -8,6 +8,7 @@ public class SkillInfo : TableData.IData<int>
     public string skillType;
     public string stateName;
 
+    public int unlockLevel = 1;
     public float cooldown = 0;
     public float duration = 0;
     public float tickTime = 0;
@@ -37,6 +38,7 @@ public class SkillSetInfo : TableData.IData<int>
     public int skillID1;
     public int skillID2;
     public int skillID3;
+    public int skillID4;
 
     public List<int> skillIDs;
 
@@ -53,6 +55,7 @@ public class SkillSetInfo : TableData.IData<int>
         Add(skillID1);
         Add(skillID2);
         Add(skillID3);
+        Add(skillID4);
     }
 
     private void Add(int skillID)
