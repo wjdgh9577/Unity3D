@@ -40,7 +40,7 @@ public class CollectionPanel : PanelBase
         PlayerData.CharData charData = PlayerData.charDataDic[PlayerData.currentChar];
         CharExpInfo expInfo = TableData.instance.charExpDataDic[charData.level];
 
-        string name = TableData.instance.GetString(PlayerData.currentChar.ToString());
+        string name = TableData.instance.GetString("Character_" + PlayerData.currentChar.ToString());
         int level = charData.level;
         string exp = string.Format("{0} / {1}", charData.exp, expInfo.requireExp);
         int vit = charInfo.vit + (level - 1) * charInfo.vitPerLevel;

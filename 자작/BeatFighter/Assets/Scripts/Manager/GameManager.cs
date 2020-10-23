@@ -131,6 +131,7 @@ public class GameManager : Singleton<GameManager>
             }
             curExp -= TableData.instance.charExpDataDic[curLevel].requireExp;
             curLevel += 1;
+            EnqueuePopups("Message_CharacterLevelUp", curLevel - 1, curLevel);
         }
         charData.SetData(curLevel, curExp);
 
@@ -152,6 +153,7 @@ public class GameManager : Singleton<GameManager>
                     }
                     curExp -= TableData.instance.skillExpDataDic[curLevel].requireExp;
                     curLevel += 1;
+                    EnqueuePopups("Message_SkillLevelUp", TableData.instance.GetString("Skill_" + skills[i]), curLevel - 1, curLevel);
                 }
                 skillData.SetData(curLevel, curExp);
                 charData.skillDatas[i] = skillData;
@@ -176,7 +178,7 @@ public class GameManager : Singleton<GameManager>
                     PlayerData.CharData newChar = new PlayerData.CharData();
                     newChar.Initialize(typeID);
                     PlayerData.charDataDic.Add(typeID, newChar);
-                    popupQueue.Enqueue(() => { GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_GetNewCharacter", DequeuePopups, TableData.instance.GetString(typeID.ToString())); });
+                    EnqueuePopups("Message_GetNewCharacter", TableData.instance.GetString("Character_" + typeID.ToString()));
                 }
             }
             else if (pair.Key == "item")
@@ -190,6 +192,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         PlayerData.SaveData();
+    }
+
+    public void EnqueuePopups(string stringID, params object[] args)
+    {
+        popupQueue.Enqueue(() => { GUIManager.Instance.messageBoxPanel.CallOKMessageBox(stringID, DequeuePopups, args); });
     }
 
     private void DequeuePopups()

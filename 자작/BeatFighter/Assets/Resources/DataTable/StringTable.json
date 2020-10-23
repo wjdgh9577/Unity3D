@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "d2ec03f58781fc647c45c6ec3ba64d3a",
+	"md5": "4a49332ccdd3ca3e0d0378c6e9299227",
 	"array": 
 		[
 			{
@@ -203,42 +203,42 @@
 				"English": "Yes"
 			},
 			{
-				"typeID": 40000,
+				"typeID": "Skill_40000",
 				"Korean": "워리어 테스트0",
 				"English": "Warrior test0"
 			},
 			{
-				"typeID": 40001,
+				"typeID": "Skill_40001",
 				"Korean": "워리어 테스트1",
 				"English": "Warrior test1"
 			},
 			{
-				"typeID": 40002,
+				"typeID": "Skill_40002",
 				"Korean": "워리어 테스트2",
 				"English": "Warrior test2"
 			},
 			{
-				"typeID": 40003,
+				"typeID": "Skill_40003",
 				"Korean": "워리어 테스트3",
 				"English": "Warrior test3"
 			},
 			{
-				"typeID": 40004,
+				"typeID": "Skill_40004",
 				"Korean": "워리어 테스트4",
 				"English": "Warrior test4"
 			},
 			{
-				"typeID": 40100,
+				"typeID": "Skill_40100",
 				"Korean": "소서리스 테스트1",
 				"English": "Sorceress test1"
 			},
 			{
-				"typeID": 40101,
+				"typeID": "Skill_40101",
 				"Korean": "소서리스 테스트2",
 				"English": "Sorceress test2"
 			},
 			{
-				"typeID": 40200,
+				"typeID": "Skill_40200",
 				"Korean": "닌자 테스트1",
 				"English": "Ninja test1"
 			},
@@ -273,12 +273,12 @@
 				"English": "폭발하는 구체를 소환하여 모든 적에게 수차례의 피해를 입힌다."
 			},
 			{
-				"typeID": 20000,
+				"typeID": "Character_20000",
 				"Korean": "워리어",
 				"English": "Warrior"
 			},
 			{
-				"typeID": 20001,
+				"typeID": "Character_20001",
 				"Korean": "소서리스",
 				"English": "Sorceress"
 			},
@@ -336,6 +336,16 @@
 				"typeID": "Description_40000",
 				"Korean": "단일 대상에게 강력한 미들킥을 찬다.",
 				"English": "단일 대상에게 강력한 미들킥을 찬다."
+			},
+			{
+				"typeID": "Message_CharacterLevelUp",
+				"Korean": "캐릭터 레벨 업!\n\n{0} -> {1}",
+				"English": "Character Level Up!\n\n{0} -> {1}"
+			},
+			{
+				"typeID": "Message_SkillLevelUp",
+				"Korean": "스킬 레벨 업!\n\n{0}\n{1} -> {2}",
+				"English": "Skill Level Up!\n\n{0}\n{1} -> {2}"
 			}
 		]
 }

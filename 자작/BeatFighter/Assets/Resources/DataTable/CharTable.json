@@ -1,11 +1,11 @@
 ﻿{
-	"md5": "184ea07caaf69500a51016c4916e9ed5",
+	"md5": "0a67cfc416915a4f55f65f31a13eee10",
 	"array": 
 		[
 			{
 				"typeID": 20000,
 				"modelID": 10000,
-				"atk": 5,
+				"atk": 500,
 				"def": 0,
 				"vit": 100,
 				"atkPerLevel": 1,

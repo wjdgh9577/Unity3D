@@ -69,7 +69,7 @@ public class SkillMode : PanelBase
     public void SetDescription(int skillID)
     {
         skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
-        skillName.text = TableData.instance.GetString(skillID.ToString());
+        skillName.text = TableData.instance.GetString("Skill_" + skillID.ToString());
         skillDescription.text = TableData.instance.GetString("Description_" + skillID);
         PlayerData.SkillData skillData = PlayerData.GetSkillData(skillID);
         int exp = skillData.exp;

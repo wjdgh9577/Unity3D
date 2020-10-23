@@ -27,7 +27,7 @@ public class SkillListContent : PoolObj
         this.skillID = skillID;
         this.unlockLevel = TableData.instance.skillDataDic[skillID].unlockLevel;
         this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
-        this.skillName.text = string.Format("Lv.{0} {1}", PlayerData.GetSkillData(skillID).level, TableData.instance.GetString(skillID.ToString()));
+        this.skillName.text = string.Format("Lv.{0} {1}", PlayerData.GetSkillData(skillID).level, TableData.instance.GetString("Skill_" + skillID.ToString()));
 
         Lock.SetActive(PlayerData.charDataDic[typeID].level < this.unlockLevel);
 
