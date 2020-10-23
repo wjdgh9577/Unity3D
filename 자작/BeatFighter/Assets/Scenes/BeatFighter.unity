@@ -3061,6 +3061,7 @@ MonoBehaviour:
   _lock: {fileID: 1988521351}
   _cooldownImage: {fileID: 1335728564}
   _cooldownText: {fileID: 45759123}
+  KeyCode: 119
 --- !u!1 &356725698
 GameObject:
   m_ObjectHideFlags: 0
@@ -4500,6 +4501,7 @@ MonoBehaviour:
   _lock: {fileID: 1198270179}
   _cooldownImage: {fileID: 1145038344}
   _cooldownText: {fileID: 2050979003}
+  KeyCode: 101
 --- !u!1 &539532916
 GameObject:
   m_ObjectHideFlags: 0
@@ -6593,6 +6595,7 @@ MonoBehaviour:
   _lock: {fileID: 2071631084}
   _cooldownImage: {fileID: 1431483408}
   _cooldownText: {fileID: 730513306}
+  KeyCode: 114
 --- !u!1 &730513304
 GameObject:
   m_ObjectHideFlags: 0
@@ -6806,6 +6809,7 @@ MonoBehaviour:
   _lock: {fileID: 1621100087}
   _cooldownImage: {fileID: 314876744}
   _cooldownText: {fileID: 712756579}
+  KeyCode: 113
 --- !u!1 &738607997
 GameObject:
   m_ObjectHideFlags: 0

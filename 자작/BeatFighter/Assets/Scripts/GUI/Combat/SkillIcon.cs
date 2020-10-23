@@ -10,6 +10,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
     public GameObject _lock;
     public Image _cooldownImage;
     public Text _cooldownText;
+    public KeyCode KeyCode;
 
     private PlayerChar player;
     private SkillInfo metaData;
@@ -27,6 +28,7 @@ public class SkillIcon : MonoBehaviour, IPointerDownHandler
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode)) on = true;
         if (on && !isLock && !isCooldown)
         {
             lastSkillTime = Time.time;

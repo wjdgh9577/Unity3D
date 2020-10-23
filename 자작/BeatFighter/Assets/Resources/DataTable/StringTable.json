@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "4a49332ccdd3ca3e0d0378c6e9299227",
+	"md5": "8879a1380c446d9e5b9f768a627a95a8",
 	"array": 
 		[
 			{
@@ -9,18 +9,18 @@
 			},
 			{
 				"typeID": "Boss_50000",
-				"Korean": "테스트 보스 1",
-				"English": "Test boss 1"
+				"Korean": "없음",
+				"English": "None"
 			},
 			{
 				"typeID": "Boss_50001",
-				"Korean": "테스트 보스 2",
-				"English": "Test boss 2"
+				"Korean": "없음",
+				"English": "None"
 			},
 			{
 				"typeID": "Boss_50002",
-				"Korean": "테스트 보스 3",
-				"English": "Test boss 3"
+				"Korean": "킹슬라임",
+				"English": "Slime King"
 			},
 			{
 				"typeID": "Boss_Unknown",
@@ -44,8 +44,8 @@
 			},
 			{
 				"typeID": "Description_Unknown",
-				"Korean": "아직은 무리야...",
-				"English": "Not yet!"
+				"Korean": "\"너무 성급한거 아니야?\"",
+				"English": "\"Isn't that too hasty?\""
 			},
 			{
 				"typeID": "Description_Note",
