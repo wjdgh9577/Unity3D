@@ -13,7 +13,13 @@ public enum Language
 [System.Serializable]
 public class DataFormat
 {
-    public int tutorial;
+    public int tutorial_combat;
+    public int tutorial_menu;
+    public int tutorial_collection;
+    public int tutorial_skillmode;
+    public int tutorial_itemmode;
+    public int tutorial_journeymode;
+
     public int currentChar;
     public List<int> currentSkills;
 
@@ -35,7 +41,13 @@ public class DataFormat
     {
         DataFormat data = new DataFormat();
 
-        data.tutorial = PlayerData.tutorial;
+        data.tutorial_combat = PlayerData.tutorial_combat;
+        data.tutorial_menu = PlayerData.tutorial_menu;
+        data.tutorial_collection = PlayerData.tutorial_collection;
+        data.tutorial_skillmode = PlayerData.tutorial_skillmode;
+        data.tutorial_itemmode = PlayerData.tutorial_itemmode;
+        data.tutorial_journeymode = PlayerData.tutorial_journeymode;
+
         data.currentChar = PlayerData.currentChar;
         data.currentSkills = PlayerData.currentSkills;
 
@@ -64,7 +76,13 @@ public class DataFormat
     /// <param name="data"></param>
     public static void SetCurrentData(DataFormat data)
     {
-        PlayerData.tutorial = data.tutorial;
+        PlayerData.tutorial_combat = data.tutorial_combat;
+        PlayerData.tutorial_menu = data.tutorial_menu;
+        PlayerData.tutorial_collection = data.tutorial_collection;
+        PlayerData.tutorial_skillmode = data.tutorial_skillmode;
+        PlayerData.tutorial_itemmode = data.tutorial_itemmode;
+        PlayerData.tutorial_journeymode = data.tutorial_journeymode;
+
         PlayerData.currentChar = data.currentChar;
         PlayerData.currentSkills = data.currentSkills;
 
@@ -138,19 +156,30 @@ public static class PlayerData
         }
     }
 
+    // device setting
     public static Language language;
     public static float musicSoundDegree;
     public static float effectSoundDegree;
 
-    public static int tutorial;
+    // tutorial
+    public static int tutorial_combat;
+    public static int tutorial_menu;
+    public static int tutorial_collection;
+    public static int tutorial_skillmode;
+    public static int tutorial_itemmode;
+    public static int tutorial_journeymode;
+
+    // selected character
     public static int currentChar;
     public static List<int> currentSkills;
 
+    // favorite
     public static int targetingParticle;
     public static int HPParticle;
     public static int MaxHPUI;
     public static int NoteUI;
 
+    // data dictionary
     public static Dictionary<int, CharData> charDataDic;
     //public static Dictionary<int, ItemData> itemData; // 보유중인 모든 아이템
 
@@ -171,7 +200,13 @@ public static class PlayerData
     /// </summary>
     public static void NewAccountSetup()
     {
-        tutorial = 0;
+        tutorial_combat = 0;
+        tutorial_menu = 0;
+        tutorial_collection = 0;
+        tutorial_skillmode = 0;
+        tutorial_itemmode = 0;
+        tutorial_journeymode = 0;
+
         currentChar = 20000;
         currentSkills = new List<int>() { 40000, 40001, 40002, 40003 };
 

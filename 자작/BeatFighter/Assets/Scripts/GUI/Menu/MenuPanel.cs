@@ -19,7 +19,7 @@ public class MenuPanel : PanelBase
     public override void Show()
     {
         base.Show();
-        if (PlayerData.tutorial == 0)
+        if (PlayerData.tutorial_combat == 0)
         {
             this.tutorialButton.SetActive(true);
             this.journeyButton.SetActive(false);
@@ -28,6 +28,10 @@ public class MenuPanel : PanelBase
         {
             this.tutorialButton.SetActive(false);
             this.journeyButton.SetActive(true);
+        }
+        if (PlayerData.tutorial_menu == 0)
+        {
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_Tutorial_Menu", () => { PlayerData.tutorial_menu = 1; PlayerData.SaveData(); });
         }
     }
 

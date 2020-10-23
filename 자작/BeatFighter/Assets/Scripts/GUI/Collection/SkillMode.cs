@@ -25,6 +25,15 @@ public class SkillMode : PanelBase
 
     public override void Initialize() { }
 
+    public override void Show()
+    {
+        base.Show();
+        if (PlayerData.tutorial_skillmode == 0)
+        {
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_Tutorial_SkillMode", () => { PlayerData.tutorial_skillmode = 1; PlayerData.SaveData(); });
+        }
+    }
+
     /// <summary>
     /// 스킬 선택창 활성화시 초기화
     /// </summary>

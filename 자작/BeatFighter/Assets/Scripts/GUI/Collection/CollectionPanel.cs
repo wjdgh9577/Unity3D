@@ -17,6 +17,15 @@ public class CollectionPanel : PanelBase
         this.skillMode.Initialize();
     }
 
+    public override void Show()
+    {
+        base.Show();
+        if (PlayerData.tutorial_collection == 0)
+        {
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_Tutorial_Collection", () => { PlayerData.tutorial_collection = 1; PlayerData.SaveData(); });
+        }
+    }
+
     /// <summary>
     /// 판넬 활성화시 초기화
     /// </summary>

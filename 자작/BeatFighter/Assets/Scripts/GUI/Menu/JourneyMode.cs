@@ -22,6 +22,15 @@ public class JourneyMode : PanelBase
 
     public override void Initialize() { }
 
+    public override void Show()
+    {
+        base.Show();
+        if (PlayerData.tutorial_journeymode == 0)
+        {
+            GUIManager.Instance.messageBoxPanel.CallOKMessageBox("Message_Tutorial_JourneyMode", () => { PlayerData.tutorial_journeymode = 1; PlayerData.SaveData(); });
+        }
+    }
+
     public override void Hide()
     {
         this.dungeon?.Switch();

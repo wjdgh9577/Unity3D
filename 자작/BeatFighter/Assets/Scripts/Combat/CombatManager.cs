@@ -180,7 +180,7 @@ public class CombatManager : Singleton<CombatManager>
         if (Targetable(this.player))
         {
             // tutorial clear
-            if (this.meta.typeID == 50000) PlayerData.tutorial = 1;
+            if (this.meta.typeID == 50000) PlayerData.tutorial_combat = 1;
 
             RewardInfo info = TableData.instance.rewardDataDic[this.meta.rewardID];
             rewardExp = info.exp;
