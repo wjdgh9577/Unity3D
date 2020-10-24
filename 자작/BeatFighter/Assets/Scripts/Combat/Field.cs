@@ -16,6 +16,6 @@ public class Field : PoolObj
     public void SetBossTrigger(int stageCount)
     {
         obj = PoolingManager.Instance.Spawn<BossTrigger>(bossTrigger, this.transform);
-        obj.Position(stageCount * 20 - 10, 0, 0);
+        obj.LocalPosition(stageCount * 20 - 10, 0, 0);
     }
 }

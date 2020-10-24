@@ -23,6 +23,11 @@ public class PoolObj : MonoBehaviour
         transform.position = new Vector3(x, y, z);
     }
 
+    public void LocalPosition(float x, float y, float z)
+    {
+        transform.localPosition = new Vector3(x, y, z);
+    }
+
     public virtual void Despawn()
     {
         AudioManager.OnEffectSoundChange -= SetAudioVolume;
