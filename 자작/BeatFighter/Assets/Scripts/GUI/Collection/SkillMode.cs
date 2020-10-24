@@ -38,8 +38,9 @@ public class SkillMode : PanelBase
     /// 스킬 선택창 활성화시 초기화
     /// </summary>
     /// <param name="typeID"></param>
-    public void Refresh(int typeID)
+    protected override void Refresh()
     {
+        int typeID = PlayerData.currentChar;
         if (contents == null) contents = new List<SkillListContent>();
         
         foreach (var content in contents) content.Despawn();

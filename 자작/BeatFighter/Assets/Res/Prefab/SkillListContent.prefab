@@ -57,7 +57,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 1865012107631160690}
   skillName: {fileID: 1865012107352563711}
-  Lock: {fileID: 2752907062959084768}
+  lockObj: {fileID: 2752907062959084768}
+  lockText: {fileID: 2083890957511828292}
 --- !u!222 &1865012106677133757
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1836663391733798777
 RectTransform:
   m_ObjectHideFlags: 0

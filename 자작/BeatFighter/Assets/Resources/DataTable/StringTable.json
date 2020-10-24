@@ -1,5 +1,5 @@
 ﻿{
-	"md5": "4c1a9d381ec041cceb2af5f815fab088",
+	"md5": "8df57ed94fcc2e279cecf871854c27c1",
 	"array": 
 		[
 			{
@@ -243,6 +243,21 @@
 				"English": "Ninja test1"
 			},
 			{
+				"typeID": "Skill_Lock",
+				"Korean": "필요 레벨 {0}",
+				"English": "Required level {0}"
+			},
+			{
+				"typeID": "Message_SkillLevelUp",
+				"Korean": "스킬 레벨 업!\n\n{0}\n{1} -> {2}",
+				"English": "Skill Level Up!\n\n{0}\n{1} -> {2}"
+			},
+			{
+				"typeID": "Description_40000",
+				"Korean": "단일 대상에게 강력한 미들킥을 찬다.",
+				"English": "단일 대상에게 강력한 미들킥을 찬다."
+			},
+			{
 				"typeID": "Description_40001",
 				"Korean": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다.",
 				"English": "대검을 한 번 휘둘러 단일 대상에게 피해를 입힌다."
@@ -281,6 +296,11 @@
 				"typeID": "Character_20001",
 				"Korean": "소서리스",
 				"English": "Sorceress"
+			},
+			{
+				"typeID": "Message_CharacterLevelUp",
+				"Korean": "캐릭터 레벨 업!\n\n{0} -> {1}",
+				"English": "Character Level Up!\n\n{0} -> {1}"
 			},
 			{
 				"typeID": "Collection_Stats",
@@ -328,39 +348,14 @@
 				"English": "Touch to back"
 			},
 			{
-				"typeID": "Develop",
-				"Korean": "개발중",
-				"English": "under development"
-			},
-			{
-				"typeID": "Description_40000",
-				"Korean": "단일 대상에게 강력한 미들킥을 찬다.",
-				"English": "단일 대상에게 강력한 미들킥을 찬다."
-			},
-			{
-				"typeID": "Message_CharacterLevelUp",
-				"Korean": "캐릭터 레벨 업!\n\n{0} -> {1}",
-				"English": "Character Level Up!\n\n{0} -> {1}"
-			},
-			{
-				"typeID": "Message_SkillLevelUp",
-				"Korean": "스킬 레벨 업!\n\n{0}\n{1} -> {2}",
-				"English": "Skill Level Up!\n\n{0}\n{1} -> {2}"
-			},
-			{
-				"typeID": "Message_Tutorial_Menu",
-				"Korean": "게임의 메인화면입니다.\n콜렉션에서 정비를 한 후 모험을 떠나보세요.",
-				"English": "This is the main screen of the game.\nGo on an journey after maintenance in the collection."
-			},
-			{
 				"typeID": "Message_Tutorial_Collection",
 				"Korean": "현재 선택된 캐릭터의 정보를 확인하고 스킬, 아이템을 장착/변경 할 수 있습니다.\n화살표를 눌러서 캐릭터를 변경할 수 있습니다.",
 				"English": "You can check the information of the currently selected character and equip/change the skill and item.\nYou can change the character by pressing the arrow."
 			},
 			{
-				"typeID": "Message_Tutorial_SkillMode",
-				"Korean": "스킬의 레벨, 경험치, 설명을 확인하고 장착할 수 있습니다.",
-				"English": "You can check and equip the skill level, exp and description."
+				"typeID": "Message_Tutorial_ItemMode",
+				"Korean": "캐릭터에게 장비를 장착하여 능력치를 끌어올릴 수 있습니다.",
+				"English": "The character can be fitted with equipment to increase its ability."
 			},
 			{
 				"typeID": "Message_Tutorial_JourneyMode",
@@ -368,9 +363,19 @@
 				"English": "You can go on an journey.\njourneys are carried out sequentially."
 			},
 			{
-				"typeID": "Message_Tutorial_ItemMode",
-				"Korean": "캐릭터에게 장비를 장착하여 능력치를 끌어올릴 수 있습니다.",
-				"English": "The character can be fitted with equipment to increase its ability."
+				"typeID": "Message_Tutorial_Menu",
+				"Korean": "게임의 메인화면입니다.\n콜렉션에서 정비를 한 후 모험을 떠나보세요.",
+				"English": "This is the main screen of the game.\nGo on an journey after maintenance in the collection."
+			},
+			{
+				"typeID": "Message_Tutorial_SkillMode",
+				"Korean": "스킬의 레벨, 경험치, 설명을 확인하고 장착할 수 있습니다.",
+				"English": "You can check and equip the skill level, exp and description."
+			},
+			{
+				"typeID": "Develop",
+				"Korean": "개발중",
+				"English": "under development"
 			}
 		]
 }

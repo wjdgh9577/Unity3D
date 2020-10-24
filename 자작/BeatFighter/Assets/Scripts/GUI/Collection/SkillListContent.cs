@@ -7,7 +7,8 @@ public class SkillListContent : PoolObj
 {
     public Image skillIcon;
     public Text skillName;
-    public GameObject Lock;
+    public GameObject lockObj;
+    public Text lockText;
 
     private int typeID;
     private int skillID;
@@ -29,7 +30,8 @@ public class SkillListContent : PoolObj
         this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
         this.skillName.text = string.Format("Lv.{0} {1}", PlayerData.GetSkillData(skillID).level, TableData.instance.GetString("Skill_" + skillID.ToString()));
 
-        Lock.SetActive(PlayerData.charDataDic[typeID].level < this.unlockLevel);
+        this.lockText.text = string.Format(TableData.instance.GetString("Skill_Lock"), this.unlockLevel);
+        this.lockObj.SetActive(PlayerData.charDataDic[typeID].level < this.unlockLevel);
 
         Deselected();
     }

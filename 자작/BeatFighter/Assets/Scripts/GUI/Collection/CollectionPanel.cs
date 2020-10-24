@@ -64,7 +64,6 @@ public class CollectionPanel : PanelBase
     public void OnSkillButton()
     {
         this.skillMode.Show();
-        this.skillMode.Refresh(this.charList[index]);
     }
 
     public void OnItemButton()
