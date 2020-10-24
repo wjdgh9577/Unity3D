@@ -49,7 +49,7 @@ public class CombatManager : Singleton<CombatManager>
     /// <param name="mapID"></param>
     public void SetMap(int mapID)
     {
-        this.combatTM.position = Vector3.zero;
+        this.combatTM.localPosition = Vector3.zero;
 
         this.meta = TableData.instance.mapDataDic[mapID];
         this.stageIDs = new Queue<int>();

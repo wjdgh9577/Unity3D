@@ -49,25 +49,15 @@ public class JourneyMode : PanelBase
         if (this.dungeon?.isLock == false) this.dungeon?.Switch();
         this.dungeon = dungeon;
         this.mapID = mapID;
-        if (this.dungeon.isLock) SetLockedDescription();
-        else SetDescription();
+        SetDescription(this.dungeon.isLock);
     }
 
-    private void SetDescription()
+    private void SetDescription(bool isLock)
     {
         this.descriptionPanel.SetActive(true);
         this.mapName.text = TableData.instance.GetString("Map_" + this.mapID);
-        this.description.text = TableData.instance.GetString("Description_" + this.mapID);
-        this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + this.mapID);
-        this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + this.mapID);
-    }
-
-    private void SetLockedDescription()
-    {
-        this.descriptionPanel.SetActive(true);
-        this.mapName.text = TableData.instance.GetString("Map_" + this.mapID);
-        this.description.text = TableData.instance.GetString("Description_Unknown");
-        this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_Unknown");
-        this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_Unknown");
+        this.description.text = TableData.instance.GetString("Description_" + (isLock ? "Unknown" : this.mapID.ToString()));
+        this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + (isLock ? "Unknown" : this.mapID.ToString()));
+        this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + (isLock ? "Unknown" : this.mapID.ToString()));
     }
 }

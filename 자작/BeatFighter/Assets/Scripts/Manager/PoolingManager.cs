@@ -52,7 +52,8 @@ public class PoolingManager : Singleton<PoolingManager>
         spawnObj.prefeb = obj;
         spawnObj.OnSpawn();
         spawnObj.SetAudioVolume();
-        
+        spawnObj.transform.localPosition = Vector3.zero;
+
         return spawnObj.GetComponent<T>();
     }
 

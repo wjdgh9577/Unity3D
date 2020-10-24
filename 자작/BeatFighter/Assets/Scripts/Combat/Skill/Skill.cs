@@ -36,6 +36,7 @@ public abstract class Skill : PoolObj
 
     private void Update()
     {
+        if (!CombatManager.Instance.isCombat || !CombatManager.Targetable(this.castInfo.from)) Despawn();
         if (prepared)
         {
             if (isAlive)
@@ -157,6 +158,7 @@ public abstract class Skill : PoolObj
         }
     }
 
+    #region Effect
     /// <summary>
     /// 특정 스킬 이펙트 실행
     /// </summary>
@@ -214,4 +216,5 @@ public abstract class Skill : PoolObj
             particles[i].Stop();
         }
     }
+    #endregion
 }
