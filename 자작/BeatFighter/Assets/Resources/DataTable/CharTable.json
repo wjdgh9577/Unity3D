@@ -1,15 +1,15 @@
 ﻿{
-	"md5": "0a67cfc416915a4f55f65f31a13eee10",
+	"md5": "d73578fff42bd00db5e9d8af7d99ccc3",
 	"array": 
 		[
 			{
 				"typeID": 20000,
 				"modelID": 10000,
-				"atk": 500,
+				"atk": 10,
 				"def": 0,
 				"vit": 100,
 				"atkPerLevel": 1,
-				"defPerLevel": 1,
+				"defPerLevel": 2,
 				"vitPerLevel": 10,
 				"signPeriod": 2,
 				"signSpeed": 1
@@ -20,7 +20,7 @@
 				"atk": 8,
 				"def": 0,
 				"vit": 100,
-				"atkPerLevel": 1,
+				"atkPerLevel": 2,
 				"defPerLevel": 1,
 				"vitPerLevel": 10,
 				"signPeriod": 2,

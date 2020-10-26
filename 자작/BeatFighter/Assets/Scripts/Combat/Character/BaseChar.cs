@@ -32,6 +32,7 @@ public class BaseChar : PoolObj
     public static Action onTakeDamage;
     public static Action onPlayerDeath;
     public static Action onMobDeath;
+    public Action<DamageInfo> changeDamageUI;
 
     private Animator animator;
 
@@ -104,7 +105,8 @@ public class BaseChar : PoolObj
         if (!CombatManager.Instance.isCombat) return;
         int damage = info.damage;
         stats.hp = Mathf.Clamp(stats.hp - damage, 0, stats.maxHp);
-        CombatManager.Instance.CreateDmgParticle(info);
+        //CombatManager.Instance.CreateDmgParticle(info);
+        changeDamageUI(info);
         onTakeDamage();
         if (stats.hp <= 0)
         {

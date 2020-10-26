@@ -8,13 +8,14 @@ using UnityEngine.UI;
 /// </summary>
 public class HPBar : PoolObj
 {
+    public DamageText damageText;
     public Image currentHP;
     private BaseChar owner;
     private RectTransform TM;
 
     private void Update()
     {
-        TM.position = Camera.main.WorldToScreenPoint(owner.transform.parent.position + Vector3.up * owner.GetHeight());
+        TM.position = Camera.main.WorldToScreenPoint(this.owner.transform.parent.position + Vector3.up * this.owner.GetHeight());
     }
 
     public void Initialize(BaseChar owner)
@@ -22,7 +23,15 @@ public class HPBar : PoolObj
         TM = GetComponent<RectTransform>();
 
         this.owner = owner;
+        this.owner.changeDamageUI += damageText.Refresh;
         Refresh();
+    }
+
+    public override void Despawn()
+    {
+        this.owner.changeDamageUI -= damageText.Refresh;
+        this.damageText.Despawn();
+        base.Despawn();
     }
 
     /// <summary>
@@ -31,8 +40,8 @@ public class HPBar : PoolObj
     /// <param name="amount"></param>
     public bool Refresh()
     {
-        currentHP.fillAmount = owner.GetHPAmount();
-        if (currentHP.fillAmount == 0)
+        this.currentHP.fillAmount = this.owner.GetHPAmount();
+        if (this.currentHP.fillAmount == 0)
         {
             Despawn();
             return true;
