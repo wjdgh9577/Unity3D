@@ -27,11 +27,11 @@ public class HPBar : PoolObj
         Refresh();
     }
 
-    public override void Despawn()
+    public void CanDespawn()
     {
         this.owner.changeDamageUI -= damageText.Refresh;
         this.damageText.Despawn();
-        base.Despawn();
+        Despawn();
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class HPBar : PoolObj
         this.currentHP.fillAmount = this.owner.GetHPAmount();
         if (this.currentHP.fillAmount == 0)
         {
-            Despawn();
+            Invoke("CanDespawn", 1);
             return true;
         }
         return false;
