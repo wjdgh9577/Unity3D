@@ -7,6 +7,7 @@ public class CollectionPanel : PanelBase
 {
     public SkillMode skillMode;
     public Text statText;
+    public Text charCountText;
 
     private Dictionary<int, PlayerData.CharData> charDic;
     private List<int> charList;
@@ -41,6 +42,7 @@ public class CollectionPanel : PanelBase
         this.charList.Sort();
         this.index = this.charList.IndexOf(PlayerData.currentChar);
         SetStats();
+        SetCharCount();
     }
 
     private void SetStats()
@@ -59,6 +61,11 @@ public class CollectionPanel : PanelBase
         float signSpeed = charInfo.signSpeed;
 
         this.statText.text = string.Format(TableData.instance.GetString("Collection_Stats"), name, level, exp, vit, atk, def, signPeriod, signSpeed);
+    }
+
+    private void SetCharCount()
+    {
+        this.charCountText.text = $"{this.index + 1} / {this.charList.Count}";
     }
 
     public void OnSkillButton()
@@ -88,5 +95,6 @@ public class CollectionPanel : PanelBase
         PlayerData.ChangeCurrentChar(this.charList[this.index]);
         BackGround.Instance.SetBackGroundCharacter();
         SetStats();
+        SetCharCount();
     }
 }

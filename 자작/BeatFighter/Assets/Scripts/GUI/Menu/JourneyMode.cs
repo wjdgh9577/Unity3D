@@ -57,6 +57,7 @@ public class JourneyMode : PanelBase
         this.descriptionPanel.SetActive(true);
         this.mapName.text = TableData.instance.GetString("Map_" + this.mapID);
         this.description.text = TableData.instance.GetString("Description_" + (isLock ? "Unknown" : this.mapID.ToString()));
+        LayoutRebuilder.ForceRebuildLayoutImmediate(this.description.GetComponent<RectTransform>());
         this.bossName.text = TableData.instance.GetString("Description_Boss") + TableData.instance.GetString("Boss_" + (isLock ? "Unknown" : this.mapID.ToString()));
         this.note.text = TableData.instance.GetString("Description_Note") + TableData.instance.GetString("Note_" + (isLock ? "Unknown" : this.mapID.ToString()));
     }
