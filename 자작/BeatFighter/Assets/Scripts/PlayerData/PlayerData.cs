@@ -222,6 +222,11 @@ public static class PlayerData
         completedMaps = new List<int>();
     }
 
+    /// <summary>
+    /// 현재 캐릭터의 스킬 데이터를 반환
+    /// </summary>
+    /// <param name="skillID"></param>
+    /// <returns></returns>
     public static SkillData GetSkillData(int skillID)
     {
         int index = charDataDic[currentChar].skills.FindIndex(id => id == skillID);

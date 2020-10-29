@@ -82,4 +82,12 @@ public class GUIManager : Singleton<GUIManager>
     {
         this.loadingText.text = text;
     }
+
+    public static void ForceRebuild(params Text[] texts)
+    {
+        for (int i = 0; i < texts.Length; i++)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(texts[i].GetComponent<RectTransform>());
+        }
+    }
 }

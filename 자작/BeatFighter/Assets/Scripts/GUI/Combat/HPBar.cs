@@ -15,7 +15,7 @@ public class HPBar : PoolObj
 
     private void Update()
     {
-        TM.position = Camera.main.WorldToScreenPoint(this.owner.transform.parent.position + Vector3.up * this.owner.GetHeight());
+        if (!this.owner.isDead) TM.position = Camera.main.WorldToScreenPoint(this.owner.transform.parent.position + Vector3.up * this.owner.GetHeight());
     }
 
     public void Initialize(BaseChar owner)

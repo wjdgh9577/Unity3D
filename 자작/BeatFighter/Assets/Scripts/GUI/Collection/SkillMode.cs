@@ -15,6 +15,7 @@ public class SkillMode : PanelBase
     [Header("Skill Description")]
     public Image skillIcon;
     public Text skillName;
+    public Text skillCooldown;
     public Text skillDescription;
     public Text skillExp;
 
@@ -78,12 +79,18 @@ public class SkillMode : PanelBase
     /// <param name="skillID"></param>
     public void SetDescription(int skillID)
     {
-        skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
-        skillName.text = TableData.instance.GetString("Skill_" + skillID.ToString());
-        skillDescription.text = TableData.instance.GetString("Description_" + skillID);
+        SkillInfo info = TableData.instance.skillDataDic[skillID];
         PlayerData.SkillData skillData = PlayerData.GetSkillData(skillID);
         int exp = skillData.exp;
         int requireExp = TableData.instance.skillExpDataDic[skillData.level].requireExp;
-        skillExp.text = string.Format("{0} / {1}", exp, requireExp);
+        object[] args = new object[] { Formula.CalcAtkMul(info.atkMul, info.atkMulPerLevel, skillData.level) * 100, Formula.CalcAtkAdd(info.atkAdd, info.atkAddPerLevel, skillData.level) };
+
+        this.skillIcon.sprite = PreloadManager.Instance.TryGetSprite(skillID);
+        this.skillName.text = TableData.instance.GetString("Skill_" + skillID.ToString());
+        this.skillCooldown.text = string.Format(TableData.instance.GetString("Description_SkillCooldown"), info.cooldown);
+        this.skillDescription.text = string.Format(TableData.instance.GetString("Description_" + skillID), args);
+        this.skillExp.text = string.Format(TableData.instance.GetString("Description_SkillExp"), exp, requireExp);
+
+        GUIManager.ForceRebuild(this.skillDescription);
     }
 }
